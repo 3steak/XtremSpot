@@ -17,20 +17,10 @@
     z-index: -1;
 }
 
-/* css feed user */
-.miniProfilUser {
-    width: 30px;
+.list-group-item {
+    padding: 0 !important;
 }
 
-.feedUser h2 {
-    font-size: 1rem;
-}
-
-span {
-    width: 15px;
-    height: 15px;
-}
-
-span p {
-    font-size: 0.6rem;
+.townsList {
+    height: 40vh;
 }
