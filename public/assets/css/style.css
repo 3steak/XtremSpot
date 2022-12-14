@@ -26,11 +26,13 @@
     font-size: 1rem;
 }
 
-span {
-    width: 15px;
-    height: 15px;
+
+.card img {
+    object-fit: contain;
+    object-position: 0px 95%;
 }
 
-span p {
-    font-size: 0.6rem;
+.banniereLike {
+    background-color: rgb(36, 37, 38, 0.6);
+    border-radius: 5px 5px 0 0;
 }

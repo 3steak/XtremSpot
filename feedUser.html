@@ -14,17 +14,16 @@
     <!-- lien bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>XtremSpot • Choix de la ville</title>
+    <title>XtremSpot • Feed User</title>
 </head>
 
-<body>
-    <!-- Intégration de la video de fond -->
-    <video id="background-video" autoplay loop muted>
-        <source src="./public/assets/img/video_home.mp4" type="video/mp4">
-    </video>
+<body class="bg-dark">
+
+    <!----------- HEADER  ----------->
+
     <header class="bg-dark bg-opacity-75">
-        <nav class="navbar  navbar-expand-lg navbar-dark ">
-            <div class="container">
+        <nav class="navbar  navbar-dark ">
+            <div class="container-fluid ">
                 <a class="navbar-brand " href="index.html"><img class="logoPrincipal" src="" alt="logo principal"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
@@ -82,38 +81,177 @@
         </nav>
     </header>
 
+    <!-----------  ----------->
+
+    <!-- Feed User, content cards -->
+
     <main>
-        <div class="container main mt-5 feedUser bg-dark bg-opacity-50">
-            <div class="row py-4">
-                <div class="col-12 pb-4 ps-4">
-                    <div class="list-group-item d-flex align-items-center">
-                        <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
-                                src="./public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
-                            <a href="#" class="text-decoration-none text-white p-2 d-flex align-items-center">
-                                Profil Name
-                            </a>
-                            <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+        <div class="container-fluid  mb-5 cardUserContent">
+            <div class="row">
+                <div class="card text-bg-dark ">
+                    <div class="col-12 p-2 ">
+                        <div class="list-group-item d-flex align-items-center ">
+                            <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
+                                    src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                <a href="#" class="text-decoration-none text-white p-2">
+                                    Profil Name
+                                </a>
+                                <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+                        </div>
+                    </div>
+                    <img src=" /public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end ">
+                        <div class="row banniereLike p-2">
+                            <div class="col-12">
+                                <p class="contentUserDescprition">Spot cool, attention aux rochers</p>
+                            </div>
+                            <div class="col-12">
+                                <a href="#" class=" text-black text-decoration-none p-3"><i
+                                        class="fa-solid fa-thumbs-up fa-2x"></i>
+                                </a>
+                                <a href="#" class=" text-black text-decoration-none p-3"><i
+                                        class="fa-solid fa-comment fa-2x"></i></a>
+                                <a href="#" class=" text-black text-decoration-none p-3"><i
+                                        class="fa-solid fa-location-dot fa-2x"></i></a>
+                                <a href="#" class=" text-black text-decoration-none p-3"><i
+                                        class="fa-solid fa-ellipsis fa-2x"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <a href="#" class=" text-black text-decoration-none p-4"><i class="fa-solid fa-thumbs-up fa-2x"></i>
-                    </a>
 
-                    <a href="#" class=" text-black text-decoration-none p-4"><i
-                            class="fa-solid fa-comment fa-2x"></i></a>
-                    <a href="#" class=" text-black text-decoration-none p-4"><i
-                            class="fa-solid fa-location-dot fa-2x"></i></a>
-                    <a href="#" class=" text-black text-decoration-none p-4"><i
-                            class="fa-solid fa-ellipsis fa-2x"></i></a>
+            </div>
+        </div>
 
+        <!-- Feed content card -->
+        <div class="container-fluid mb-5 cardUserContent">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-bg-dark ">
+                        <div class="col-12 p-2 ">
+                            <div class="list-group-item d-flex align-items-center ">
+                                <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
+                                        src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                    <a href="#" class="text-decoration-none text-white p-2 d-flex align-items-center">
+                                        Profil Name
+                                    </a>
+                                    <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+                            </div>
+                        </div>
+                        <img src="/public/assets/img/testFeedUser2.jpg" class="card-img" alt="...">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+                            <div class="row bg-dark banniereLike bg-opacity-75 p-2">
 
+                                <div class="col-12">
+                                    <p class="contentUserDescprition">Route Sympa</p>
+                                </div>
+                                <div class="col-12">
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-thumbs-up fa-2x"></i>
+                                    </a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-comment fa-2x"></i></a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-location-dot fa-2x"></i></a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-ellipsis fa-2x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Feed content card -->
+        <div class="container-fluid mb-5 cardUserContent">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-bg-dark ">
+                        <div class="col-12 pb-2 ps-2 ">
+                            <div class="list-group-item d-flex align-items-center ">
+                                <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
+                                        src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                    <a href="#" class="text-decoration-none text-white p-2 d-flex align-items-center">
+                                        Profil Name
+                                    </a>
+                                    <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+                            </div>
+                        </div>
+                        <img src="/public/assets/img/testFeedUser3.jpg" class="card-img img-fluid " alt="...">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+
+                            <div class="row bg-dark banniereLike bg-opacity-75 p-2">
+
+                                <div class="col-12">
+                                    <p class="contentUserDescprition">Oui</p>
+                                </div>
+                                <div class="col-12">
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-thumbs-up fa-2x"></i>
+                                    </a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-comment fa-2x"></i></a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-location-dot fa-2x"></i></a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-ellipsis fa-2x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Feed content card -->
+        <div class="container-fluid cardUserContent mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-bg-dark ">
+                        <div class="col-12 pb-2 ps-2 ">
+                            <div class="list-group-item d-flex align-items-center ">
+                                <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
+                                        src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                    <a href="#" class="text-decoration-none text-white p-2 d-flex align-items-center">
+                                        Profil Name
+                                    </a>
+                                    <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+                            </div>
+                        </div>
+                        <img src="/public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+
+                            <div class="row bg-dark banniereLike bg-opacity-75 p-2">
+
+                                <div class="col-12">
+                                    <p class="contentUserDescprition">Encore un spot cool</p>
+                                </div>
+                                <div class="col-12">
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-thumbs-up fa-2x"></i>
+                                    </a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-comment fa-2x"></i></a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-location-dot fa-2x"></i></a>
+                                    <a href="#" class=" text-black text-decoration-none p-3"><i
+                                            class="fa-solid fa-ellipsis fa-2x"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </main>
+
+    <!-- FOOOTER -->
     <footer class="bg-dark">
-        <div class="container mt-5">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col d-flex flex-column text-center">
                     <a href="#" class="text-decoration-none text-white p-3">Mentions légales</a>
