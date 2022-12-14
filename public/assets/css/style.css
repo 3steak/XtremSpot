@@ -32,7 +32,22 @@
     object-position: 0px 95%;
 }
 
+/* BANNIERE LIKE COMMENTS... */
 .banniereLike {
     background-color: rgb(36, 37, 38, 0.6);
     border-radius: 5px 5px 0 0;
+}
+
+/* Collapse commentaire */
+.commentsList {
+    height: 15vh !important;
+}
+
+#message-text {
+    background-color: rgb(36, 37, 38, 0.6);
+    color: white;
+}
+
+.accordion-collapse {
+    background-color: rgba(0, 0, 0, 0.8);
 }
