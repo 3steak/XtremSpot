@@ -109,17 +109,43 @@
                                 <a href="#" class=" text-black text-decoration-none p-3"><i
                                         class="fa-solid fa-thumbs-up fa-2x"></i>
                                 </a>
-                                <a href="#" class=" text-black text-decoration-none p-3"><i
-                                        class="fa-solid fa-comment fa-2x"></i></a>
+                                <!-- Collapse pour commentaire -->
+                                <a class="text-black text-decoration-none p-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseComments">
+                                    <i class="fa-solid fa-comment fa-2x"></i>
+                                </a>
                                 <a href="#" class=" text-black text-decoration-none p-3"><i
                                         class="fa-solid fa-location-dot fa-2x"></i></a>
                                 <a href="#" class=" text-black text-decoration-none p-3"><i
                                         class="fa-solid fa-ellipsis fa-2x"></i></a>
                             </div>
                         </div>
+                        <!-- Collapse pour commentaires -->
+                        <div id="collapseComments" class="accordion-collapse collapse mt-1 rounded-2"
+                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <!-- Listes de commentaires -->
+                            <div class="commentsList px-3 py-1 overflow-auto">
+                                <div class="commentUser idX">
+                                    <p class="userName fs-5">Username</p>
+                                    <p class="text-white fs-6">Lorem lorem lorem test</p>
+                                    <hr>
+                                </div>
+                                <div class="commentUser idX">
+                                    <p class="userName fs-5">Username</p>
+                                    <p class="text-white fs-6">Lorem lorem lorem test</p>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="mb-2 px-3">
+                                <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-center pb-2">
+                                <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
