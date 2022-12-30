@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+p {
+    margin-bottom: 0 !important;
+}
+
 .body {
     background-color: #101010;
 }
@@ -71,3 +75,9 @@
 /* .profilUserBanniere {
     background-color: rgb(96, 114, 177);
 } */
+
+/* CRUD */
+
+.cardCrud {
+    background-color: black !important;
+}

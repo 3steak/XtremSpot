@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/assets/css/style.css">
+    <script defer src="./public/assets/js/profilUser.js"></script>
+    <!-- lien font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- lien bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
+    <title>XtremSpot • Informations du profil</title>
+</head>
+
+<body class="body">
+
+    <!--------------------- HEADER  --------------------------->
+
+    <header class="bg-dark bg-opacity-75">
+        <nav class="navbar  navbar-dark ">
+            <div class="container-fluid ">
+                <a class="navbar-brand " href="index.html"><img class="logoPrincipal" src="" alt="logo principal"></a>
+                <!-- CE BOUTON CRUD APPARAIT SI USER = ADMIN -->
+                <a class="btn btn-primary " href="CRUD.html" role="button">CRUD</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ms-5" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav text-end ">
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white p-3" href="notifUser.html">
+                                Notifications
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white p-3" href="feedUser.html">
+                                Feed
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white p-3" href="addPublication.html">
+                                Ajouter une publication
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white  p-3" href="addFriends.html">
+                                Ajouter un ami
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white p-3" href="homeConnexion.html">
+                                Déconnexion
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!----------------------  FIN HEADER ---------------------->
+
+
+
+    <!---------------- MAIN --------------->
+    <main>
+        <div class="container-fluid main mt-5">
+            <div class="row d-flex gap-2 justify-content-center">
+                <div class="col-12">
+                    <h1 class="text-white text-center m-2">MODERATION</h1>
+                </div>
+                <div class="container-fluid  my-3 cardUserContent">
+                    <div class="row">
+                        <div class="card d-flex  gap-2 text-bg-dark pb-3">
+                            <div class="col-12 p-2 ">
+                                <div class="list-group-item d-flex align-items-center ">
+                                    <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
+                                            src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                        <a href="#" class="text-decoration-none text-white p-2 ">
+                                            Profil Name
+                                        </a>
+                                </div>
+                                <div>
+                                    <p>Publication du DATE </p>
+                                </div>
+                            </div>
+                            <img src=" /public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
+                            <div class="col-12 d-flex gap-2"> <button type="button"
+                                    class="btn btn-primary w-50 mx-auto">ACCEPTER</button>
+                                <button type="button" class="btn btn-primary w-50 mx-auto">REFUSER</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid  my-3 cardUserContent">
+                    <div class="row">
+                        <div class="card d-flex  gap-2 text-bg-dark pb-3">
+                            <div class="col-12 p-2 ">
+                                <div class="list-group-item d-flex align-items-center ">
+                                    <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto"
+                                            src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                        <a href="#" class="text-decoration-none text-white p-2 ">
+                                            Profil Name
+                                        </a>
+
+                                </div>
+                                <div>
+                                    <p>Commentaire du DATE </p>
+                                </div>
+                            </div>
+                            <div class="input-group">
+
+                                <textarea class="form-control" value="">WOW AMAZING !</textarea>
+                            </div>
+                            <div class="col-12 d-flex gap-2"> <button type="button"
+                                    class="btn btn-primary w-50 mx-auto">ACCEPTER</button>
+                                <button type="button" class="btn btn-primary w-50 mx-auto">REFUSER</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </main>
+    <!-------  MAIN  ----->
+
+    <!---------------------- FOOOTER --------------------------->
+    <!-- <footer class="bg-dark">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col d-flex flex-column text-center">
+                    <a href="#" class="text-decoration-none text-white p-3">Mentions légales</a>
+                    <a href="#" class="text-decoration-none text-white p-3">Politique de confidentialité</a>
+                    <a href="#" class="text-decoration-none text-white p-3">Plan du site</a>
+                    <a href="#" class="text-decoration-none text-white p-3">Réseaux sociaux</a>
+                    <a href="#" class="text-decoration-none text-white p-3">Localisation</a>
+                    <a href="#" class="text-decoration-none text-white p-3"><small>&copy; Copyright 2023</small> </a>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    <!----- FIN DU FOOTER ----->
+
+
+    <!-- JavaScript Boostrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
