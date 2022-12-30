@@ -6,7 +6,7 @@
 }
 
 .body {
-    background-color: black;
+    background-color: #101010;
 }
 
 #background-video {
@@ -59,7 +59,11 @@
 
 /*  NOTIFUSER */
 .notifBanniere {
-    background-color: black;
+    background-color: #242526;
+}
+
+.cardNotif {
+    background-color: black !important;
 }
 
 /* ProfilUser */
