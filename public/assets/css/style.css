@@ -46,7 +46,7 @@ p {
     border-radius: 5px 5px 0 0;
 }
 
-/* Collapse commentaire */
+/* Collapse for comments */
 .commentsList {
     height: 15vh !important;
 }
@@ -80,4 +80,13 @@ p {
 
 .cardCrud {
     background-color: black !important;
+}
+
+
+/* CRUD */
+
+/* Report page */
+
+.reportTitle {
+    font-size: 1.2rem;
 }
