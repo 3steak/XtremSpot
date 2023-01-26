@@ -76,6 +76,13 @@ p {
     background-color: rgb(96, 114, 177);
 } */
 
+
+/* INFOPROFIL */
+
+.avatar {
+    width: 150px;
+}
+
 /* CRUD */
 
 .cardCrud {
