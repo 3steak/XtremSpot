@@ -97,3 +97,15 @@ p {
 .reportTitle {
     font-size: 1.2rem;
 }
+
+
+/* Town Choice */
+
+.list-group-item {
+    padding: 0 !important;
+}
+
+.townsList,
+.usersList {
+    height: 40vh;
+}
