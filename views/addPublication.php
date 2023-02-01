@@ -35,6 +35,7 @@
                            <input type="file" class="form-control " name="inputGroupFile" id="inputGroupFile">
                            <label class="input-group-text" accept="image/png, image/jpeg, video/mp4" for="inputGroupFile"></label>
                        </div>
+                       <?= $error['type'] ?? '' ?>
                        <div class="d-flex justify-content-center mt-5 mb-5"><textarea placeholder="Ajouter une légende" name="legendContent" id="legendContent" cols="100" maxlength="200" rows="4"></textarea>
                        </div>
                        <h4 class="text-white">Ajoute le lieu du spot !</h4>

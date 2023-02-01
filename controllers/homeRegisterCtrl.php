@@ -2,6 +2,9 @@
 
 require_once(__DIR__ . '/../config/constants.php');
 
+
+$jsName = 'homeRegisterCtrl';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ============= FIRSTNAME : clean and check ===========
     $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
