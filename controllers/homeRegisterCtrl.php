@@ -1,7 +1,8 @@
 <?php
-
+session_start();
+require_once(__DIR__ . '/../helpers/flash.php');
+flash('register', 'Ton compte vient d\'être crée ! Merci de le valider en cliquant sur le mail envoyé !', FLASH_SUCCESS);
 require_once(__DIR__ . '/../config/constants.php');
-
 
 $jsName = 'homeRegisterCtrl';
 
@@ -96,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     if (empty($error)) {
         // Redirige vers page de connexion ( il devra valider un mail)
-        header('location: /controllers/homeConnexionCtrl.php');
+        header('location: /controllers/homeConnexionCtrl.php?register=ok');
         die;
     }
 

@@ -44,7 +44,6 @@
         </div>
     </div>
 
-
     <!-------------- Feed User, content cards ------->
 
     <!-- CONTENT 1 -->
