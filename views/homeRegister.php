@@ -17,13 +17,13 @@
                           <?= $error['firstname'] ?? '' ?>
                           <!-- Lastname -->
                           <div class="col-12 col-lg-6 p-3">
-                              <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname *" pattern="[A-Za-zÀ-ÿ' `\-]{2,20}" aria-label="lastname" required>
+                              <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname *" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="lastname" required>
                           </div>
                           <?= $error['lastname'] ?? '' ?>
 
                           <!-- Pseudo -->
                           <div class="col-12 p-3">
-                              <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo *" pattern="[A-Za-zÀ-ÿ' `\-]{2,20}" aria-label="pseudo" required>
+                              <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo *" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="pseudo" required>
                           </div>
                           <?= $error['pseudo'] ?? '' ?>
 
@@ -38,24 +38,27 @@
                               <small class="text-white d-none" id="passwordHelp">Dois contenir au moins 8 lettres ou plus, une MAJUSCULE et une minuscule ainsi qu'un chiffre.</small><br>
                               <small class="text-white mx-auto" id="passwordforce"></small>
                           </div>
+                          <?= $error['password'] ?? '' ?>
+
                           <!-- confirmPassword -->
                           <div class="col-12 p-3">
                               <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirmer votre password *" aria-label="confirmPassword" required>
                               <small class="text-white" id="passwordDif"></small>
                           </div>
+                          <?= $error['confirmPassword'] ?? '' ?>
+
                           <!-- Birthday -->
                           <h3 class="text-white ms-2 pt-3">Birthday</h3>
                           <div class="col-12 px-3 mb-3">
                               <input type="date" class="form-control" id="birthdayUser" name="birthday" placeholder="" aria-label="birthdayUser" min="1900-01-01" max="2010-01-01" required>
-                              <?= $error['birthday'] ?? '' ?>
                           </div>
+                          <?= $error['birthday'] ?? '' ?>
                           <div class="col py-3 d-flex justify-content-center">
                               <button type="submit" id="register" class="btn btn-dark px-5">S'inscrire</button>
                           </div>
                           <div class="col py-3 d-flex justify-content-center">
-                              <button type="submit" id="connecion" class="btn btn-dark px-5">Connexion</button>
+                              <button type="submit" id="connexion" class="btn btn-dark px-5">Connexion</button>
                           </div>
-
                       </div>
                   </form>
               </div>

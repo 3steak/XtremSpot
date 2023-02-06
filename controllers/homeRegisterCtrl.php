@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error['password'] = '<small class="text-white">Veuillez renseigner un mot de passe</small>';
     } else {
         if ($password != $confirmPassword) {
-            $error['password'] = '<small class="text-white">Veuillez entrer le même mot de passe</small>';
+            $error['confirmPassword'] = '<small class="text-white">Veuillez entrer le même mot de passe</small>';
         } else {
             // VERIF PAR REGEX
         }
