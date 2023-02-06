@@ -76,6 +76,14 @@
                             <hr class="border border-light border-2 ">
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link text-white  p-3" href="/controllers/townChoiceCtrl.php">
+                                Changer de ville
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link text-white p-3" href="/controllers/settingsCtrl.php">
                                 Paramètres
                             </a>

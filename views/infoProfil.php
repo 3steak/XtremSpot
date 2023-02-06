@@ -15,7 +15,7 @@
                                 <div class=" row">
 
                                     <div class="d-flex justify-content-center mt-4 mb-1 ">
-                                        <img src="./public/assets/img/avatar.png" class="avatar" alt="avatar" />
+                                        <img src="/public/assets/img/avatar.png" class="avatar" alt="avatar" />
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="btn btn-light mb-4">

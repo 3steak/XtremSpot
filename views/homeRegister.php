@@ -46,7 +46,7 @@
                           <!-- Birthday -->
                           <h3 class="text-white ms-2 pt-3">Birthday</h3>
                           <div class="col-12 px-3 mb-3">
-                              <input type="date" class="form-control" id="birthdayUser" name="birthday" placeholder="" aria-label="birthdayUser" required>
+                              <input type="date" class="form-control" id="birthdayUser" name="birthday" placeholder="" aria-label="birthdayUser" min="1900-01-01" max="2010-01-01" required>
                               <?= $error['birthday'] ?? '' ?>
                           </div>
                           <div class="col py-3 d-flex justify-content-center">

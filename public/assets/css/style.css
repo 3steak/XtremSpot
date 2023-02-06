@@ -42,7 +42,7 @@ p {
 
 /* BANNIERE LIKE COMMENTS... */
 .banniereLike {
-    background-color: rgb(36, 37, 38, 0.6);
+    background-color: #101010cc;
     border-radius: 5px 5px 0 0;
 }
 
@@ -52,22 +52,22 @@ p {
 }
 
 #message-text {
-    background-color: rgb(36, 37, 38, 0.6);
-    color: white;
+    background-color: #101010e6;
+    color: #EDF7F6;
 }
 
 .accordion-collapse {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #101010e6;
 }
 
 
 /*  NOTIFUSER */
 .notifBanniere {
-    background-color: #242526;
+    background-color: #101010;
 }
 
 .cardNotif {
-    background-color: black !important;
+    background-color: #EDF7F6 !important;
 }
 
 /* ProfilUser */
@@ -86,7 +86,7 @@ p {
 /* CRUD */
 
 .cardCrud {
-    background-color: black !important;
+    background-color: #101010 !important;
 }
 
 
@@ -108,4 +108,11 @@ p {
 .townsList,
 .usersList {
     height: 40vh;
+}
+
+/* COMMENTS */
+
+
+.commentUser::-webkit-scrollbar {
+    display: none;
 }

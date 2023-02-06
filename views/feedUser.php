@@ -35,14 +35,14 @@
                 <div class="card text-bg-dark pb-3 col-lg-10 mx-auto">
                     <div class="col-12 p-2 ">
                         <div class="list-group-item d-flex align-items-center ">
-                            <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="./public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                            <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
                                 <a href="#" class="text-decoration-none text-white p-2 ">
                                     Profil Name
                                 </a>
                                 <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
                         </div>
                     </div>
-                    <img src="./public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
+                    <img src="/public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
                     <div class="card-img-overlay d-flex flex-column justify-content-end ">
                         <div class="row banniereLike p-2 ">
                             <div class="col-12">
@@ -91,13 +91,15 @@
                                     <hr>
                                 </div>
                             </div>
-                            <div class="mb-2 px-3">
-                                <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                            <form action="#" method="post">
+                                <div class="mb-2 px-3">
+                                    <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
+                                    <textarea class="form-control" maxlength="500" id="message-text"></textarea required>
                             </div>
                             <div class="d-flex justify-content-center pb-2">
-                                <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
+                                <button type="submit" class="btn border border-ligth btn-dark ">Commenter</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -154,7 +156,7 @@
                             </div>
                             <div class="mb-2 px-3">
                                 <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" maxlength="500" id="message-text"></textarea required>
                             </div>
                             <div class="d-flex justify-content-center pb-2">
                                 <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
@@ -215,7 +217,7 @@
                             </div>
                             <div class="mb-2 px-3">
                                 <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" maxlength="500" id="message-text"></textarea required>
                             </div>
                             <div class="d-flex justify-content-center pb-2">
                                 <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
