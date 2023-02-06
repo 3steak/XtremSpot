@@ -1,7 +1,13 @@
 <?php
+session_start();
 require_once(__DIR__ . '/../config/constants.php');
+require_once(__DIR__ . '/../helpers/flash.php');
+flash('updateOk', 'Information du profil mis à jour !', FLASH_SUCCESS);
+
+
 $jsName = 'infoProfilCtrl';
 $sports = ['Skate', 'Roller', 'Bmx', 'Surf', 'Kitesurf', 'Paddle', 'Longboard', 'Bodyboard', 'Planche à voile'];
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -127,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($error)) {
         // Redirige vers settings 
-        header('location: /controllers/settingsCtrl.php');
+        header('location: /controllers/settingsCtrl.php?update=ok');
         die;
     }
     // FIN DU IF 
