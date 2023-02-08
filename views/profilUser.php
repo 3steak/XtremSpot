@@ -104,7 +104,6 @@
                                 <textarea class="form-control" maxlength="500" name="comment" id="comment"></textarea required>
                             </div>
                             <?= $error['comment'] ?? '' ?>
-                          
                             <div class="d-flex justify-content-center pb-2">
                                 <button type="submit" class="btn border border-ligth btn-dark ">Commenter</button>
                             </div>
