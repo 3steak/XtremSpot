@@ -14,32 +14,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // ========== FILE AVATAR ======================
 
-    // if (isset($_FILES['avatar'])) {
-    //     // son nom
-    //     $file = $_FILES['avatar']['name'];
-    //     // son type
-    //     $filetype = $_FILES['avatar']['type'];
+    if (isset($_FILES['avatar'])) {
+        // son nom
+        $file = $_FILES['avatar']['name'];
+        // son type
+        $filetype = $_FILES['avatar']['type'];
 
-    //     if (!empty($file)) {
-    //         if ($_FILES['avatar']['error'] != 0) {
-    //             $error['file'] = '<small class="text-white">Une erreur est survenue</small>';
-    //         } else {
-    //             // Si l'extension n'est pas dans le format renseigner dans le tableau EXTENSION
-    //             if (!in_array($filetype, EXTENSION)) {
-    //                 $error['type'] = '<small class="text-white">Fichier non valide</small>';
-    //             } else {
-    //                 $extenstion = pathinfo($file, PATHINFO_EXTENSION);
-    //                 // AJOUTER $USERID pour nom
-    //                 $fileName = 'avatarUser.' . $extenstion;
-    //                 $from = $_FILES['avatar']['tmp_name'];
-    //                 $to = __DIR__ . '/../public/assets/uploads/profilPicture/' . $fileName;
-    //                 move_uploaded_file($from, $to);
-    //             }
-    //         }
-    //     } else {
-    //         $error['file'] = '<small class="text-white">Fichier non renseigné</small>';
-    //     }
-    // }
+        if (!empty($file)) {
+            if ($_FILES['avatar']['error'] != 0) {
+                $error['file'] = '<small class="text-white">Une erreur est survenue</small>';
+            } else {
+                // Si l'extension n'est pas dans le format renseigner dans le tableau EXTENSION
+                if (!in_array($filetype, EXTENSION)) {
+                    $error['type'] = '<small class="text-white">Fichier non valide</small>';
+                } else {
+                    $extenstion = pathinfo($file, PATHINFO_EXTENSION);
+                    // AJOUTER $USERID pour nom
+                    $fileName = 'avatarUser.' . $extenstion;
+                    $from = $_FILES['avatar']['tmp_name'];
+                    $to = __DIR__ . '/../public/assets/uploads/profilPicture/' . $fileName;
+                    move_uploaded_file($from, $to);
+                }
+            }
+        }
+    }
     // ============= FIRSTNAME : clean and check ===========
     $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
     // Isnt empty

@@ -1,3 +1,4 @@
+<?php flash('commentEmpty') ?>
 <!---------------- START MAIN --------------->
 <main>
     <!----- BANNIERE OF USERPROFIL AND MODALMAP ---->
@@ -97,13 +98,17 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="mb-2 px-3">
-                            <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-center pb-2">
-                            <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
-                        </div>
+                        <form method="post">
+                            <div class="mb-2 px-3">
+                                <label for="comment" class="col-form-label">Ajouter un commentaire :</label>
+                                <textarea class="form-control" maxlength="500" name="comment" id="comment"></textarea required>
+                            </div>
+                            <?= $error['comment'] ?? '' ?>
+                          
+                            <div class="d-flex justify-content-center pb-2">
+                                <button type="submit" class="btn border border-ligth btn-dark ">Commenter</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -162,10 +167,10 @@
                         <div class="mb-2 px-3">
                             <label for="message-text" class="col-form-label">Ajouter un commentaire :</label>
                             <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                        <div class="d-flex justify-content-center pb-2">
-                            <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
-                        </div>
+                            </div>
+                            <div class="d-flex justify-content-center pb-2">
+                                <button type="button" class="btn border border-ligth btn-dark ">Commenter</button>
+                            </div>
                     </div>
                 </div>
             </div>
