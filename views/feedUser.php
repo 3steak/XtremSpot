@@ -24,7 +24,47 @@
 
         </div>
     </div>
-
+    <!--------------------- FILTER BUTTON ---------------->
+    <div class="container my-3">
+        <div class="row">
+            <div class=" col-lg-10 mx-auto">
+                <div class="d-flex justify-content-center  p-2">
+                    <h1 class="text-white m-2">VOICI LES SPOTS ! </h1>
+                    <button class="btn btn-sm btn-primary m-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-left" viewBox="0 0 16 16">
+                            <path d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                        </svg> Filtres
+                    </button>
+                </div>
+            </div>
+            <div class=" col-lg-10  mx-auto">
+                <div class="collapse" id="collapseFilters">
+                    <p class="text-white">Filtrer par :</p>
+                    <form action="" method="get">
+                        <div class="d-flex gap-2 m-2">
+                            <div class="col-4 col-lg-4">
+                                <select class="form-select  sportUser" name="sport" id="sportUser" aria-label="sportUser">
+                                    <?php foreach ($sports as $sport) { ?>
+                                        <!-- SI SPORT = SPORT 'selected' -->
+                                    <?php echo '<option value =' . $sport . '>' . $sport . '</option>';
+                                    } ?>
+                                </select>
+                            </div>
+                            <div class="col-4 col-lg-4">
+                                <select class="form-select  townUser" name="town" id="townUser" aria-label="townUser">
+                                    <?php foreach ($towns as $town) { ?>
+                                        <!-- SI town = town 'selected' -->
+                                    <?php echo '<option value =' . $town . '>' . $town . '</option>';
+                                    } ?>
+                                </select>
+                            </div>
+                            <a class="btn btn-sm btn-dark" id="filter" type="submit" href="#" role="button">Filtrer</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-------------- Feed User, content cards ------->
 
@@ -33,13 +73,14 @@
     <div class="container  my-3 cardUserContent">
         <div class="row">
             <div class="card text-bg-dark pb-3 col-lg-10 mx-auto">
-                <div class="col-12 p-2 ">
+                <div class="col-12 p-2">
                     <div class="list-group-item d-flex align-items-center ">
                         <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
                             <a href="#" class="text-decoration-none text-white p-2 ">
                                 Profil Name
                             </a>
                             <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+                            <a href="#" class="text-black ms-auto  me-2 fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
                     </div>
                 </div>
                 <img src="/public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
@@ -120,7 +161,9 @@
                                     Profil Name
                                 </a>
                                 <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
-                        </div>
+                                <a href="#" class="text-black ms-auto me-2  fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
+
+                            </div>
                     </div>
                     <img src=" /public/assets/img/testFeedUser2.jpg" class="card-img" alt="...">
                     <div class="card-img-overlay d-flex flex-column justify-content-end ">

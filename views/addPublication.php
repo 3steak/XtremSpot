@@ -7,7 +7,7 @@
            <!-- BANNIERE -->
            <div class="row  p-2 my-4 profilUserBanniere rounded-top">
                <div class="col-2 col-lg-6 text-center">
-                   <a href="profilUser.html"> <img src="./public/assets/img/photoProfilUser.png" alt="photo user profil">
+                   <a href="profilUser.html"> <img src="/public/assets/img/photoProfilUser.png" alt="photo user profil">
                    </a>
                </div>
                <div class="col-10 col-lg-6  d-flex align-items-center">
@@ -38,6 +38,20 @@
                        <?= $error['type'] ?? '' ?>
                        <div class="d-flex justify-content-center mt-5 mb-5"><textarea placeholder="Ajouter une légende" name="legendContent" id="legendContent" cols="100" maxlength="250" rows="4"></textarea>
                        </div>
+                       <!------ town ------->
+                       <h4 class="text-white">C'était où ?</h4>
+                       <div class="col-12 col-lg-10 p-3">
+                           <select class="form-select " id="nativeTown" name="town" aria-label="Native town ">
+                               <option selected>Ville du spot *</option>
+                               <?php
+                                foreach ($listTown as $town) {
+                                    echo  "<option>$town</option>";
+                                }
+                                ?>
+                           </select>
+                       </div>
+                       <?= $error['town'] ?? '' ?>
+
                        <h4 class="text-white">Ajoute le lieu du spot !</h4>
 
                        <h3 class="text-white d-flex justify-content-center m-4">MAP LEAFLET</h3>

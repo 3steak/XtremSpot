@@ -3,7 +3,7 @@ session_start();
 require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
 flash('formNewContentOk', 'Votre publication va être lue par nos lutins modo', FLASH_SUCCESS);
-
+$listTown = ['Amiens', 'Paris', 'Hossegor', 'Biarritz'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // ----------------- CONTROL INPUT FILE-----------------------
@@ -31,8 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error['file'] = '<small class="text-white">Fichier non renseigné</small>';
         }
     }
-
-
+    // -------------------- CONTROL SELECT TOWN --------------------------------
+    $town = trim(filter_input(INPUT_POST, 'town', FILTER_SANITIZE_SPECIAL_CHARS));
+    if (!empty($town)) {
+        // Si town n'est pas dans dans la liste
+        if (!in_array($town, $listTown)) {
+            $error["town"] = "<small>La ville entrée n'est pas valide!</small>";
+        }
+    }
     // ------------- CONTROL TEXTAERA--------------------------------
     $legendContent = trim((string) filter_input(INPUT_POST, 'legendContent', FILTER_SANITIZE_SPECIAL_CHARS));
     if (empty($error)) {
