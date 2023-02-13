@@ -116,3 +116,10 @@ p {
 .commentUser::-webkit-scrollbar {
     display: none;
 }
+
+
+/* BTN COLOR */
+
+.btn-primary {
+    background-color: #2B59C3 !important;
+}

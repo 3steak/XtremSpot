@@ -21,9 +21,45 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL SIGNALEMENT  -->
+    <!-- Modal -->
+    <div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="" method="get">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="reportLabel">Pourquoi signaler ?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="btn-group col-12 d-flex flex-column p-3">
+                            <h3 class="text-black ms-2 pt-3 mb-2">Choissisez un motif de signalement</h3>
+                            <input type="radio" class="btn-check" value="Contenu indésirable" name="report_msg" id="contentUndesirable" checked />
+                            <label class="btn btn-light mx-auto w-100" for="contentUndesirable">Contenu indésirable</label>
+
+                            <input type="radio" class="btn-check" value="Nudité" name="report_msg" id="nudity" />
+                            <label class="btn btn-light mx-auto w-100" for="nudity">Nudité</label>
+
+                            <input type="radio" class="btn-check" value="Discours ou symboles haineux" name="report_msg" id="racism" />
+                            <label class="btn btn-light mx-auto w-100" for="racism">Discours ou symboles haineux</label>
+
+                            <input type="radio" class="btn-check" value="Fausses informations" name="report_msg" id="wrongInfo" />
+                            <label class="btn btn-light mx-auto w-100" for="wrongInfo">Fausses informations</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Confirmer le signalement</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>
+
     <!--------------------- FILTER BUTTON ---------------->
     <div class="container my-3">
         <div class="row">
@@ -107,7 +143,7 @@
                             </a>
                             <!-- dropdown menu  -->
                             <ul class="dropdown-menu bg-dark">
-                                <li><a class="dropdown-item text-white" href="#">Signaler</a></li>
+                                <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
                                 <li>
                                     <hr class="dropdown-divider bg-white ">
                                 </li>
