@@ -28,8 +28,9 @@
                                   <span class="input-group-text bg-dark text-white" id="addon-wrapping">@</span>
                                   <input type="mail" class="form-control" id="email" placeholder="Email *" aria-label="email" aria-describedby="addon-wrapping" required>
                               </div>
-                              <div class="col-12 p-3">
+                              <div class="input-group p-3">
                                   <input type="password" class="form-control" id="password" placeholder="Password *" aria-label="password" required>
+                                  <span class="input-group-text bg-dark text-white" id="basic-addon2"><i class="fa-regular fa-eye" id="togglePassword"></i></span>
                               </div>
                               <a href="/controllers/forgotMdp.php" class="link-secondary text-white text-center text-decoration-none forgotMdp">Mot de
                                   passe oublié</a>
