@@ -32,7 +32,7 @@ class Category
     }
 
 
-    public static function get(int $id = null)
+    public static function get(int $id = null): array
     {
         if ($id) {
             $sql = 'SELECT * from `categories` WHERE id = :id;';
@@ -46,4 +46,45 @@ class Category
         $categories = $sth->fetchAll();
         return $categories;
     }
+
+    public function update(): bool
+    {
+        $sql = 'UPDATE `categories` 
+                SET  `name`=:name
+                WHERE id = :id ;';
+
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $sth->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
+
+    public function addCategory(): bool
+    {
+        $sql = "INSERT INTO `categories` (`name`) VALUES (:name);";
+
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
+
+
+    public static function delete($id): bool
+    {
+        $sql = 'DELETE FROM `categories` WHERE id = :id;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':id', $id, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
+
+
+
+
+    // FIN CLASS 
 }
