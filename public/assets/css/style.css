@@ -5,12 +5,17 @@
     padding: 0;
 }
 
+:root {
+    --main-bg-color: #101010;
+    --button-bg-color: #2B59C3;
+}
+
 p {
     margin-bottom: 0 !important;
 }
 
 .body {
-    background-color: #101010;
+    background-color: var(--main-bg-color);
 }
 
 #background-video {
@@ -63,7 +68,7 @@ p {
 
 /*  NOTIFUSER */
 .notifBanniere {
-    background-color: #101010;
+    background-color: var(--main-bg-color);
 }
 
 .cardNotif {
@@ -86,7 +91,7 @@ p {
 /* CRUD */
 
 .cardCrud {
-    background-color: #101010 !important;
+    background-color: var(--main-bg-color) !important;
 }
 
 
@@ -121,5 +126,9 @@ p {
 /* BTN COLOR */
 
 .btn-primary {
-    background-color: #2B59C3 !important;
+    background-color: var(--button-bg-color) !important;
+}
+
+.btn-filter {
+    background-color: var(--button-bg-color) !important;
 }

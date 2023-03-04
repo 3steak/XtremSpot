@@ -2,6 +2,7 @@
 session_start();
 require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
+require_once(__DIR__ . '/../helpers/db.php');
 $jsName = 'feedUserCtrl';
 
 

@@ -76,27 +76,32 @@
             <div class=" col-lg-10  mx-auto">
                 <div class="collapse" id="collapseFilters">
                     <p class="text-white">Filtrer par :</p>
-                    <form action="" method="get">
-                        <div class="d-flex gap-2 m-2">
-                            <div class="col-4 col-lg-4">
-                                <select class="form-select  sportUser" name="sport" id="sportUser" aria-label="sportUser">
-                                    <?php foreach ($sports as $sport) { ?>
-                                        <!-- SI SPORT = SPORT 'selected' -->
-                                    <?php echo '<option value =' . $sport . '>' . $sport . '</option>';
-                                    } ?>
-                                </select>
-                            </div>
-                            <div class="col-4 col-lg-4">
-                                <select class="form-select  townUser" name="town" id="townUser" aria-label="townUser">
-                                    <?php foreach ($towns as $town) { ?>
-                                        <!-- SI town = town 'selected' -->
-                                    <?php echo '<option value =' . $town . '>' . $town . '</option>';
-                                    } ?>
-                                </select>
-                            </div>
-                            <a class="btn btn-sm btn-dark" id="filter" type="submit" href="#" role="button">Filtrer</a>
+                    <div class="d-flex flex-column gap-2 m-2">
+                        <div class="col-4 col-lg-4">
+                            <p class="text-white">Sport</p>
+
+                            <select class="form-select mt-2 sportUser" name="sport" id="sportUser" aria-label="sportUser">
+                                <?php foreach ($sports as $sport) { ?>
+                                    <!-- SI SPORT = SPORT 'selected' -->
+                                <?php echo '<option value =' . $sport . '>' . $sport . '</option>';
+                                } ?>
+                            </select>
+                            <!-- RENVOI VERS LE CONTROLLER POUR SELECT WHERE SPORT = SPORTSELECTED -->
+                            <a class="btn btn-dark btn-filter mt-2" id="filter" type="submit" href="#" role="button">Filtrer</a>
                         </div>
-                    </form>
+
+                        <div class="col-4 col-lg-4">
+                            <p class="text-white">Lieux</p>
+                            <select class="form-select mt-2 townUser" name="town" id="townUser" aria-label="townUser">
+                                <?php foreach ($towns as $town) { ?>
+                                    <!-- SI town = town 'selected' -->
+                                <?php echo '<option value =' . $town . '>' . $town . '</option>';
+                                } ?>
+                            </select>
+                            <!-- RENVOI VERS LE CONTROLLER POUR SELECT WHERE Town = TOWN -->
+                            <a class="btn btn-dark btn-filter mt-2" id="filter" type="submit" href="#" role="button">Filtrer</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
