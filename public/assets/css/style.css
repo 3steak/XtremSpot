@@ -132,3 +132,14 @@ p {
 .btn-filter {
     background-color: var(--button-bg-color) !important;
 }
+
+/* LOGO  */
+
+
+.logoPrincipal {
+    width: 90px;
+}
+
+.logoHome {
+    width: 250px;
+}
