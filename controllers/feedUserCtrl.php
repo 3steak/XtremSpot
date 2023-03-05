@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../helpers/db.php');
 $jsName = 'feedUserCtrl';
 
-
+var_dump(Database::connect());
 // Tableau factice pour exemple
 $sports = ['Skate', 'Roller', 'Bmx', 'Surf', 'Kitesurf', 'Paddle', 'Longboard', 'Bodyboard', 'Planche à voile'];
 $towns  = ['Amiens', 'Reims', 'Rouen', 'Paris', 'Nantes'];
