@@ -8,8 +8,8 @@ class Publication
     private $marker_longitude;
     private $marker_latitude;
     private $town;
-    private $id_categories;
-    private $id_users;
+    private $idCategories;
+    private $idUsers;
 
 
     public function setId(int $id)
@@ -36,13 +36,13 @@ class Publication
     {
         $this->town = $town;
     }
-    public function setId_categories(int $id_categories)
+    public function setIdCategories(int $idCategories)
     {
-        $this->id_categories = $id_categories;
+        $this->idCategories = $idCategories;
     }
-    public function setId_users(int $id_users)
+    public function setIdUsers(int $idUsers)
     {
-        $this->id_users = $id_users;
+        $this->idUsers = $idUsers;
     }
 
 
@@ -73,24 +73,31 @@ class Publication
     {
         return $this->town;
     }
-    public function getId_categories(): int
+    public function getIdCategories(): int
     {
-        return $this->id_categories;
+        return $this->idCategories;
     }
-    public function getId_users(): int
+    public function getIdUsers(): int
     {
-        return $this->id_users;
+        return $this->idUsers;
     }
 
-
+    //  DOUBLE JOINTURE publication, id user, category
+    // Id USERS  a passer en parametre
     public static function get(int $id = null): array
     {
         if ($id) {
-            $sql = 'SELECT * from `publications` WHERE id = :id;';
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+            FROM `publications` 
+            JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+            JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE users.id = :id;';
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
         } else {
-            $sql = 'SELECT * from `publications`;';
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+            FROM `publications` 
+            JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+            JOIN `categories` ON `categories`.`id` = `users`.`idCategories`;';
             $sth = Database::connect()->prepare($sql);
         }
         $sth->execute();
@@ -101,8 +108,8 @@ class Publication
 
     public function addPublication(): bool
     {
-        $sql = "INSERT INTO `publications` (`title`,`description`,`marker_longitude`,`marker_latitude`,`town`,`id_categories`,`id_users`)
-                 VALUES (:title,:description,:marker_longitude,:marker_latitude,:town,:id_categories,:id_users);";
+        $sql = "INSERT INTO `publications` (`title`,`description`,`marker_longitude`,`marker_latitude`,`town`,`idCategories`,`idUsers`)
+                 VALUES (:title,:description,:marker_longitude,:marker_latitude,:town,:idCategories,:idUsers);";
 
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':title', $this->title, PDO::PARAM_STR);
@@ -110,8 +117,8 @@ class Publication
         $sth->bindValue(':marker_longitude', $this->marker_longitude, PDO::PARAM_STR);
         $sth->bindValue(':marker_latitude', $this->marker_latitude, PDO::PARAM_STR);
         $sth->bindValue(':town', $this->town, PDO::PARAM_STR);
-        $sth->bindValue(':id_categories', $this->id_categories, PDO::PARAM_INT);
-        $sth->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
+        $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
+        $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         $sth->execute();
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;
@@ -122,7 +129,7 @@ class Publication
         $sql = 'UPDATE `publications` 
                 SET  `title`=:title, `description`=:description,
                 `marker_longitude`=:marker_longitude,`marker_latitude`=:marker_latitude,
-                `town`=:town,`id_categories`=:id_categories,`id_users`=:id_users
+                `town`=:town,`idCategories`=:idCategories,`idUsers`=:idUsers
                 WHERE id = :id ;';
 
         $sth = Database::connect()->prepare($sql);
@@ -132,8 +139,8 @@ class Publication
         $sth->bindValue(':marker_longitude', $this->marker_longitude, PDO::PARAM_STR);
         $sth->bindValue(':marker_latitude', $this->marker_latitude, PDO::PARAM_STR);
         $sth->bindValue(':town', $this->town, PDO::PARAM_STR);
-        $sth->bindValue(':id_categories', $this->id_categories, PDO::PARAM_INT);
-        $sth->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
+        $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
+        $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         $sth->execute();
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;
