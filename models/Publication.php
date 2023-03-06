@@ -48,7 +48,6 @@ class Publication
 
 
 
-
     public function getId(): int
     {
         return $this->id;
@@ -83,16 +82,16 @@ class Publication
     }
 
     //  DOUBLE JOINTURE publication, id user, category
-    // Id USERS  a passer en parametre
-    public static function get(int $id = null): array
+    // ajout if parametre = SPORT ou TOWN 
+    public static function get(int $userId = null): array
     {
-        if ($id) {
+        if ($userId) {
             $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE users.id = :id;';
             $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->bindValue(':id', $userId, PDO::PARAM_INT);
         } else {
             $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
@@ -123,7 +122,6 @@ class Publication
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;
     }
-
     public function update(): bool
     {
         $sql = 'UPDATE `publications` 
