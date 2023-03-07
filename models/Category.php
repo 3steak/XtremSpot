@@ -5,20 +5,34 @@ class Category
     private int $id;
     private string $name;
 
-
-
-    // Setter getter
+    /** Allows to set id
+     * setId
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function setId(int $id)
     {
         $this->id = $id;
     }
 
+    /** Allows to get id
+     * getId
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
 
+    /** Allows to set name
+     * setName
+     *
+     * @param  mixed $name
+     * @return void
+     */
     public function setName(string $name)
     {
         $this->name = $name;
@@ -26,12 +40,24 @@ class Category
 
 
 
+    /** Allows to get Name
+     * getName
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
 
+    /** Allows to get all category if param null 
+     * get category name if id in param 
+     * get
+     *
+     * @param  mixed $id
+     * @return array
+     */
     public static function get(int $id = null): array
     {
         if ($id) {
@@ -47,6 +73,11 @@ class Category
         return $categories;
     }
 
+    /** Allows to update a category
+     * update
+     *
+     * @return bool
+     */
     public function update(): bool
     {
         $sql = 'UPDATE `categories` 
@@ -61,6 +92,11 @@ class Category
         return ($result > 0) ? true : false;
     }
 
+    /** Allows to add category
+     * addCategory
+     *
+     * @return bool
+     */
     public function addCategory(): bool
     {
         $sql = "INSERT INTO `categories` (`name`) VALUES (:name);";
@@ -73,6 +109,12 @@ class Category
     }
 
 
+    /** Allows to delete a category
+     * delete
+     *
+     * @param  mixed $id
+     * @return bool
+     */
     public static function delete($id): bool
     {
         $sql = 'DELETE FROM `categories` WHERE id = :id;';

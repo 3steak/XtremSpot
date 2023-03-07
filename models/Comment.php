@@ -7,36 +7,91 @@ class Comment
     private $idUsers;
     private $idPublications;
 
+    /** Allows to set id
+     * setId
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
+
+
+    /**Allows to set description
+     * setdescription
+     *
+     * @param  mixed $description
+     * @return void
+     */
     public function setdescription($description)
     {
         $this->description = $description;
     }
+
+    /**Allows to set idUsers
+     * setIdUsers
+     *
+     * @param  mixed $idUsers
+     * @return void
+     */
     public function setIdUsers($idUsers)
     {
         $this->idUsers = $idUsers;
     }
+
+
+    /** Allows to set idPublication
+     * setIdPublications
+     *
+     * @param  mixed $idPublications
+     * @return void
+     */
     public function setIdPublications($idPublications)
     {
         $this->idPublications = $idPublications;
     }
 
 
+    /** Allows to get id
+     * getId
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
+
+
+    /** Allows to get Description
+     * getDescription
+     *
+     * @return string
+     */
     public function getDescription(): string
     {
         return $this->description;
     }
+
+
+    /** Allows to get idUsers
+     * getIdUsers
+     *
+     * @return int
+     */
     public function getIdUsers(): int
     {
         return $this->idUsers;
     }
+
+
+    /** Allows to get isPublications
+     * getIdPublications
+     *
+     * @return int
+     */
     public function getIdPublications(): int
     {
         return $this->idPublications;
