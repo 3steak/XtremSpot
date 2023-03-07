@@ -12,34 +12,90 @@ class Publication
     private $idUsers;
 
 
+    /** Allows to set id
+     * setId
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function setId(int $id)
     {
         $this->id = $id;
     }
+
+    /** Allows to set title
+     * setTitle
+     *
+     * @param  mixed $title
+     * @return void
+     */
     public function setTitle(string $title)
     {
         $this->title = $title;
     }
+
+    /** Allows to set description
+     * setDescription
+     *
+     * @param  mixed $description
+     * @return void
+     */
     public function setDescription(string $description)
     {
         $this->description = $description;
     }
+
+    /** Allows to set marker_longitude
+     * setMarker_longitude
+     *
+     * @param  mixed $marker_longitude
+     * @return void
+     */
     public function setMarker_longitude(float $marker_longitude)
     {
         $this->marker_longitude = $marker_longitude;
     }
+
+    /** Allows to set marker_latitude
+     * setMarker_latitude
+     *
+     * @param  mixed $marker_latitude
+     * @return void
+     */
     public function setMarker_latitude(float $marker_latitude)
     {
         $this->marker_latitude = $marker_latitude;
     }
+
+    /** Allows to set Town
+     * setTown
+     *
+     * @param  mixed $town
+     * @return void
+     */
     public function setTown(string $town)
     {
         $this->town = $town;
     }
+
+    /** Allows to set idCatagories
+     * setIdCategories
+     *
+     * @param  mixed $idCategories
+     * @return void
+     */
     public function setIdCategories(int $idCategories)
     {
         $this->idCategories = $idCategories;
     }
+
+
+    /** Allows to set idUsers
+     * setIdUsers
+     *
+     * @param  mixed $idUsers
+     * @return void
+     */
     public function setIdUsers(int $idUsers)
     {
         $this->idUsers = $idUsers;
@@ -48,51 +104,132 @@ class Publication
 
 
 
+    /** Allows to get id
+     * getId
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
+
+
+    /** Allows to get Title
+     * getTitle
+     *
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
+
+
+    /** Allows to get description
+     * getDescription
+     *
+     * @return string
+     */
     public function getDescription(): string
     {
         return $this->description;
     }
+
+
+    /** Allows to get marker_longitude
+     * getMarker_longitude
+     *
+     * @return float
+     */
     public function getMarker_longitude(): float
     {
         return $this->marker_longitude;
     }
+
+
+    /** Allows to get marker_latitude
+     * getMarker_latitude
+     *
+     * @return float
+     */
     public function getMarker_latitude(): float
     {
         return $this->marker_latitude;
     }
+
+
+    /** Allows to get town
+     * getTown
+     *
+     * @return string
+     */
     public function getTown(): string
     {
         return $this->town;
     }
+
+
+    /** Allows to get idCategories
+     * getIdCategories
+     *
+     * @return int
+     */
     public function getIdCategories(): int
     {
         return $this->idCategories;
     }
+
+    /** Allows to get idUsers
+     * getIdUsers
+     *
+     * @return int
+     */
     public function getIdUsers(): int
     {
         return $this->idUsers;
     }
 
-    //  DOUBLE JOINTURE publication, id user, category
-    // ajout if parametre = SPORT ou TOWN 
-    public static function get(int $userId = null): array
+
+
+
+    /** Allows to get all publications if param null 
+     *  if param is UserId get all user's publication
+     * if param is Category get all category's publication
+     * if param is town get all town's publication
+     * get
+     *
+     * @param  mixed $userId
+     * @return array
+     */
+    public static function get(int $userId = null, string $category = null, string $town = null): array
     {
         if ($userId) {
+            #return publication filtered by user id for profil or CRUD
             $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE users.id = :id;';
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':id', $userId, PDO::PARAM_INT);
+        } elseif ($category) {
+            # return publication filtered by category
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+                FROM `publications` 
+                JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+                JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE categoryName = :category;';
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':category', $category, PDO::PARAM_INT);
+        } elseif ($town) {
+            # return publication filtered by town 
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+                FROM `publications` 
+                JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+                JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE `publications`.`town` = :town;';
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':town', $town, PDO::PARAM_INT);
         } else {
+            # return all publications
             $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
@@ -105,6 +242,11 @@ class Publication
     }
 
 
+    /** Allows to add publication 
+     * addPublication
+     *
+     * @return bool
+     */
     public function addPublication(): bool
     {
         $sql = "INSERT INTO `publications` (`title`,`description`,`marker_longitude`,`marker_latitude`,`town`,`idCategories`,`idUsers`)
@@ -122,6 +264,13 @@ class Publication
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;
     }
+
+
+    /** Allows to update publication 
+     * update
+     *
+     * @return bool
+     */
     public function update(): bool
     {
         $sql = 'UPDATE `publications` 
@@ -146,6 +295,12 @@ class Publication
 
 
 
+    /** Allows to delete publication by id
+     * delete
+     *
+     * @param  mixed $id
+     * @return bool
+     */
     public static function delete($id): bool
     {
         $sql = 'DELETE FROM `publications` WHERE id = :id;';

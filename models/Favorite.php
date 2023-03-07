@@ -6,16 +6,36 @@ class Favorite
     private $idPublications;
     private $idUsers;
 
+    /** Allows to set id
+     * setId
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function setId(int $id)
     {
         $this->id = $id;
     }
 
+    /** Allows to set idpublication
+     * setIdPublications
+     *
+     * @param  mixed $idPublications
+     * @return void
+     */
     public function setIdPublications(int $idPublications)
     {
         $this->idPublications = $idPublications;
     }
 
+
+
+    /** Allows to set idUsers
+     * setIdUsers
+     *
+     * @param  mixed $idUsers
+     * @return void
+     */
     public function setIdUsers(int $idUsers)
     {
         $this->idUsers = $idUsers;
@@ -23,19 +43,44 @@ class Favorite
 
 
 
+    /** Allows to get Id
+     * getId
+     *
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
+
+    /**  Allows to get idPublication
+     * getIdPublications
+     *
+     * @return int
+     */
     public function getIdPublications(): int
     {
         return $this->idPublications;
     }
+
+
+    /**  Allows to get idUsers
+     * getIdUsers
+     *
+     * @return int
+     */
     public function getIdUsers(): int
     {
         return $this->idUsers;
     }
 
+
+    /**  Allows to get user's favorite(s)
+     * get
+     *
+     * @param  mixed $idUser
+     * @return array
+     */
     public static function get(int $idUser): array
     {
         $sql = 'SELECT `favorites`.`id` AS `idFavorites`, `idPublications`, `publications`.`title`, `publications`.`description`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` AS `categoryName`, `publications`.`idUsers` AS `publishBy`, `users`.`pseudo`, `users`.`admin` 
@@ -51,6 +96,11 @@ class Favorite
         return $favorites;
     }
 
+    /** Allows to add favorites
+     * addFavorites
+     *
+     * @return bool
+     */
     public function addFavorites(): bool
     {
         $sql = "INSERT INTO `favorites` (`idPublications`, `idUsers`)
@@ -66,6 +116,12 @@ class Favorite
     }
 
 
+    /** Allows to delete Favorites 
+     * delete
+     *
+     * @param  mixed $idFavorites
+     * @return bool
+     */
     public static function delete(int $idFavorites): bool
     {
         $sql = 'DELETE FROM `favorites` WHERE id = :id;';
