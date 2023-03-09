@@ -52,6 +52,7 @@
                            </div>
                        </div>
                        <?= $error['town'] ?? '' ?>
+                       <?= $error['zipcode'] ?? '' ?>
 
                        <!------ Category ------->
                        <h4 class="text-white">Sport pratiqué ?</h4>

@@ -4,6 +4,12 @@ require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Publication.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+
+use GuzzleHttp\Client;
+
+const API_URL = 'https://geo.api.gouv.fr/';
 
 $jsName = 'addPublication';
 
@@ -42,12 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error['file'] = '<small class="text-white">Fichier non renseigné</small>';
         }
     }
-    // -------------------- CONTROL SELECT TOWN --------------------------------
+    // -------------------- CONTROL SELECT ZIPCODE && TOWN WITH COMPOSER Guzzle --------------------------------
+
+
     $town = trim(filter_input(INPUT_POST, 'town', FILTER_SANITIZE_SPECIAL_CHARS));
+    $zipcode = trim(filter_input(INPUT_POST, 'zipcode', FILTER_SANITIZE_NUMBER_INT));
+
     if (empty($town) || $town == '') {
         // Si town n'est pas dans dans la liste
-
         $error["town"] = "<small>Veuillez selectionner une ville</small>";
+    }
+    if (empty($zipcode) || $zipcode == '') {
+        // Si town n'est pas dans dans la liste
+        $error["zipcode"] = "<small>Veuillez rentrer un code postal</small>";
     }
 
     // -------------------- CONTROL SELECT CATEGORY --------------------------------
