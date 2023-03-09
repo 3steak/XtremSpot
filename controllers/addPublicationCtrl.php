@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Publication.php');
 
-
+$jsName = 'addPublication';
 
 flash('formNewContentOk', 'Votre publication va être lue par nos lutins modo', FLASH_SUCCESS);
 

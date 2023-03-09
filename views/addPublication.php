@@ -41,14 +41,15 @@
                        <!------ town ------->
                        <h4 class="text-white">C'était où ? *</h4>
                        <div class="col-12 col-lg-10 p-3">
-                           <select class="form-select " id="nativeTown" name="town" aria-label="Native town ">
-                               <option selected>Ville du spot *</option>
-                               <?php
-                                foreach ($listTown as $town) {
-                                    echo  "<option>$town</option>";
-                                }
-                                ?>
-                           </select>
+                           <div class="form-group">
+                               <label for="zipcode">Code Postal</label>
+                               <input type="text" name="zipcode" class="form-control" placeholder="Code postal" id="zipcode">
+                               <small id="error-message" class="text-white"></small>
+                           </div>
+                           <div class="form-group">
+                               <label for="town">Ville</label>
+                               <select class="form-control" name="town" id="town"></select>
+                           </div>
                        </div>
                        <?= $error['town'] ?? '' ?>
 

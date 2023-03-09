@@ -16,6 +16,8 @@
   </footer>
   <!----- FIN DU FOOTER ----->
 
+  <!-- Lien jQuery pour AJAX -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <!-- Lien font awesome -->
   <script src="https://kit.fontawesome.com/f422d87d3c.js" crossorigin="anonymous"></script>
   <!-- JavaScript Boostrap Bundle with Popper -->
