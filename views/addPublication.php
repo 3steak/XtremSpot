@@ -39,7 +39,7 @@
                        <div class="d-flex justify-content-center mt-5 mb-5"><textarea placeholder="Ajouter une légende" name="legendContent" id="legendContent" cols="100" maxlength="250" rows="4"></textarea>
                        </div>
                        <!------ town ------->
-                       <h4 class="text-white">C'était où ?</h4>
+                       <h4 class="text-white">C'était où ? *</h4>
                        <div class="col-12 col-lg-10 p-3">
                            <select class="form-select " id="nativeTown" name="town" aria-label="Native town ">
                                <option selected>Ville du spot *</option>
@@ -51,6 +51,20 @@
                            </select>
                        </div>
                        <?= $error['town'] ?? '' ?>
+
+                       <!------ Category ------->
+                       <h4 class="text-white">Sport pratiqué ?</h4>
+                       <div class="col-12 col-lg-10 p-3">
+                           <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
+                               <option selected>Sport *</option>
+                               <?php
+                                foreach ($listCategory as $category) { ?>
+                                   <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                               <?php }
+                                ?>
+                           </select>
+                       </div>
+                       <?= $error['category'] ?? '' ?>
 
                        <h4 class="text-white">Ajoute le lieu du spot !</h4>
 

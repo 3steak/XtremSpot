@@ -2,8 +2,19 @@
 session_start();
 require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
+require_once(__DIR__ . '/../models/Category.php');
+require_once(__DIR__ . '/../models/Publication.php');
+
+
+
 flash('formNewContentOk', 'Votre publication va être lue par nos lutins modo', FLASH_SUCCESS);
-$listTown = ['Amiens', 'Paris', 'Hossegor', 'Biarritz'];
+
+// category list 
+$listCategory = Category::get();
+
+// AJAX TOWN
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // ----------------- CONTROL INPUT FILE-----------------------
@@ -33,12 +44,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     // -------------------- CONTROL SELECT TOWN --------------------------------
     $town = trim(filter_input(INPUT_POST, 'town', FILTER_SANITIZE_SPECIAL_CHARS));
-    if (!empty($town)) {
+    if (empty($town) || $town == '') {
         // Si town n'est pas dans dans la liste
-        if (!in_array($town, $listTown)) {
-            $error["town"] = "<small>La ville entrée n'est pas valide!</small>";
-        }
+
+        $error["town"] = "<small>Veuillez selectionner une ville</small>";
     }
+
+    // -------------------- CONTROL SELECT CATEGORY --------------------------------
+    $idCategories = trim(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
+    if (empty($idCategories) || $idCategories == '') {
+        // Si idCategories n'est pas dans dans la liste
+        $error["category"] = "<small>Veuillez selectionner un sport !</small>";
+    }
+
     // ------------- CONTROL TEXTAERA--------------------------------
     $legendContent = trim((string) filter_input(INPUT_POST, 'legendContent', FILTER_SANITIZE_SPECIAL_CHARS));
     if (empty($error)) {
