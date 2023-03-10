@@ -143,3 +143,11 @@ p {
 .logoHome {
     width: 250px;
 }
+
+/* MAP ADD PUBLICATION */
+
+#mapid {
+    height: 40vh;
+    width: 100%;
+    margin: 0 auto;
+}

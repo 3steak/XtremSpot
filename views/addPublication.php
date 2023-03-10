@@ -29,7 +29,9 @@
                    <h1 class="text-white text-center">Nouvelle publication</h1>
                </div>
                <div class="col-11  card bg-dark p-4 m-2">
-                   <form method="post" action="" enctype="multipart/form-data" autocomplete="off">
+
+                   <!------------------   FORM  ---------------->
+                   <form method="post" enctype="multipart/form-data" autocomplete="off">
                        <h4 class="text-white">Choisir une photo ou vidéo :</h4>
                        <div class="input-group m-2 bg-dark">
                            <input type="file" class="form-control " name="inputGroupFile" id="inputGroupFile">
@@ -53,7 +55,7 @@
                            <h4 class="text-white">C'était où ? *</h4>
                            <div class="form-group mx-auto">
                                <label for="zipcode">Code Postal</label>
-                               <input type="text" name="zipcode" class="form-control" placeholder="Code postal" id="zipcode" required>
+                               <input type="text" name="zipcode" class="form-control" placeholder="Code postal" id="zipcode" pattern="<?= REGEX_ZIPCODE ?>" required>
                                <small id="error-message" class="text-white"></small>
                            </div>
                            <div class="form-group">
@@ -80,13 +82,16 @@
 
                        <h4 class="text-white">Ajoute le lieu du spot ! *</h4>
 
-                       <h3 class="text-white d-flex justify-content-center m-4">MAP LEAFLET</h3>
-                       <div class="col-12 text-center"><button type="submit" class="btn btn-info">Ajouter</button>
+                       <div id="mapid">
+
+                       </div>
+                       <div hidden>
+                           <input type="text" id="hiddenInput" name="latlng" value="">
+                       </div>
+                       <div class="col-12 text-center mt-4"><button type="submit" class="btn btn-info">Ajouter</button>
                        </div>
                    </form>
                </div>
            </div>
        </div>
-
    </main>
-   <!-------FIN FEED USER  ----->

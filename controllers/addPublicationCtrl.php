@@ -22,6 +22,7 @@ $listCategory = Category::get();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     var_dump($_POST);
+    die;
     // ----------------- CONTROL INPUT FILE-----------------------
 
     if (isset($_FILES['inputGroupFile'])) {
@@ -94,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = trim((string) filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
 
     //  --------------- CONTROL MARKER ------------------------------------------------------
-
+    // je recup latlng dans input hidden
 
 
 
