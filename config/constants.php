@@ -23,3 +23,6 @@ define('DB_PASS', '');
 
 // Phone 
 define('REGEXP_PHONE_NUMBER', '^(0[1-9]{1})(\d{8})$');
+
+// format image
+define('AUTHORIZED_IMAGE_FORMAT', ['image/jpeg', 'image/png']);

@@ -29,21 +29,31 @@
                    <h1 class="text-white text-center">Nouvelle publication</h1>
                </div>
                <div class="col-11  card bg-dark p-4 m-2">
-                   <form method="post" action="" enctype="multipart/form-data">
+                   <form method="post" action="" enctype="multipart/form-data" autocomplete="off">
                        <h4 class="text-white">Choisir une photo ou vidéo :</h4>
                        <div class="input-group m-2 bg-dark">
                            <input type="file" class="form-control " name="inputGroupFile" id="inputGroupFile">
                            <label class="input-group-text" accept="image/png, image/jpeg, video/mp4" for="inputGroupFile"></label>
                        </div>
                        <?= $error['type'] ?? '' ?>
-                       <div class="d-flex justify-content-center mt-5 mb-5"><textarea placeholder="Ajouter une légende" name="legendContent" id="legendContent" cols="100" maxlength="250" rows="4"></textarea>
+
+                       <!------- TITLE  ------->
+                       <h4 class="text-white mt-4">Titre du post *</h4>
+                       <div class="d-flex justify-content-center mt-2 mb-5">
+                           <input type="text" class="form-control" placeholder="Ajouter un titre" name="title" id="title" cols="100" maxlength="100" rows="1" required>
+                       </div>
+                       <?= $error['type'] ?? '' ?>
+
+                       <!------- DESCRIPTION  ------->
+                       <div class="d-flex justify-content-center mt-5 mb-5"><textarea placeholder="Décrivez votre photo ou le lieu de spot en question" name="description" id="description" cols="100" maxlength="250" rows="4"></textarea>
                        </div>
                        <!------ town ------->
-                       <h4 class="text-white">C'était où ? *</h4>
+
                        <div class="col-12 col-lg-10 p-3">
-                           <div class="form-group">
+                           <h4 class="text-white">C'était où ? *</h4>
+                           <div class="form-group mx-auto">
                                <label for="zipcode">Code Postal</label>
-                               <input type="text" name="zipcode" class="form-control" placeholder="Code postal" id="zipcode">
+                               <input type="text" name="zipcode" class="form-control" placeholder="Code postal" id="zipcode" required>
                                <small id="error-message" class="text-white"></small>
                            </div>
                            <div class="form-group">
@@ -55,7 +65,7 @@
                        <?= $error['zipcode'] ?? '' ?>
 
                        <!------ Category ------->
-                       <h4 class="text-white">Sport pratiqué ?</h4>
+                       <h4 class="text-white">Sport pratiqué ? *</h4>
                        <div class="col-12 col-lg-10 p-3">
                            <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
                                <option selected>Sport *</option>
@@ -68,7 +78,7 @@
                        </div>
                        <?= $error['category'] ?? '' ?>
 
-                       <h4 class="text-white">Ajoute le lieu du spot !</h4>
+                       <h4 class="text-white">Ajoute le lieu du spot ! *</h4>
 
                        <h3 class="text-white d-flex justify-content-center m-4">MAP LEAFLET</h3>
                        <div class="col-12 text-center"><button type="submit" class="btn btn-info">Ajouter</button>
