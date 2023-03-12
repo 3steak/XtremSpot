@@ -35,16 +35,17 @@
                        <h4 class="text-white">Choisir une photo ou vidéo :</h4>
                        <div class="input-group m-2 bg-dark">
                            <input type="file" class="form-control " name="inputGroupFile" id="inputGroupFile">
-                           <label class="input-group-text" accept="image/png, image/jpeg, video/mp4" for="inputGroupFile"></label>
+                           <label class="input-group-text" accept="image/png, image/jpeg" for="inputGroupFile"></label>
                        </div>
                        <?= $error['type'] ?? '' ?>
+                       <?= $error['file'] ?? '' ?>
 
                        <!------- TITLE  ------->
                        <h4 class="text-white mt-4">Titre du post *</h4>
                        <div class="d-flex justify-content-center mt-2 mb-5">
                            <input type="text" class="form-control" placeholder="Ajouter un titre" name="title" id="title" cols="100" maxlength="100" rows="1" required>
                        </div>
-                       <?= $error['type'] ?? '' ?>
+                       <?= $error['title'] ?? '' ?>
 
                        <!------- DESCRIPTION  ------->
                        <div class="d-flex justify-content-center mt-5 mb-5"><textarea placeholder="Décrivez votre photo ou le lieu de spot en question" name="description" id="description" cols="100" maxlength="250" rows="4"></textarea>

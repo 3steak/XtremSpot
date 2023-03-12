@@ -12,7 +12,7 @@ use GuzzleHttp\Client;
 const API_URL = 'https://geo.api.gouv.fr/';
 $jsName = 'addPublication';
 
-flash('formNewContentOk', 'Votre publication va être lue par nos lutins modo', FLASH_SUCCESS);
+flash('formNewContentOk', 'Votre publication va être lue par nos plus beaux modérateurs', FLASH_SUCCESS);
 
 // category list 
 $listCategory = Category::get();
@@ -21,11 +21,22 @@ $listCategory = Category::get();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    var_dump($_POST);
-    die;
+
+
+    // ----------------- CONTROL ID USER -----------------------
+
+    $idUsers = 3;
+    // $idUsers = trim(filter_input(INPUT_POST, 'idUsers', FILTER_SANITIZE_NUMBER_INT));
+    // if (empty($idUsers) || $idUsers == '') {
+    //     $error['idUsers'] = '<small class="text-black"> Vous devez être connecté pour publier du contenu.</small>';
+    // }
+
+
     // ----------------- CONTROL INPUT FILE-----------------------
 
     if (isset($_FILES['inputGroupFile'])) {
+
+
         $inputGroupFile = $_FILES['inputGroupFile'];
         if (!empty($inputGroupFile['name'])) {
             if ($inputGroupFile['error'] > 0) {
@@ -54,11 +65,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($town) || $town == '') {
         // Si town n'est pas dans dans la liste
-        $error["town"] = "<small>Veuillez selectionner une ville</small>";
+        $error["town"] = "<small class='text-white'>Veuillez selectionner une ville</small>";
     }
     if (empty($zipcode) || $zipcode == '') {
         // Si town n'est pas dans dans la liste
-        $error["zipcode"] = "<small>Veuillez rentrer un code postal</small>";
+        $error["zipcode"] = "<small class='text-white'>Veuillez rentrer un code postal</small>";
     }
 
     // control avec librairie Guzzle
@@ -74,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         array_push($towns, $resp->nom);
     }
     if (!in_array($town, $towns)) {
-        $error["town"] = "<small>Veuillez rentrer un nom de ville existant</small>";
+        $error["town"] = "<small class='text-white'>Veuillez rentrer un nom de ville existant</small>";
     }
 
 
@@ -83,20 +94,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idCategories = trim(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
     if (empty($idCategories) || $idCategories == '') {
         // Si idCategories n'est pas dans dans la liste
-        $error["category"] = "<small>Veuillez selectionner un sport !</small>";
+        $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
     }
     // ------------- CONTROL TITLE--------------------------------
     $title = trim((string) filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
     if (empty($title) || $title == '') {
         // Si title n'est pas dans dans la liste
-        $error["title"] = "<small>Veuillez rentrer un titre</small>";
+        $error["title"] = "<small class='text-white'>Veuillez rentrer un titre</small>";
     }
     // ------------- CONTROL TEXTAERA--------------------------------
     $description = trim((string) filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
 
-    //  --------------- CONTROL MARKER ------------------------------------------------------
+    //  --------------- CONTROL MARKERS ------------------------------------------------------
     // je recup latlng dans input hidden
 
+
+    $coordinates = trim((string) filter_input(INPUT_POST, 'latlng', FILTER_SANITIZE_SPECIAL_CHARS));
+    if (empty($coordinates) || $coordinates == '') {
+        $error['coordinates'] = "<small class='text-white'>Veuillez mettre votre marker !</small>";
+    }
+    preg_match('/LatLng\((\d+\.\d+), (\d+\.\d+)\)/', $coordinates, $markers);
+    $marker_latitude = $markers[1];
+    $marker_longitude = $markers[2];
 
 
     if (empty($error)) {
