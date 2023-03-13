@@ -257,6 +257,23 @@ class Publication
     }
 
 
+    /** Allows to get all towns in DB with a SELECT DISTINCT
+     * get
+     *
+     * @param  mixed $userId
+     * @return array
+     */
+    public static function getTowns(): array
+    {
+        $sql = 'SELECT DISTINCT `publications`.`town` FROM `publications`
+            WHERE (`validated_at` is null);';
+        $sth = Database::connect()->prepare($sql);
+        $sth->execute();
+        $towns = $sth->fetchAll();
+        return $towns;
+    }
+
+
     /** Allows to get all publications validated if param null 
      *  if param is UserId get all user's publication
      * if param is Category get all category's publication

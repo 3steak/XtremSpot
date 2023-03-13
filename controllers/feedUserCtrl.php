@@ -10,7 +10,7 @@ $jsName = 'feedUserCtrl';
 
 // list cat for filter or 
 $listCategory = Category::get();
-$listPublication = Publication::get();
+$listTowns = Publication::getTowns();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     var_dump($_POST);

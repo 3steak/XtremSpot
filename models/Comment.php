@@ -97,6 +97,8 @@ class Comment
         return $this->idPublications;
     }
 
+
+
     /** Methode get permet de retourner les commentaires à valider si 0 paramètres rentrés,
      * Si param = $idUser la méthode retourne les commentaires validés de l'user 
      * Si param = $idPublication la méthode retourne les commentaires validés de la publication

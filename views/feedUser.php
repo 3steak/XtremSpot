@@ -84,7 +84,7 @@
                                     <option selected value="">Sport</option>
                                     <?php
                                     foreach ($listCategory as $category) { ?>
-                                        <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                                        <option value="<?= $category->id ?>" <?= (!empty($_POST['idCategories']) === $category->id) ? 'selected' : '' ?>><?= $category->name ?></option>
                                     <?php }
                                     ?>
                                 </select>
@@ -101,8 +101,8 @@
                                 <select class="form-select townUser" name="town" id="townUser" aria-label="townUser">
                                     <option selected value="">Ville</option>
                                     <?php
-                                    foreach ($listPublication as $publication) { ?>
-                                        <option value="<?= $publication->town ?>"><?= $publication->town ?></option>
+                                    foreach ($listTowns as $publication) { ?>
+                                        <option value="<?= $publication->town ?>" <?= (!empty($_POST['town']) === $publication->town) ? 'selected' : '' ?>><?= $publication->town ?></option>
                                     <?php }
                                     ?>
                                 </select>
