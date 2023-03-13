@@ -5,6 +5,8 @@ class Publication
     private $id;
     private $title;
     private $description;
+    private $image_name;
+    private $validated_at;
     private $marker_longitude;
     private $marker_latitude;
     private $town;
@@ -43,6 +45,27 @@ class Publication
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+    /** Allows to set image_name
+     * setImage_name
+     *
+     * @param  mixed $image_name
+     * @return void
+     */
+    public function setImage_name(string $image_name)
+    {
+        $this->image_name = $image_name;
+    }
+
+    /** Allows to set validated_at
+     * setValidated_at
+     *
+     * @param  mixed $validated_at
+     * @return void
+     */
+    public function setValidated_at(string $validated_at)
+    {
+        $this->validated_at = $validated_at;
     }
 
     /** Allows to set marker_longitude
@@ -137,6 +160,27 @@ class Publication
     }
 
 
+    /** Allows to get image_name
+     * getImage_name
+     *
+     * @return string
+     */
+    public function getImage_name(): string
+    {
+        return $this->image_name;
+    }
+
+    /** Allows to get validated_at
+     * getValidated_at
+     *
+     * @return string
+     */
+    public function getValidated_at(): string
+    {
+        return $this->validated_at;
+    }
+
+
     /** Allows to get marker_longitude
      * getMarker_longitude
      *
@@ -191,9 +235,29 @@ class Publication
     }
 
 
+    /** Allows to get all publications not validated for CRUD
+     * get
+     *
+     * @param  mixed $userId
+     * @return array
+     */
+    public static function getCrudPublications(): array
+    {
+
+        # return all publications validated
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+            FROM `publications` 
+            JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+            JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
+            WHERE (`validated_at` is null);';
+        $sth = Database::connect()->prepare($sql);
+        $sth->execute();
+        $publications = $sth->fetchAll();
+        return $publications;
+    }
 
 
-    /** Allows to get all publications if param null 
+    /** Allows to get all publications validated if param null 
      *  if param is UserId get all user's publication
      * if param is Category get all category's publication
      * if param is town get all town's publication
@@ -202,35 +266,38 @@ class Publication
      * @param  mixed $userId
      * @return array
      */
-    public static function get(int $userId = null, string $category = null, string $town = null): array
+    public static function get(int $userId = null, int $idCategories = null, string $town = null): array
     {
         if ($userId) {
             #return publication filtered by user id for profil or CRUD
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-            JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE users.id = :id;';
+            JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
+            WHERE (`validated_at` is not null) AND users.id = :id;';
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':id', $userId, PDO::PARAM_INT);
-        } elseif ($category) {
-            # return publication filtered by category
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+        } elseif ($idCategories) {
+            # return publication filtered by idCategories
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
                 FROM `publications` 
                 JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-                JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE categoryName = :category;';
+                JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
+                WHERE (`validated_at` is not null) AND idCategories = :idCategories;';
             $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':category', $category, PDO::PARAM_INT);
+            $sth->bindValue(':idCategories', $idCategories, PDO::PARAM_INT);
         } elseif ($town) {
             # return publication filtered by town 
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
                 FROM `publications` 
                 JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-                JOIN `categories` ON `categories`.`id` = `users`.`idCategories` WHERE `publications`.`town` = :town;';
+                JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
+                WHERE (`validated_at` is not null) AND `publications`.`town` = :town;';
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':town', $town, PDO::PARAM_INT);
         } else {
-            # return all publications
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+            # return all publications validated
+            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories`;';
@@ -249,12 +316,13 @@ class Publication
      */
     public function addPublication(): bool
     {
-        $sql = "INSERT INTO `publications` (`title`,`description`,`marker_longitude`,`marker_latitude`,`town`,`idCategories`,`idUsers`)
-                 VALUES (:title,:description,:marker_longitude,:marker_latitude,:town,:idCategories,:idUsers);";
+        $sql = "INSERT INTO `publications` (`title`,`description`,`image_name`,`marker_longitude`,`marker_latitude`,`town`,`idCategories`,`idUsers`)
+                 VALUES (:title,:description,:image_name,:marker_longitude,:marker_latitude,:town,:idCategories,:idUsers);";
 
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':title', $this->title, PDO::PARAM_STR);
         $sth->bindValue(':description', $this->description, PDO::PARAM_STR);
+        $sth->bindValue(':image_name', $this->image_name, PDO::PARAM_STR);
         $sth->bindValue(':marker_longitude', $this->marker_longitude, PDO::PARAM_STR);
         $sth->bindValue(':marker_latitude', $this->marker_latitude, PDO::PARAM_STR);
         $sth->bindValue(':town', $this->town, PDO::PARAM_STR);
@@ -266,28 +334,38 @@ class Publication
     }
 
 
-    /** Allows to update publication 
+    /** Allows to update publication and validated if admin and validated is informed
      * update
      *
      * @return bool
      */
-    public function update(): bool
+    public function update(string $validated_at = null): bool
     {
-        $sql = 'UPDATE `publications` 
-                SET  `title`=:title, `description`=:description,
+        if ($validated_at) {
+            #update validated at and valid the publication or not
+            $sql = 'UPDATE `publications` 
+            SET  `validated_at`=:validated_at,
+            WHERE id = :id ;';
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':validated_at', $this->validated_at, PDO::PARAM_STR);
+        } else {
+            $sql = 'UPDATE `publications` 
+                SET  `title`=:title, `description`=:description,`image_name`=:image_name,
                 `marker_longitude`=:marker_longitude,`marker_latitude`=:marker_latitude,
                 `town`=:town,`idCategories`=:idCategories,`idUsers`=:idUsers
                 WHERE id = :id ;';
 
-        $sth = Database::connect()->prepare($sql);
-        $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $sth->bindValue(':title', $this->title, PDO::PARAM_STR);
-        $sth->bindValue(':description', $this->description, PDO::PARAM_STR);
-        $sth->bindValue(':marker_longitude', $this->marker_longitude, PDO::PARAM_STR);
-        $sth->bindValue(':marker_latitude', $this->marker_latitude, PDO::PARAM_STR);
-        $sth->bindValue(':town', $this->town, PDO::PARAM_STR);
-        $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
-        $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $sth->bindValue(':title', $this->title, PDO::PARAM_STR);
+            $sth->bindValue(':description', $this->description, PDO::PARAM_STR);
+            $sth->bindValue(':image_name', $this->image_name, PDO::PARAM_STR);
+            $sth->bindValue(':marker_longitude', $this->marker_longitude, PDO::PARAM_STR);
+            $sth->bindValue(':marker_latitude', $this->marker_latitude, PDO::PARAM_STR);
+            $sth->bindValue(':town', $this->town, PDO::PARAM_STR);
+            $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
+            $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
+        }
         $sth->execute();
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;

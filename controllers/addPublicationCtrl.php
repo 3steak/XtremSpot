@@ -122,24 +122,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($error)) {
         try {
+            $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);
+            $from = $inputGroupFile['tmp_name'];
+            $image_name = uniqid('img_') . '.' . $idUsers . '.' . $extension;
+            $to = __DIR__ . '/../public/assets/uploads/newPicture/' . $image_name;
+            $move = move_uploaded_file($from, $to);
+            if (!$move) {
+                throw new Exception("Image non envoyé", 1);
+                die;
+            }
             $publication = new Publication;
             $publication->setTitle($title);
             $publication->setDescription($description);
+            $publication->setImage_name($image_name);
             $publication->setMarker_longitude($marker_longitude);
             $publication->setMarker_latitude($marker_latitude);
             $publication->setTown($town);
             $publication->setIdCategories($idCategories);
             $publication->setIdUsers($idUsers);
 
-            $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);
-            $from = $inputGroupFile['tmp_name'];
-            $fileName = uniqid('img_') . '.' . $idUsers . '.' . $extension;
-            $to = __DIR__ . '/../public/assets/uploads/newPicture/' . $fileName;
-            $move = move_uploaded_file($from, $to);
-            if (!$move) {
-                throw new Exception("Image non envoyé", 1);
-                die;
-            }
             $result = $publication->addPublication();
             if ($result) {
                 header('location: /controllers/profilUserCtrl.php?isSent=ok');

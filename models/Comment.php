@@ -87,7 +87,7 @@ class Comment
     }
 
 
-    /** Allows to get isPublications
+    /** Allows to get idPublications
      * getIdPublications
      *
      * @return int

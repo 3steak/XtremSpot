@@ -75,36 +75,47 @@
             </div>
             <div class=" col-lg-10  mx-auto">
                 <div class="collapse" id="collapseFilters">
-                    <p class="text-white">Filtrer par :</p>
-                    <div class="d-flex flex-column gap-2 m-2">
+                    <h4 class="text-white">Filtrer par :</h4>
+                    <div class="d-flex justify-content-around gap-4 m-2">
                         <div class="col-4 col-lg-4">
-                            <p class="text-white">Sport</p>
+                            <p class="text-white mb-2">Sport</p>
+                            <form method="post">
+                                <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
+                                    <option selected value="">Sport</option>
+                                    <?php
+                                    foreach ($listCategory as $category) { ?>
+                                        <option value="<?= $category->id ?>"><?= $category->name ?></option>
+                                    <?php }
+                                    ?>
+                                </select>
 
-                            <select class="form-select mt-2 sportUser" name="sport" id="sportUser" aria-label="sportUser">
-                                <?php foreach ($sports as $sport) { ?>
-                                    <!-- SI SPORT = SPORT 'selected' -->
-                                <?php echo '<option value =' . $sport . '>' . $sport . '</option>';
-                                } ?>
-                            </select>
-                            <!-- RENVOI VERS LE CONTROLLER POUR SELECT WHERE SPORT = SPORTSELECTED -->
-                            <a class="btn btn-dark btn-filter mt-2" id="filter" type="submit" href="#" role="button">Filtrer</a>
+                                <!-- RENVOI VERS LE CONTROLLER POUR SELECT WHERE SPORT = SPORTSELECTED -->
+                                <button type="submit" id="filter" class="btn btn-dark btn-filter mx-auto mt-2">Filtrer</button>
+                            </form>
+                            <?= $error['category'] ?? '' ?>
                         </div>
 
                         <div class="col-4 col-lg-4">
-                            <p class="text-white">Lieux</p>
-                            <select class="form-select mt-2 townUser" name="town" id="townUser" aria-label="townUser">
-                                <?php foreach ($towns as $town) { ?>
-                                    <!-- SI town = town 'selected' -->
-                                <?php echo '<option value =' . $town . '>' . $town . '</option>';
-                                } ?>
-                            </select>
-                            <!-- RENVOI VERS LE CONTROLLER POUR SELECT WHERE Town = TOWN -->
-                            <a class="btn btn-dark btn-filter mt-2" id="filter" type="submit" href="#" role="button">Filtrer</a>
+                            <p class="text-white mb-2">Lieux</p>
+                            <form method="post">
+                                <select class="form-select townUser" name="town" id="townUser" aria-label="townUser">
+                                    <option selected value="">Ville</option>
+                                    <?php
+                                    foreach ($listPublication as $publication) { ?>
+                                        <option value="<?= $publication->town ?>"><?= $publication->town ?></option>
+                                    <?php }
+                                    ?>
+                                </select>
+                                <!-- RENVOI VERS LE CONTROLLER POUR SELECT WHERE Town = TOWN -->
+                                <button type="submit" id="filter" class="btn btn-dark btn-filter mx-auto mt-2">Filtrer</button>
+                            </form>
+                            <?= $error['town'] ?? '' ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-------------- Feed User, content cards ------->
