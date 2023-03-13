@@ -22,7 +22,6 @@ $(document).ready(function () {
         // Send request to API
         fetch(url, { method: 'get' }).then(response => response.json()).then(result => {
             $(city).find('option').remove();
-            console.log(result);
             if (result.code !== '') {
                 $(city).append('<option value ="' + result.name + '">' + result.name + '</option>');
                 function init() {
@@ -73,17 +72,14 @@ $(document).ready(function () {
                             .bindPopup("<small>" + content + "<br>" + e.latlng + "</small>")
                             .addTo(map);
                         $(hiddenInput).val(e.latlng);
-                        console.log(hiddenInput);
                     }
                     map.on('click', onMapClick);
-
                     // fin fonction init
                 }
                 init();
 
             } else {
                 if ($(zipcode).val()) {
-                    console.log('Erreur de code postal.');
                     $(errorMessage).text('Aucune commmune avec ce code postal.').show();
                 }
                 else {
@@ -91,7 +87,6 @@ $(document).ready(function () {
                 }
             }
         }).catch(err => {
-            console.log(err);
             $(city).find('option').remove();
         });
     });

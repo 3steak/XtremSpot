@@ -41,21 +41,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!empty($inputGroupFile['name'])) {
             if ($inputGroupFile['error'] > 0) {
                 $error['file'] = '<small class="text-white">Une erreur est survenue</small>';
-            } else {
-                if (!in_array($inputGroupFile['type'], AUTHORIZED_IMAGE_FORMAT)) {
-                    $error['type'] = '<small class="text-white">Fichier non valide</small>';
-                } else {
-                    $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);
-                    $from = $inputGroupFile['name'];
-                    $fileName = uniqid('img_') . '.' . $extension;
-                    $to = __DIR__ . '/../public/uploads/newPicture' . $fileName;
-                    move_uploaded_file($from, $to);
-                }
+            }
+            if (!in_array($inputGroupFile['type'], AUTHORIZED_IMAGE_FORMAT)) {
+                $error['type'] = '<small class="text-white">Fichier non valide</small>';
+            }
+            $maxSize = 15728640; //15mb
+            if ($_FILES['inputGroupFile']['size'] > $maxSize) {
+                $error['type'] = '<small class="text-white">Fichier trop volumineux</small>';
             }
         }
     } else {
         $error['file'] = '<small class="text-white">Fichier non renseigné</small>';
     }
+    // mettre dans try catch
+
+
+
 
     // -------------------- CONTROL SELECT ZIPCODE && TOWN WITH COMPOSER Guzzle --------------------------------
 
@@ -110,24 +111,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     $coordinates = trim((string) filter_input(INPUT_POST, 'latlng', FILTER_SANITIZE_SPECIAL_CHARS));
+
     if (empty($coordinates) || $coordinates == '') {
         $error['coordinates'] = "<small class='text-white'>Veuillez mettre votre marker !</small>";
     }
-    preg_match('/LatLng\((\d+\.\d+), (\d+\.\d+)\)/', $coordinates, $markers);
+    preg_match(REGEXP_LATLNG, $coordinates, $markers);
     $marker_latitude = $markers[1];
     $marker_longitude = $markers[2];
 
 
     if (empty($error)) {
-        // try {
-        //     //code...
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        // }
+        try {
+            $publication = new Publication;
+            $publication->setTitle($title);
+            $publication->setDescription($description);
+            $publication->setMarker_longitude($marker_longitude);
+            $publication->setMarker_latitude($marker_latitude);
+            $publication->setTown($town);
+            $publication->setIdCategories($idCategories);
+            $publication->setIdUsers($idUsers);
+
+            $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);
+            $from = $inputGroupFile['tmp_name'];
+            $fileName = uniqid('img_') . '.' . $idUsers . '.' . $extension;
+            $to = __DIR__ . '/../public/assets/uploads/newPicture/' . $fileName;
+            $move = move_uploaded_file($from, $to);
+            if (!$move) {
+                throw new Exception("Image non envoyé", 1);
+                die;
+            }
+            $result = $publication->addPublication();
+            if ($result) {
+                header('location: /controllers/profilUserCtrl.php?isSent=ok');
+                die;
+            } else {
+                throw new Exception("Publication non ajouté", 1);
+                die;
+            }
+        } catch (\Throwable $th) {
+            $errorMsg = $th->getMessage();
+            include_once(__DIR__ . '/../views/templates/header.php');
+            include(__DIR__ . '/../../views/errors.php');
+            include_once(__DIR__ . '/../views/templates/footer.php');
+            die;
+        }
         // Redirige vers son profil avec passage de valeur en URL pour message si publi envoyé
-        header('location: /controllers/profilUserCtrl.php?isSent=ok');
-        // Envoyer une alerte "Un de nos developpeur contrôle votre publication !"
-        die;
+
+
     } else {
         include_once(__DIR__ . '/../views/templates/header.php');
         include(__DIR__ . '/../views/addPublication.php');
