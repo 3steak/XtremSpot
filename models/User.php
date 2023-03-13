@@ -7,7 +7,7 @@ class User
     private string $firstname;
     private string $lastname;
     private string $pseudo;
-    private  $password;
+    private string  $password;
     private string $email;
     // idcategories recup dans le select value 
     private $idCategories;

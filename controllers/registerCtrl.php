@@ -3,9 +3,11 @@ session_start();
 require_once(__DIR__ . '/../helpers/flash.php');
 flash('register', 'Ton compte vient d\'être crée ! Merci de le valider en cliquant sur le mail envoyé !', FLASH_SUCCESS);
 require_once(__DIR__ . '/../config/constants.php');
+require_once(__DIR__ . '/../models/User.php');
+require_once(__DIR__ . '/../models/Category.php');
 
 $jsName = 'registerCtrl';
-
+$listCategory = Category::get();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // ============= FIRSTNAME : clean and check ===========
     $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
@@ -74,31 +76,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // VERIF PAR REGEX
         }
         // Encodage du MDP
-        $paswordHash = password_hash($password, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_DEFAULT);
+    }
+    // -------------------- CONTROL SELECT CATEGORY --------------------------------
+    $idCategories = trim(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
+    if (empty($idCategories) || $idCategories == '') {
+        // Si idCategories n'est pas dans dans la liste
+        $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
     }
 
-
-    //  ========== BIRTHDAY =========
-
-    $birthday = trim(filter_input(INPUT_POST, 'birthday', FILTER_SANITIZE_NUMBER_INT));
-
-    if (empty($birthday)) {
-        $error['birthday'] = '<small class="text-white">Veuillez rentrer une date de naissance.</small>';
-    } else {
-        $isOk = filter_var($birthday, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDAY . '/')));
-        if (!$isOk) {
-            $error['birthday'] = '<small class="text-white">La date de naissance n\'est pas au bon format.</small>';
-        } else {
-            $year = date('Y', strtotime($birthday));
-            if (date("Y") - $year < 18 || date('Y') - $year > 120) {
-                $error['birthday'] = '<small class="text-white">La date de naissance n\'est pas valide</small>';
-            }
-        }
-    }
+    //  ISMAILEXIST = USER PAS ENCORE INSCRIT
     if (empty($error)) {
-        // Redirige vers page de connexion ( il devra valider un mail)
-        header('location: /controllers/homeCtrl.php?register=ok');
-        die;
+        try {
+            $user = new User;
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setPseudo($pseudo);
+            $user->setEmail($email);
+            $user->setPassword($password);
+            $user->setIdCategories($idCategories);
+
+            $result = $user->addUser();
+            if ($result) {
+                header('location: /controllers/homeCtrl.php?register=ok');
+                die;
+            } else {
+                throw new Exception("Inscription non réussie", 1);
+                die;
+            }
+        } catch (\Throwable $th) {
+            $errorMsg = $th->getMessage();
+            include_once(__DIR__ . '/../views/templates/header.php');
+            include(__DIR__ . '/../../views/errors.php');
+            include_once(__DIR__ . '/../views/templates/footer.php');
+            die;
+        }
+    } else {
+        include_once(__DIR__ . '/../views/templates/header.php');
+        include(__DIR__ . '/../views/register.php');
     }
 
     // FIN DU IF 

@@ -81,17 +81,6 @@
                                     <?= $error['sport'] ?? '' ?>
 
 
-                                    <!------------------------------------------  BIRTHDAY  ---------------------->
-                                    <h3 class="text-white ms-2 pt-3">Birthday</h3>
-                                    <div class="col-12 px-3">
-                                        <input type="date" name="birthday" class="form-control" id="birthdayUser" value="" placeholder="" aria-label="birthdayUser" required>
-                                    </div>
-                                    <?= $error['birthday'] ?? '' ?>
-
-                                </div>
-                                <div class="d-flex justify-content-center m-4"><button class="btn btn-info" type="submit">Modifier</button>
-                                </div>
-
                             </form>
                         </div>
                     </div>

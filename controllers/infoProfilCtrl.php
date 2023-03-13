@@ -111,23 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error["sport"] = "<small>Le sport entré n'est pas valide!</small>";
         }
     }
-    //  ========== BIRTHDAY =========
-
-    $birthday = trim(filter_input(INPUT_POST, 'birthday', FILTER_SANITIZE_NUMBER_INT));
-
-    if (empty($birthday)) {
-        $error['birthday'] = '<small class="text-white">Veuillez rentrer une date de naissance.</small>';
-    } else {
-        $isOk = filter_var($birthday, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_BIRTHDAY . '/')));
-        if (!$isOk) {
-            $error['birthday'] = '<small class="text-white">La date de naissance n\'est pas au bon format.</small>';
-        } else {
-            $year = date('Y', strtotime($birthday));
-            if (date("Y") - $year < 18 || date('Y') - $year > 120) {
-                $error['birthday'] = '<small class="text-white">La date de naissance n\'est pas valide</small>';
-            }
-        }
-    }
 
     if (empty($error)) {
         // Redirige vers settings 
