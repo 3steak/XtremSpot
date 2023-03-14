@@ -33,7 +33,7 @@
                               <span class="input-group-text bg-dark text-white" id="addon-wrapping">@</span>
                               <input type="mail" class="form-control" name="email" id="email" placeholder="Email *" value="<?= !empty($_POST['email']) ? $_POST['email'] : '' ?>" maxlength="100" aria-label="email" aria-describedby="addon-wrapping" required>
                           </div>
-
+                          <?= $error['email'] ?? '' ?>
                           <!------ CATEGORY ------->
                           <div class="col-12 p-3">
                               <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">

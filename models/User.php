@@ -265,5 +265,22 @@ class User
         return ($result > 0) ? true : false;
     }
 
+
+
+    /**
+     * isMailExist
+     *
+     * @param  mixed $mail
+     * @return bool
+     */
+    public static function isMailExist(string $email)
+    {
+        $request = 'SELECT * FROM `users` WHERE `email` = ? ;';
+        $sth = Database::connect()->prepare($request);
+        $sth->execute([$email]);
+        $result = $sth->fetchAll();
+        return !empty($result) ?? false;
+    }
+
     //  end of class
 }

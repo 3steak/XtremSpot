@@ -19,3 +19,22 @@ width="auto" height="300" style="border:0;"allowfullscreen="" loading="lazy" ref
 
     modalMapIframe.innerHTML = mapUser
 })
+
+
+//------------------------ MODAL FOR DESCRIPTION FEEDUSER.PHP -----------------------------------------
+
+let seeMores = document.querySelectorAll('.seeMore');
+
+for (let seeMore of seeMores) {
+    seeMore.addEventListener('click', persoModal)
+}
+function persoModal() {
+    // Attributs data
+    let title = this.dataset.title;
+    let description = this.dataset.description;
+
+    // Injection in modal
+    document.querySelector("#description .description").innerText = description;
+
+}
+

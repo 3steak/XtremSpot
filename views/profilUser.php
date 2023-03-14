@@ -1,4 +1,8 @@
-<?php flash('commentEmpty') ?>
+<?php
+if (isset($_SESSION['flash'])) {
+
+    flash('commentEmpty');
+}  ?>
 <!---------------- START MAIN --------------->
 <main>
     <!----- BANNIERE OF USERPROFIL AND MODALMAP ---->

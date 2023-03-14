@@ -86,6 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     //  ISMAILEXIST = USER PAS ENCORE INSCRIT
+    if (User::isMailExist($email)) {
+        $error["email"] = '<small class= "text-white">Ce mail correspond déjà à un autre utilisateur</small>';
+    }
     if (empty($error)) {
         try {
             $user = new User;

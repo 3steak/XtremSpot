@@ -23,6 +23,28 @@
             </div>
         </div>
     </div>
+    <!-- MODAL DESCRIPTION -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- MODAL -->
+            <div class="modal fade" id="description" tabindex="-1" aria-labelledby="descriptionLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content bg-dark">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 text-white" id="descriptionLabel">Publication->title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-white description">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL SIGNALEMENT  -->
     <!-- Modal -->
@@ -74,10 +96,10 @@
                 </div>
             </div>
             <div class=" col-lg-10  mx-auto">
-                <div class="collapse" id="collapseFilters">
+                <div class="collapse " id="collapseFilters">
                     <h4 class="text-white">Filtrer par :</h4>
-                    <div class="d-flex justify-content-around gap-4 m-2">
-                        <div class="col-4 col-lg-4">
+                    <div class="d-flex flex-column flex-md-row justify-content-around gap-4 m-2">
+                        <div class="col-8 col-lg-4 mx-auto">
                             <p class="text-white mb-2">Sport</p>
                             <form method="post">
                                 <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
@@ -94,8 +116,10 @@
                             </form>
                             <?= $error['category'] ?? '' ?>
                         </div>
-
-                        <div class="col-4 col-lg-4">
+                        <div class="col-2 align-self-center align-self-lg-end">
+                            <a class="btn btn-dark btn-filter " href="/controllers/feedUserCtrl.php" role="button">Reset</a>
+                        </div>
+                        <div class="col-8 col-lg-4 mx-auto">
                             <p class="text-white mb-2">Lieux</p>
                             <form method="post">
                                 <select class="form-select townUser" name="town" id="townUser" aria-label="townUser">
@@ -112,6 +136,7 @@
                             <?= $error['town'] ?? '' ?>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -126,20 +151,22 @@
         <div class="row">
             <div class="card text-bg-dark pb-3 col-lg-10 mx-auto">
                 <div class="col-12 p-2">
-                    <div class="list-group-item d-flex align-items-center ">
-                        <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
-                            <a href="#" class="text-decoration-none text-white p-2 ">
-                                Profil Name
-                            </a>
-                            <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
-                            <a href="#" class="text-black ms-auto  me-2 fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
+                    <div class="d-flex align-items-center ">
+                        <a href="/controllers/profilUserCtrl.php?id=$user->id" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur"></a>
+                        <a href="/controllers/profilUserCtrl.php?id=$user->id" title="Voir profil" class="text-decoration-none text-white p-2 ">
+                            Profil Name
+                        </a>
+                        <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
+                        <a href="#" class="text-black ms-auto  me-2 fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
                     </div>
                 </div>
+
                 <img src="/public/assets/img/testFeedUser.jpg" class="card-img" alt="...">
-                <div class="card-img-overlay d-flex flex-column justify-content-end ">
+                <div class=" d-flex flex-column justify-content-end ">
                     <div class="row banniereLike p-2 ">
-                        <div class="col-12">
-                            <p class="contentUserDescprition">Spot cool, attention aux rochers</p>
+                        <div class="col-12 d-flex">
+                            <p class="contentUserDescprition">Spot cool, attention aux rochers...</p>
+                            <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-title="publication->title" data-description="publication->description" role="button">En savoir plus</a>
                         </div>
 
                         <div class="col-12 dropcenter dropup">
@@ -150,7 +177,7 @@
                                 <i class="fa-solid fa-comment fa-2x"></i>
                             </a>
                             <!-- BOUTON MAP -->
-                            <a class=" text-black text-decoration-none p-3"><i class="fa-solid fa-location-dot fa-2x" data-bs-toggle="modal" data-bs-target="#mapModal" data-bs-whatever="USER1"></i></a>
+                            <a class=" text-black text-decoration-none p-3" title="Voir le lieu du spot"><i class="fa-solid fa-location-dot fa-2x" data-bs-toggle="modal" data-bs-target="#mapModal" data-bs-whatever="USER1"></i></a>
 
 
                             <!--  BOUTON OPTION -->

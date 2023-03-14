@@ -7,7 +7,6 @@ require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Publication.php');
 $jsName = 'feedUserCtrl';
 
-
 // list cat for filter or 
 $listCategory = Category::get();
 $listTowns = Publication::getTowns();
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $town = trim(filter_input(INPUT_POST, 'town', FILTER_SANITIZE_NUMBER_INT));
         if (empty($town) || $town == '') {
             // Si town n'est pas dans dans la liste
-            $error["town"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
+            $error["town"] = "<small class='text-white'>Veuillez selectionner une ville !</small>";
         }
     }
     if (isset($_POST['comment'])) {

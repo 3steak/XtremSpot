@@ -3,7 +3,7 @@ session_start();
 require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../views/templates/header.php');
 
-if (!empty($_GET) && $_GET['isSent'] == 'ok') {
+if (!empty($_GET) && isset($_GET['isSent']) == 'ok') {
     flash('formNewContentOk');
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
