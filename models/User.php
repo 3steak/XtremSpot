@@ -11,6 +11,7 @@ class User
     private string $email;
     // idcategories recup dans le select value 
     private $idCategories;
+    private $admin;
 
 
     /** Allows to register id
@@ -105,6 +106,18 @@ class User
     }
 
 
+    /** Allows to set admin
+     * setAdmin
+     *
+     * @param  mixed $admin
+     * @return void
+     */
+    public function setAdmin(int $admin)
+    {
+        $this->admin = $admin;
+    }
+
+
 
 
 
@@ -172,15 +185,25 @@ class User
         return $this->idCategories;
     }
 
+    /** Allows to get admin
+     * getAdmin
+     *
+     * @return int
+     */
+    public function getAdmin(): int
+    {
+        return $this->admin;
+    }
+
 
     /** Allows to get userlist if param is null,
      * If param = $id return user's information 
      * get
      *
      * @param  mixed $id
-     * @return array
+     * @return object 
      */
-    public static function get(int $id = null): array
+    public static function get(int $id = null): object | array
     {
         if ($id) {
             $sql = 'SELECT `users`.`id`, `lastname`, `firstname`,`pseudo`,`email`, `admin`, `categories`.`name` AS `category`
@@ -189,13 +212,15 @@ class User
 
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->execute();
+            $users = $sth->fetch();
         } else {
             $sql = 'SELECT `users`.`id`, `categories`.`name` AS `category` , `lastname`, `firstname`,`pseudo`,`email`, `admin` 
             FROM `users` JOIN `categories` ON `users`.`idCategories` = `categories`.`id`;';
             $sth = Database::connect()->prepare($sql);
+            $sth->execute();
+            $users = $sth->fetchAll();
         }
-        $sth->execute();
-        $users = $sth->fetchAll();
         return $users;
     }
 
@@ -223,19 +248,28 @@ class User
     }
 
 
-    /** Allows to update infos of user
+    /** Allows to update infos of user if admin in param updateAdmin
      * update
      *
      * @return bool
      */
-    public function update(): bool
+    public function update(int $admin = null): bool
     {
-        $sql = 'UPDATE `users` 
+        if ($admin) {
+            $sql = 'UPDATE `users` 
+            SET  `firstname`=:firstname, `lastname`=:lastname,
+            `pseudo`=:pseudo,`password`=:password,`email`=:email, `idCategories`=:idCategories, `admin`=:admin
+            WHERE id = :id ;';
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':admin', $this->admin, PDO::PARAM_INT);
+        } else {
+            $sql = 'UPDATE `users` 
                 SET  `firstname`=:firstname, `lastname`=:lastname,
                 `pseudo`=:pseudo,`password`=:password,`email`=:email, `idCategories`=:idCategories,
                 WHERE id = :id ;';
+            $sth = Database::connect()->prepare($sql);
+        }
 
-        $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
         $sth->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $sth->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
@@ -279,6 +313,16 @@ class User
         $sth = Database::connect()->prepare($request);
         $sth->execute([$email]);
         $result = $sth->fetchAll();
+        return !empty($result) ?? false;
+    }
+
+    //VERIF ID
+    public static function isIdExist(int $id): bool|object
+    {
+        $request = 'SELECT * FROM `users` WHERE `id` = ? ;';
+        $sth = Database::connect()->prepare($request);
+        $sth->execute([$id]);
+        $result = $sth->fetch();
         return !empty($result) ?? false;
     }
 

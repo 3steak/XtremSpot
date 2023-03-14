@@ -8,6 +8,8 @@
 :root {
     --main-bg-color: #101010;
     --button-bg-color: #2B59C3;
+    --main-red-color: #FF0000;
+
 }
 
 p {
@@ -150,4 +152,93 @@ p {
     height: 40vh;
     width: 100%;
     margin: 0 auto;
+}
+
+
+/* TABLEAU  */
+
+table.neumorphic {
+    border-spacing: 0;
+    color: var(--main-bg-color);
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+
+    background: var(--main-font-color);
+}
+
+table>a {
+    text-decoration: none;
+}
+
+.dataTables_info {
+    color: var(--main-font-color) !important;
+}
+
+label {
+    color: var(--main-font-color) !important;
+}
+
+#dataTable_previous,
+#dataTable_next {
+    color: var(--main-font-color) !important;
+}
+
+.telmail,
+.seeProfil {
+    text-decoration: none !important;
+    color: var(--main-bg-color) !important;
+}
+
+.deleteApt,
+.deleteComment {
+    text-decoration: none !important;
+    color: var(--main-red-color) !important;
+}
+
+#pseudo {
+    font-weight: 600;
+    text-decoration: none !important;
+    color: var(--main-bg-color) !important;
+
+}
+
+.fullname {
+    font-weight: 600;
+}
+
+.content {
+    background: var(--main-font-color);
+    width: 80vw;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    margin: 0 auto;
+}
+
+.btnUpdate {
+    color: var(--main-font-color) !important;
+    font-weight: 900;
+    font-size: 18px;
+    background: var(--button-bg-color) !important;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px #000000,
+        -5px -5px 10px #17171773;
+    margin: auto;
+}
+
+/* FOR MOBIL */
+@media only screen and (max-width: 780px) {
+    .dNoneMobil {
+        display: none;
+    }
+
+    .content {
+        background: var(--main-font-color);
+        border-radius: 10px;
+        padding: 30px 20px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
 }

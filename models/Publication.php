@@ -273,9 +273,29 @@ class Publication
         return $towns;
     }
 
+    /** Allows to get validated User's publication with his ID in Param
+     * getUserPublication
+     *
+     * @param  mixed $userId
+     * @return void
+     */
+    public static function getUserPublication(int $userId)
+    {
+
+        #return publication filtered by user id for profil or CRUD
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+        FROM `publications` 
+        JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+        JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
+        WHERE (`validated_at` is not null) AND users.id = :id;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':id', $userId, PDO::PARAM_INT);
+        $sth->execute();
+        $publications = $sth->fetchAll();
+        return $publications;
+    }
 
     /** Allows to get all publications validated if param null 
-     *  if param is UserId get all user's publication
      * if param is Category get all category's publication
      * if param is town get all town's publication
      * get
@@ -283,18 +303,9 @@ class Publication
      * @param  mixed $userId
      * @return array
      */
-    public static function get(int $userId = null, int $idCategories = null, string $town = null): array
+    public static function get(int $idCategories = null, string $town = null): array
     {
-        if ($userId) {
-            #return publication filtered by user id for profil or CRUD
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
-            FROM `publications` 
-            JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-            JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-            WHERE (`validated_at` is not null) AND users.id = :id;';
-            $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':id', $userId, PDO::PARAM_INT);
-        } elseif ($idCategories) {
+        if ($idCategories) {
             # return publication filtered by idCategories
             $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
                 FROM `publications` 

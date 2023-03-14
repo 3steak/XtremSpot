@@ -98,26 +98,34 @@ class Comment
     }
 
 
-
+    /** Allows to get user comment with his id in param
+     * getUdserComment
+     *
+     * @param  mixed $idUser
+     * @return array
+     */
+    public static function getUserComments(int $idUser): array
+    {
+        #return user's comments
+        $sql = 'SELECT `id` as `commentId`, `description`, `validated_at`, `created_at`, `idUsers`, `idPublications`
+                FROM `comments` 
+                WHERE (`validated_at` is not null) AND `idUsers` = :id ;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':id', $idUser, PDO::PARAM_INT);
+        $sth->execute();
+        $comments = $sth->fetchAll();
+        return $comments;
+    }
     /** Methode get permet de retourner les commentaires à valider si 0 paramètres rentrés,
-     * Si param = $idUser la méthode retourne les commentaires validés de l'user 
      * Si param = $idPublication la méthode retourne les commentaires validés de la publication
      * get
      *
-     * @param  mixed $idUser
      * @param  mixed $idPublication
      * @return array
      */
-    public static function get(int $idUser = null, int $idPublication = null): array
+    public static function get(int $idPublication = null): array
     {
-        if ($idUser) {
-            #return commentaires de l'user
-            $sql = 'SELECT `id` as `commentId`, `description`, `validated_at`, `created_at`, `idUsers`, `idPublications`
-                    FROM `comments` 
-                    WHERE (`validated_at` is not null) AND `idUsers` = :id ;';
-            $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':id', $idUser, PDO::PARAM_INT);
-        } elseif ($idPublication) {
+        if ($idPublication) {
             #return commentaires de la publication
             $sql = 'SELECT `id` as `commentId`, `description`, `validated_at`, `created_at`, `idUsers`, `idPublications`
             FROM `comments` 
