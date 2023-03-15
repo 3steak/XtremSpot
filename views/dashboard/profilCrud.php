@@ -13,11 +13,10 @@ if (isset($_SESSION['flash'])) {
                 <div class="modal-dialog ">
                     <div class="modal-content bg-dark">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-white" id="mapModalLabel">New message</h1>
+                            <h1 class="modal-title fs-5 text-white " id="mapModalLabel">Spot de <span class="pseudo"></span></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            oui
+                        <div id="mapid" class="modal-body">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -39,7 +38,6 @@ if (isset($_SESSION['flash'])) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-white description">
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -63,8 +61,8 @@ if (isset($_SESSION['flash'])) {
                     Cela n'affectera pas ses publications et ses commentaires
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a class="btn btn-primary " id="linkDelete" href="/deletePublicationCtrl?id=" role="button">Supprimer</a>
+                    <a role="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</a>
+                    <a class="btn btn-primary " id="linkDelete" href="/deletePublicationCrudCtrl?id==" role="button">Supprimer</a>
                 </div>
             </div>
         </div>
@@ -83,8 +81,8 @@ if (isset($_SESSION['flash'])) {
                     Cela n'affectera pas ses publications et ses commentaires
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a class="btn btn-primary " id="linkDeleteComment" href="/deleteCommentCtrl?id=" role="button">Supprimer</a>
+                    <a role="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</a>
+                    <a class="btn btn-primary " id="linkDeleteComment" href="/deleteCommentCrudCtrl?id==" role="button">Supprimer</a>
                 </div>
             </div>
         </div>
@@ -115,7 +113,7 @@ if (isset($_SESSION['flash'])) {
 
 
         <!-------------- FORM FOR UPDATE USER, HIS PUBLICATIONS AND COMMENT ------->
-        <div class="content">
+        <div class="content bg-dark">
 
             <div class="d-flex flex-column">
                 <p class="text-white mb-2">Cliquer sur le boutton ci-dessous pour accéder à la modification</p>
@@ -140,12 +138,12 @@ if (isset($_SESSION['flash'])) {
                     <div class="col-lg-6">
                         <label for="disabledTextInput" class="form-label"></label>
                         <h4 class=" text-white text-start ">Admin ?</h4>
-                        <select class="form-select " id="nativeTown" name="admin" aria-label="Pratique">
+                        <select class="form-select " id="admin" name="admin" aria-label="admin">
                             <option value="0" <?= ($profilUser->admin === 0) ? 'selected' : '' ?>>NON</option>
                             <option value="1" <?= ($profilUser->admin === 1) ? 'selected' : '' ?>>OUI</option>
 
                         </select>
-                        <p><?= $error['admin'] ?? '' ?></p>
+                        <small><?= $error['admin'] ?? '' ?></small>
                     </div>
                     <div class="col-lg-6">
                         <label for="disabledTextInput" class="form-label"></label>
@@ -162,11 +160,11 @@ if (isset($_SESSION['flash'])) {
                         <small><?= $error['pseudo'] ?? '' ?></small>
                     </div>
 
+
                     <div class="col-lg-8 mx-auto mb-2">
                         <label for="disabledTextInput" class="form-label"></label>
                         <h4 class=" text-white text-start">Sport pratiqué</h4>
-                        <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
-
+                        <select class="form-select " id="idCategories" name="idCategories" aria-label="Pratique">
                             <?php
                             foreach ($listCategory as $category) { ?>
                                 <option value="<?= $category->id ?>" <?= ($profilUser->category === $category->name) ? 'selected' : '' ?>><?= $category->name ?></option>
@@ -200,7 +198,7 @@ if (isset($_SESSION['flash'])) {
                                 </div>
                                 <div class="col-12 text-center mt-2">
                                     <!-- BOUTON MAP -->
-                                    <a class=" text-black text-decoration-none p-3" title="Voir le lieu du spot"><i class="fa-solid fa-location-dot fa-2x" data-bs-toggle="modal" data-bs-target="#mapModal" data-bs-whatever="USER1"></i></a>
+                                    <a class=" text-black text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $profilUser->pseudo ?>"><i class="fa-solid fa-location-dot fa-2x"></i></a>
 
                                     <!-- BOUTON DELETE PUBLICATION  -->
                                     <a href="" class="text-decoration-none p-3 deleteApt" title="Supprimer la publication" data-bs-toggle="modal" data-bs-target="#validateModal" data-name="<?= $profilUser->pseudo ?>" data-id="<?= $publication->id ?>">

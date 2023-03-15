@@ -248,24 +248,28 @@ class User
     }
 
 
-    /** Allows to update infos of user if admin in param updateAdmin
+    /** Allows to update user's infos if admin in param  can updateAdmin
      * update
      *
      * @return bool
      */
     public function update(int $admin = null): bool
     {
-        if ($admin) {
+
+        if ($admin === 0 || $admin === 1) {
+
             $sql = 'UPDATE `users` 
-            SET  `firstname`=:firstname, `lastname`=:lastname,
-            `pseudo`=:pseudo,`password`=:password,`email`=:email, `idCategories`=:idCategories, `admin`=:admin
-            WHERE id = :id ;';
+                    SET  `firstname`=:firstname, `lastname`=:lastname,
+                    `pseudo`=:pseudo,`email`=:email, `idCategories`=:idCategories, `admin`=:admin
+                    WHERE id = :id ;';
+
             $sth = Database::connect()->prepare($sql);
+
             $sth->bindValue(':admin', $this->admin, PDO::PARAM_INT);
         } else {
             $sql = 'UPDATE `users` 
                 SET  `firstname`=:firstname, `lastname`=:lastname,
-                `pseudo`=:pseudo,`password`=:password,`email`=:email, `idCategories`=:idCategories,
+                `pseudo`=:pseudo,`email`=:email, `idCategories`=:idCategories,
                 WHERE id = :id ;';
             $sth = Database::connect()->prepare($sql);
         }
@@ -274,7 +278,6 @@ class User
         $sth->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $sth->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $sth->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
-        $sth->bindValue(':password', $this->password, PDO::PARAM_STR);
         $sth->bindValue(':email', $this->email, PDO::PARAM_STR);
         $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
         $sth->execute();

@@ -26,7 +26,7 @@
     <header class="bg-dark bg-opacity-75">
         <nav class="navbar  navbar-dark ">
             <div class="container-fluid ">
-                <a class="navbar-brand " href="/controllers/feedUserCtrl.php"><img class="logoPrincipal" src="/public/assets/img/logo-removebg-.png" alt="logo principal"></a>
+                <a class="navbar-brand " href="/controllers/feedUserCtrl.php"><img class="logoPrincipal" src="/public/assets/img/logo-light.png" alt="logo principal"></a>
                 <!-- CE BOUTON CRUD APPARAIT SI USER = ADMIN -->
                 <a class="btn btn-primary " href="/controllers/dashboard/CRUDCtrl.php" role="button">DASHBOARD</a>
 

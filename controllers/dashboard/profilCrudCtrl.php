@@ -2,14 +2,16 @@
 
 session_start();
 $jsName = 'profilCrudCtrl';
-
 require_once(__DIR__ . '/../../helpers/flash.php');
 require_once(__DIR__ . '/../../models/User.php');
 require_once(__DIR__ . '/../../models/Publication.php');
 require_once(__DIR__ . '/../../models/Comment.php');
 require_once(__DIR__ . '/../../models/Category.php');
+flash('update', 'Utilisateur modifié avec succès ! ', FLASH_SUCCESS);
+flash('noUpdate', 'Utilisateur non modifié ! ', FLASH_WARNING);
 
 $idUser = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+
 try {
     if (User::isIdExist($idUser) === false) {
         throw new Exception("Cet utilisateur n'existe pas", 1);
@@ -17,10 +19,8 @@ try {
     $profilUser = User::get($idUser);
     $publications = Publication::getUserPublication($idUser);
     $listCategory = Category::get();
-
     $comments = Comment::getUserComments($idUser);
-    // var_dump($comments);
-    // die;
+
     //  Si profilUser return false
     if (!$profilUser) {
         throw new Exception('Id non valide', 1);
@@ -34,6 +34,7 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     // ============= FIRSTNAME : clean and check ===========
     $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
     // Isnt empty
@@ -90,56 +91,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // -------------------- CONTROL SELECT CATEGORY --------------------------------
-    $idCategories = trim(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
+    $idCategories = intval(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
     if (empty($idCategories) || $idCategories == '') {
         // Si idCategories n'est pas dans dans la liste
         $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
     }
     // -------------------- CONTROL SELECT ADMIN OR NOT --------------------------------
-    $admin = trim(filter_input(INPUT_POST, 'admin', FILTER_SANITIZE_NUMBER_INT));
-    if (empty($admin) || $admin == '') {
+    $admin = intval(filter_input(INPUT_POST, 'admin', FILTER_SANITIZE_NUMBER_INT));
+    if (empty($admin) && $admin != 0) {
         // Si idCategories n'est pas dans dans la liste
-        $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
+        $error["admin"] = "<small class='text-white'>Veuillez selectionner si ADMIN OU NON !</small>";
     }
     //  ISMAILEXIST = USER PAS ENCORE INSCRIT
-    if (User::isMailExist($email)) {
-        $error["email"] = '<small class= "text-white">Ce mail correspond déjà à un autre utilisateur</small>';
+    if ($profilUser->email != $email) {
+        if (User::isMailExist($email)) {
+            $error["email"] = '<small class= "text-white">Ce mail correspond déjà à un autre utilisateur</small>';
+        }
     }
+
+
     if (empty($error)) {
+
         try {
             $user = new User;
+            $user->setId($idUser);
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setPseudo($pseudo);
             $user->setEmail($email);
-            $user->setPassword($password);
             $user->setIdCategories($idCategories);
             $user->setAdmin($admin);
 
             $result = $user->update($admin);
             if ($result) {
-                header('location: /controllers/homeCtrl.php?register=ok');
+                // Faire row count si >1 mis a jour sinon non modifié
+                header('location: /controllers/dashboard/profilCrudCtrl.php?id=' . $idUser . '?update');
                 die;
             } else {
-                throw new Exception("Inscription non réussie", 1);
+                header('location: /controllers/dashboard/profilCrudCtrl.php?id=' . $idUser . '?noUpdate');
                 die;
             }
         } catch (\Throwable $th) {
             $errorMsg = $th->getMessage();
-            include_once(__DIR__ . '/../views/templates/header.php');
-            include(__DIR__ . '/../../views/errors.php');
-            include_once(__DIR__ . '/../views/templates/footer.php');
+            include_once(__DIR__ . '/../../views/templates/header.php');
+            include(__DIR__ . '/../../views/error.php');
+            include_once(__DIR__ . '/../../views/templates/footer.php');
             die;
         }
     } else {
-        include_once(__DIR__ . '/../views/templates/header.php');
-        include(__DIR__ . '/../views/register.php');
+        include_once(__DIR__ . '/../../views/templates/header.php');
+        include(__DIR__ . '/../../views/dashboard/profilCrud.php');
     }
 
     // FIN DU IF 
 } else {
-    require_once(__DIR__ . '/../../views/templates/header.php');
-    require(__DIR__ . '/../../views/dashboard/profilCrud.php');
+    include_once(__DIR__ . '/../../views/templates/header.php');
+
+    if (!empty($_GET) && $_GET['id'] == $idUser . '?update') {
+        flash('update');
+    }
+    if (!empty($_GET) && $_GET['id'] == $idUser . '?noUpdate') {
+        flash('noUpdate');
+    }
+    include(__DIR__ . '/../../views/dashboard/profilCrud.php');
 }
 
-require_once(__DIR__ . '/../../views/templates/footer.php');
+include_once(__DIR__ . '/../../views/templates/footer.php');
