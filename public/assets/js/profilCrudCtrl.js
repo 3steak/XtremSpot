@@ -51,11 +51,6 @@ function mapModal() {
         // //  ajout marker
         let marker = L.marker([town.lat, town.lng], { icon: myIcon }).bindPopup("<small>" + title + "</small > ").addTo(map);
 
-
-
-
-
-
         // fin fonction init
     }
     setTimeout(() => {
@@ -69,18 +64,17 @@ function mapModal() {
 //------------------------ MODAL FOR DESCRIPTION FEEDUSER.PHP -----------------------------------------
 
 let seeMores = document.querySelectorAll('.seeMore');
-
 for (let seeMore of seeMores) {
-    seeMore.addEventListener('click', persoModal)
-
+    seeMore.addEventListener('click', descModal)
 }
-function persoModal() {
+function descModal() {
     // Attributs data
-    let title = this.dataset.title;
+    let titledesc = this.dataset.titledesc;
     let description = this.dataset.description;
-    console.log('oui');
+
     // Injection in modal
     document.querySelector("#description .description").innerText = description;
+    document.querySelector('#description #descriptionLabel').innerText = titledesc;
 
 }
 

@@ -138,7 +138,6 @@ class Comment
             FROM `comments` 
             WHERE (`validated_at` is null) ;';
             $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':id', $idPublication, PDO::PARAM_INT);
         }
         $sth->execute();
         $comments = $sth->fetchAll();

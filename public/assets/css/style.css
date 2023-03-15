@@ -143,6 +143,7 @@ p {
 
 .logoHome {
     width: 250px;
+
 }
 
 /* MAP ADD PUBLICATION */
@@ -161,7 +162,6 @@ table.neumorphic {
     color: var(--main-bg-color);
     text-align: center;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-
     background: var(--main-font-color);
 }
 
@@ -193,6 +193,7 @@ label {
     text-decoration: none !important;
     color: var(--main-red-color) !important;
 }
+
 
 #pseudo {
     font-weight: 600;
@@ -234,6 +235,9 @@ label {
         display: none;
     }
 
+
+
+
     .content {
         background: var(--main-font-color);
         border-radius: 10px;
@@ -241,3 +245,8 @@ label {
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     }
 }
+
+@media only screen and (max-width: 1000px) {
+    .dNoneTab {
+        display: none;
+    }

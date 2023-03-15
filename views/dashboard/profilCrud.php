@@ -26,15 +26,16 @@ if (isset($_SESSION['flash'])) {
             </div>
         </div>
     </div>
-    <!-- MODAL DESCRIPTION -->
+
+
+    <!-- MODAL DESCRIPTION-->
     <div class="container-fluid">
         <div class="row">
-            <!-- MODAL -->
             <div class="modal fade" id="description" tabindex="-1" aria-labelledby="descriptionLabel" aria-hidden="true">
                 <div class="modal-dialog ">
                     <div class="modal-content bg-dark">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-white" id="descriptionLabel">Publication->title</h1>
+                            <h1 class="modal-title fs-5 text-white " id="descriptionLabel"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-white description">
@@ -194,14 +195,15 @@ if (isset($_SESSION['flash'])) {
                             <div class="row banniereLike p-2 ">
                                 <div class="col-12 d-flex">
                                     <p class="contentUserDescprition"><?= htmlspecialchars($publication->title) ?></p>
-                                    <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-title="<?= htmlspecialchars($publication->title) ?>" data-description="<?= htmlspecialchars($publication->description) ?>" role="button">En savoir plus</a>
+                                    <!-- BUTON SEEMORE -->
+                                    <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
                                 </div>
                                 <div class="col-12 text-center mt-2">
                                     <!-- BOUTON MAP -->
                                     <a class=" text-black text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $profilUser->pseudo ?>"><i class="fa-solid fa-location-dot fa-2x"></i></a>
 
                                     <!-- BOUTON DELETE PUBLICATION  -->
-                                    <a href="" class="text-decoration-none p-3 deleteApt" title="Supprimer la publication" data-bs-toggle="modal" data-bs-target="#validateModal" data-name="<?= $profilUser->pseudo ?>" data-id="<?= $publication->id ?>">
+                                    <a class="text-decoration-none p-3 deleteApt" title="Supprimer la publication" data-bs-toggle="modal" data-bs-target="#validateModal" data-name="<?= $profilUser->pseudo ?>" data-id="<?= $publication->id ?>">
                                         <i class="fa-regular fa-trash-can m-1 fa-2x"></i></a>
                                 </div>
                             </div>

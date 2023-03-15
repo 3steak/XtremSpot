@@ -5,15 +5,14 @@
                 <div class="col-12">
                     <h1 class="text-white text-center m-2">UTILISATEURS</h1>
                 </div>
-                <div class="container-fluid  my-3 cardUserContent">
-                    <div class="row">
-                        <div class="card d-flex  gap-2  bg-light p-3">
-
+                <div class="container  my-3 ">
+                    <div class="row bg-table">
+                        <div class=" d-flex justify-content-center   bg-light p-3">
                             <table id="dataTable" class="display neumorphic">
                                 <thead>
                                     <tr class="">
                                         <th class="dNoneMobil">Nom</th>
-                                        <th class="dNoneMobil">Prénom</th>
+                                        <th class="dNoneTab">Prénom</th>
                                         <th>Pseudo</th>
                                         <th class="dNoneMobil">Mail</th>
                                         <th class="">Admin</th>
@@ -25,7 +24,7 @@
                                     foreach ($users as $user) { ?>
                                         <tr>
                                             <td class="dNoneMobil"><?= htmlspecialchars($user->lastname) ?></td>
-                                            <td class="dNoneMobil"><?= htmlspecialchars($user->firstname) ?></td>
+                                            <td class="dNoneTab"><?= htmlspecialchars($user->firstname) ?></td>
                                             <td><a id="pseudo" title="Voir profil" href="/../../controllers/profilUserCtrl.php?id=<?= $user->id ?>"><?= htmlspecialchars($user->pseudo) ?></a></td>
                                             <td class="dNoneMobil"><a class="telmail" title="Appeler" href="mailto:<?= htmlspecialchars($user->email) ?>"><?= htmlspecialchars($user->email) ?></a></td>
                                             <td><?= ($user->admin === 1) ? "OUI" : "NON" ?></td>

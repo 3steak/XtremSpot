@@ -245,7 +245,7 @@ class Publication
     {
 
         # return all publications validated
-        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`created_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
@@ -328,7 +328,8 @@ class Publication
             $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-            JOIN `categories` ON `categories`.`id` = `users`.`idCategories`;';
+            JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
+            WHERE (`validated_at` is not null);';
             $sth = Database::connect()->prepare($sql);
         }
         $sth->execute();
@@ -372,9 +373,10 @@ class Publication
         if ($validated_at) {
             #update validated at and valid the publication or not
             $sql = 'UPDATE `publications` 
-            SET  `validated_at`=:validated_at,
+            SET  `validated_at`=:validated_at
             WHERE id = :id ;';
             $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
             $sth->bindValue(':validated_at', $this->validated_at, PDO::PARAM_STR);
         } else {
             $sql = 'UPDATE `publications` 
