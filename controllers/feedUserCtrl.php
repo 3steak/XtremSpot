@@ -11,9 +11,24 @@ $jsName = 'feedUserCtrl';
 $listCategory = Category::get();
 $listTowns = Publication::getTowns();
 
+try {
+    $publications = Publication::get();
+    // $comments = Comment::get($idPublication);
+} catch (\Throwable $th) {
+    //throw $th;
+    $errorMsg = $th->getMessage();
+    include_once(__DIR__ . '/../views/templates/header.php');
+    include(__DIR__ . '/../views/error.php');
+    include_once(__DIR__ . '/../../views/templates/footer.php');
+    die;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     var_dump($_POST);
-    if (isset($_POST['idCategories'])) {
+
+    // Faire !empty
+    if (!empty($_POST['idCategories'])) {
 
         $idCategories = trim(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
 
@@ -22,15 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
         }
     }
-    if (isset($_POST['town'])) {
+    if (!empty($_POST['town'])) {
 
-        $town = trim(filter_input(INPUT_POST, 'town', FILTER_SANITIZE_NUMBER_INT));
+        $town = trim(filter_input(INPUT_POST, 'town', FILTER_SANITIZE_SPECIAL_CHARS));
         if (empty($town) || $town == '') {
             // Si town n'est pas dans dans la liste
             $error["town"] = "<small class='text-white'>Veuillez selectionner une ville !</small>";
         }
     }
-    if (isset($_POST['comment'])) {
+    if (!empty($_POST['comment'])) {
         $comment = trim((string) filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS));
         if (empty($comment)) {
             // $error["comment"] = '<small class="text-white mx-auto">Veuillez renseigner un commentaire</small>';
@@ -39,12 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     // IF NO ERRRROOOR 
     if (empty($error)) {
-        // Redirige au même endroit
-        // try {
-        //     //code...
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        // }
+        var_dump($town);
+        die;
     } else {
         include_once(__DIR__ . '/../views/templates/header.php');
         include(__DIR__ . '/../views/feedUser.php');

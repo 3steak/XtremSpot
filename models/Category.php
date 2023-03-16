@@ -73,6 +73,8 @@ class Category
         return $categories;
     }
 
+
+
     /** Allows to update a category
      * update
      *
