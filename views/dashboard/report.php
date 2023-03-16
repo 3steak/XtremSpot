@@ -32,13 +32,7 @@
                 </div>
                 <div class="container-fluid col-lg-6  my-3 cardUserContent">
                     <div class="row">
-                        <!--  Div reportContent -->
-                        <div class="reportContent alert alert-danger" role="alert">
-                            <h2 class=" reportTitle">Signalement de "userName"</h2>
-                            <p class="">"date"</p>
-                            <p class=" text-center"> "Cette photo ne respecte pas les règles de diffusions"
-                            </p>
-                        </div>
+
                         <div class="card d-flex  gap-2 text-bg-dark pb-3">
                             <div class="col-12 p-2 ">
                                 <div class="list-group-item d-flex align-items-center ">
@@ -49,6 +43,9 @@
                                 </div>
                                 <div>
                                     <p>Publication du DATE </p>
+                                </div>
+                                <div class="div">
+                                    <p>COUNT REPORT</p>
                                 </div>
                             </div>
                             <img src=" /public/assets/img/testFeedUser.jpg" class="card-img" alt="...">

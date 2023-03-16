@@ -249,7 +249,8 @@ class Publication
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
-            WHERE (`validated_at` is null);';
+            WHERE (`validated_at` is null)
+            ORDER BY `created_at` ASC;';
         $sth = Database::connect()->prepare($sql);
         $sth->execute();
         $publications = $sth->fetchAll();
@@ -363,7 +364,7 @@ class Publication
     }
 
 
-    /** Allows to update publication and validated if admin and validated is informed
+    /** Allows to update publication and validated if admin and $validated_at is informed
      * update
      *
      * @return bool

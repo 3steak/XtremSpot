@@ -6,6 +6,7 @@ class Comment
     private $description;
     private $idUsers;
     private $idPublications;
+    private $validated_at;
 
     /** Allows to set id
      * setId
@@ -53,6 +54,16 @@ class Comment
         $this->idPublications = $idPublications;
     }
 
+    /** Allows to set validated_at
+     * setValidated_at
+     *
+     * @param  mixed $validated_at
+     * @return void
+     */
+    public function setValidated_at(string $validated_at)
+    {
+        $this->validated_at = $validated_at;
+    }
 
     /** Allows to get id
      * getId
@@ -97,6 +108,16 @@ class Comment
         return $this->idPublications;
     }
 
+    /** Allows to get validated_at
+     * getValidated_at
+     *
+     * @return string
+     */
+    public function getValidated_at()
+    {
+        return $this->validated_at;
+    }
+
 
     /** Allows to get user comment with his id in param
      * getUdserComment
@@ -127,16 +148,21 @@ class Comment
     {
         if ($idPublication) {
             #return commentaires de la publication
-            $sql = 'SELECT `id` as `commentId`, `description`, `validated_at`, `created_at`, `idUsers`, `idPublications`
+            $sql = 'SELECT `comments`.`id` as `commentId`, `description`, `comments`.`validated_at`, `comments`.`created_at`, `idUsers`, `idPublications`,`users`.`pseudo`
             FROM `comments` 
+            JOIN `users` ON `comments`.`idUsers` = `users`.`id`
             WHERE (`validated_at` is not null) AND `idUsers` = :idPublication ;';
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':id', $idPublication, PDO::PARAM_INT);
         } else {
             #return commentaires non validés pour modération
-            $sql = 'SELECT `id` as `commentId`, `description`, `validated_at`, `created_at`, `idUsers`, `idPublications`
-            FROM `comments` 
-            WHERE (`validated_at` is null) ;';
+            $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`, `comments`.`created_at`, `comments`.`idUsers`, `idPublications`,`users`.`pseudo`,
+                    `publications`.`title` AS `publicationTitle`, `publications`.`image_name` as `publicationImg` 
+                    FROM `comments` 
+                    JOIN `users` ON `comments`.`idUsers` = `users`.`id` 
+                    JOIN `publications` ON `comments`.`idPublications` = `publications`.`id` 
+                    WHERE (`comments`.`validated_at` is null) 
+                    ORDER BY `created_at` ASC;';
             $sth = Database::connect()->prepare($sql);
         }
         $sth->execute();
@@ -164,6 +190,36 @@ class Comment
         return ($result > 0) ? true : false;
     }
 
+
+    /** Allows to update comments and validated if admin and $validated_at is informed
+     * update
+     *
+     * @return bool
+     */
+    public function update(string $validated_at = null): bool
+    {
+        if ($validated_at) {
+            #update validated at and valid the comment or not
+            $sql = 'UPDATE `comments` 
+            SET  `validated_at`=:validated_at
+            WHERE id = :id ;';
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $sth->bindValue(':validated_at', $this->validated_at, PDO::PARAM_STR);
+        } else {
+            $sql = 'UPDATE `comments` 
+                SET   `description`=:description,`idPublications`=:idPublications,`idUsers`=:idUsers
+                WHERE id = :id ;';
+            $sth = Database::connect()->prepare($sql);
+            $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $sth->bindValue(':description', $this->description, PDO::PARAM_STR);
+            $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
+            $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
+        }
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
 
     /** Methode qui permet de supprimer un commentaire
      * delete
