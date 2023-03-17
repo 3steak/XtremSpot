@@ -257,7 +257,6 @@ class Publication
         return $publications;
     }
 
-
     /** Allows to get all towns in DB with a SELECT DISTINCT
      * get
      *
@@ -299,46 +298,52 @@ class Publication
     }
 
     /** Allows to get all publications validated if param null 
-     * if param is Category get all category's publication
-     * if param is town get all town's publication
+     * if param is $town get all town's publication
      * get
      *
      * @param  mixed $userId
      * @return array
      */
-    public static function get(int $idCategories = null, string $town = null): array
+    public static function get(string $town = null): array
     {
-        if ($idCategories) {
-            # return publication filtered by idCategories
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`,
+                             `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
                     FROM `publications` 
                     JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                     JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-                    WHERE (`validated_at` is not null) AND idCategories = :idCategories
-                    ORDER BY `publications`.`validated_at` ASC;';
-            $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':idCategories', $idCategories, PDO::PARAM_INT);
-        } elseif ($town) {
-            # return publication filtered by town 
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
-                    FROM `publications` 
-                    JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-                    JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-                    WHERE (`validated_at` is not null) AND `publications`.`town` = :town
-                    ORDER BY `publications`.`validated_at` ASC;';
-            $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':town', $town, PDO::PARAM_INT);
-        } else {
-            # return all publications validated
-            $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`,
-                             `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin`
-                    FROM `publications` 
-                    JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
-                    JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
-                    WHERE (`validated_at` is not null)
-                    ORDER BY `publications`.`validated_at` ASC;';
-            $sth = Database::connect()->prepare($sql);
+                    WHERE (`validated_at` is not null)';
+        $sql .= ($town) ? ' AND `publications`.`town` = :town' : '';
+        $sql .= ' ORDER BY `publications`.`validated_at` DESC;';
+
+        $sth = Database::connect()->prepare($sql);
+        if ($town) {
+            $sth->bindValue(':town', $town, PDO::PARAM_STR);
         }
+        $sth->execute();
+        $publications = $sth->fetchAll();
+        return $publications;
+    }
+
+
+    /** Allows to get all publications validated by $idCategories
+     * 
+     * get
+     *
+     
+     * @return array
+     */
+    public static function getPublicationByCategory(int $idCategories): array
+    {
+        # return publication filtered by idCategories
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+                    FROM `publications` 
+                    JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
+                    JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
+                    WHERE (`validated_at` is not null) AND `publications`.`idCategories` = :idCategories
+                    ORDER BY `publications`.`validated_at` ASC;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':idCategories', $idCategories, PDO::PARAM_INT);
         $sth->execute();
         $publications = $sth->fetchAll();
         return $publications;

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // ----------------- CONTROL ID USER -----------------------
 
-    $idUsers = 3;
+    $idUsers = 4;
     // $idUsers = trim(filter_input(INPUT_POST, 'idUsers', FILTER_SANITIZE_NUMBER_INT));
     // if (empty($idUsers) || $idUsers == '') {
     //     $error['idUsers'] = '<small class="text-black"> Vous devez être connecté pour publier du contenu.</small>';

@@ -9,6 +9,7 @@ $(document).ready(function () {
     let errorMessage = $('#error-message');
     let hiddenInput = $('#hiddenInput');
     let map = '';
+
     $(zipcode).on('blur', function () {
         if (map !== '') {
             map.off();

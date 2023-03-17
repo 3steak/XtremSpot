@@ -25,7 +25,6 @@ try {
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    var_dump($_POST);
 
     // Faire !empty
     if (!empty($_POST['idCategories'])) {
@@ -54,18 +53,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     // IF NO ERRRROOOR 
     if (empty($error)) {
-        var_dump($town);
-        die;
+
+        try {
+            if (!empty($idCategories)) {
+                $publications = Publication::getPublicationByCategory($idCategories);
+                if (count($publications) <= 0) {
+                    $error['void'] = '<small class="text-white mx-auto">Aucune publication est publiée pour ce sport</small>';
+                }
+            } elseif (!empty($town)) {
+                $publications = Publication::get($town);
+            }
+            include_once(__DIR__ . '/../views/templates/header.php');
+            include(__DIR__ . '/../views/feedUser.php');
+        } catch (\Throwable $th) {
+            $errorMsg = $th->getMessage();
+            include_once(__DIR__ . '/../views/templates/header.php');
+            include(__DIR__ . '/../views/error.php');
+            include_once(__DIR__ . '/../views/templates/footer.php');
+            die;
+        }
     } else {
         include_once(__DIR__ . '/../views/templates/header.php');
-        include(__DIR__ . '/../views/feedUser.php');
+        include_once(__DIR__ . '/../views/feedUser.php');
     }
 } else {
     // IF NO POST ( COMMENT OR FILTER)
     //  faire get all 
-    $publications = Publication::get();
+
     include_once(__DIR__ . '/../views/templates/header.php');
-    include(__DIR__ . '/../views/feedUser.php');
+    include_once(__DIR__ . '/../views/feedUser.php');
 }
 
 include_once(__DIR__ . '/../views/templates/footer.php');

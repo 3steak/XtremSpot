@@ -85,7 +85,7 @@
                            </div>
                            <?php foreach ($comments as $comment) { ?>
                                <div class="card col-lg-10 mx-auto text-bg-dark pb-3 m-2">
-                                   <div class="row justify-content-center">
+                                   <div class="row justify-content-around">
                                        <div class="col-4 p-2 ">
                                            <div class="list-group-item d-flex align-items-center ">
                                                <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">

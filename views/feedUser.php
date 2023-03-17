@@ -9,11 +9,10 @@
                 <div class="modal-dialog ">
                     <div class="modal-content bg-dark">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-white" id="mapModalLabel">New message</h1>
+                            <h1 class="modal-title fs-5 text-white " id="mapModalLabel">Spot de <span class="pseudo"></span></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            oui
+                        <div id="mapid" class="modal-body">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -23,19 +22,19 @@
             </div>
         </div>
     </div>
-    <!-- MODAL DESCRIPTION -->
+
+
+    <!-- MODAL DESCRIPTION-->
     <div class="container-fluid">
         <div class="row">
-            <!-- MODAL -->
             <div class="modal fade" id="description" tabindex="-1" aria-labelledby="descriptionLabel" aria-hidden="true">
                 <div class="modal-dialog ">
                     <div class="modal-content bg-dark">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5 text-white" id="descriptionLabel">Publication->title</h1>
+                            <h1 class="modal-title fs-5 text-white " id="descriptionLabel"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-white description">
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -45,9 +44,7 @@
             </div>
         </div>
     </div>
-
     <!-- MODAL SIGNALEMENT  -->
-    <!-- Modal -->
     <div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -98,7 +95,7 @@
                 <div class="collapse " id="collapseFilters">
                     <h4 class="text-white">Filtrer par :</h4>
                     <div class="d-flex flex-column flex-md-row justify-content-around gap-4 m-2">
-                        <div class="col-8 col-lg-4 mx-auto">
+                        <div class="col-8 col-md-8 col-lg-4 mx-auto">
                             <p class="text-white mb-2">Sport</p>
                             <form method="post">
                                 <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
@@ -117,7 +114,7 @@
                         <div class="col-2 align-self-center align-self-lg-end">
                             <a class="btn btn-dark btn-filter " href="/controllers/feedUserCtrl.php" role="button">Reset</a>
                         </div>
-                        <div class="col-8 col-lg-4 mx-auto">
+                        <div class="col-8 col-md-8 col-lg-4 mx-auto">
                             <p class="text-white mb-2">Lieux</p>
                             <form method="post">
                                 <select class="form-select townUser" name="town" id="townUser" aria-label="townUser">
@@ -141,14 +138,15 @@
     </div>
 
 
-    <!-------------- Feed User, content cards ------->
+    <!-------------- CONTENT ------->
 
     <div class="container  my-3 cardUserContent">
         <div class="row">
+            <?= $error['void'] ?? '' ?>
             <?php foreach ($publications as $publication) { ?>
 
 
-                <div class="card text-bg-dark pb-3 col-lg-10 mx-auto">
+                <div class="card text-bg-dark pb-3 col-lg-10 my-5 mx-auto">
                     <div class="col-12 p-2">
                         <div class="d-flex align-items-center ">
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur"></a>
@@ -157,8 +155,13 @@
                             </a>
                             <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
                             <a href="#" class="text-black ms-auto  me-2 fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
+
                         </div>
+
                         <div class="d-flex align-items-center ">
+                            <small><?= $publication->town ?></small>
+                        </div>
+                        <div class="d-flex  justify-content-center align-items-center ">
                             <p class="contentUserDescprition"><?= htmlentities($publication->title) ?></p>
                         </div>
                     </div>
@@ -174,7 +177,7 @@
                                     <i class="fa-solid fa-comment fa-2x"></i>
                                 </a>
                                 <!-- BOUTON MAP -->
-                                <a class=" text-black text-decoration-none p-3" title="Voir le lieu du spot"><i class="fa-solid fa-location-dot fa-2x" data-bs-toggle="modal" data-bs-target="#mapModal" data-bs-whatever="USER1"></i></a>
+                                <a class=" text-black text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-2x"></i></a>
 
 
                                 <!--  BOUTON OPTION -->
@@ -186,7 +189,7 @@
                                     <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
                                 </ul>
                                 <!-- BUTTON SEE MORE -->
-                                <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-title="<?= htmlentities($publication->title) ?>" data-description="<?= htmlentities($publication->description) ?>" role="button">En savoir plus</a>
+                                <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
 
                             </div>
                         </div>
