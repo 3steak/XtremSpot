@@ -55,7 +55,7 @@ function mapModal() {
     }
     setTimeout(() => {
         init();
-    }, "10");
+    }, "300");
 
 }
 
