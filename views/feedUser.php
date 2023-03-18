@@ -95,10 +95,10 @@
                 <div class="collapse " id="collapseFilters">
                     <h4 class="text-white">Filtrer par :</h4>
                     <div class="d-flex flex-column flex-md-row justify-content-around gap-4 m-2">
-                        <div class="col-8 col-md-8 col-lg-4 mx-auto">
+                        <div class=" mx-auto">
                             <p class="text-white mb-2">Sport</p>
                             <form method="post">
-                                <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
+                                <select class="form-select w-100 " id="nativeTown" name="idCategories" aria-label="Pratique">
                                     <option selected value="">Sport</option>
                                     <?php
                                     foreach ($listCategory as $category) { ?>
@@ -111,13 +111,13 @@
                             </form>
                             <?= $error['category'] ?? '' ?>
                         </div>
-                        <div class="col-2 align-self-center align-self-lg-end">
+                        <div class=" align-self-center align-self-lg-end">
                             <a class="btn btn-dark btn-filter " href="/controllers/feedUserCtrl.php" role="button">Reset</a>
                         </div>
-                        <div class="col-8 col-md-8 col-lg-4 mx-auto">
+                        <div class=" mx-auto">
                             <p class="text-white mb-2">Lieux</p>
                             <form method="post">
-                                <select class="form-select townUser" name="town" id="townUser" aria-label="townUser">
+                                <select class="form-select townUser w-100" name="town" id="townUser" aria-label="townUser">
                                     <option selected value="">Ville</option>
                                     <?php
                                     foreach ($listTowns as $publication) { ?>
