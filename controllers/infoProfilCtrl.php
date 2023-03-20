@@ -88,22 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // =========== Password ========== 
-    $password = filter_input(INPUT_POST, 'password');
-    $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
-
-    if (empty($password) || empty($confirmPassword)) {
-        $error['password'] = '<small class="text-white">Veuillez renseigner un mot de passe</small>';
-    } else {
-        if ($password != $confirmPassword) {
-            $error['confirmPassword'] = '<small class="text-white">Veuillez entrer le même mot de passe</small>';
-        } else {
-            // VERIF PAR REGEX
-        }
-        // Encodage du MDP
-        $paswordHash = password_hash($password, PASSWORD_DEFAULT);
-    }
-
     // ----------------- SPORT ----------------------- 
     $sport = trim(filter_input(INPUT_POST, 'sport', FILTER_SANITIZE_SPECIAL_CHARS));
     if (!empty($sport)) {

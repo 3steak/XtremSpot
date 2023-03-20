@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die;
         }
     } else {
-        include_once(__DIR__ . '/../views/templates/header.php');
+        include_once(__DIR__ . '/../views/templates/headerHome.php');
         include(__DIR__ . '/../views/register.php');
     }
 

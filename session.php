@@ -1,0 +1,4 @@
+<?php
+
+//  RENSEIGNE MON USER ID POUR TOUTES MES PAGES
+$idUser = 4;

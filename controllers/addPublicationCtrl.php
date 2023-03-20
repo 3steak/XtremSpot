@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Publication.php');
 require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/../session.php');
 
 
 use GuzzleHttp\Client;
@@ -21,11 +22,10 @@ $listCategory = Category::get();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
-
+    // ID DANS SESSION.PHP
     // ----------------- CONTROL ID USER -----------------------
 
-    $idUsers = 4;
+
     // $idUsers = trim(filter_input(INPUT_POST, 'idUsers', FILTER_SANITIZE_NUMBER_INT));
     // if (empty($idUsers) || $idUsers == '') {
     //     $error['idUsers'] = '<small class="text-black"> Vous devez être connecté pour publier du contenu.</small>';
@@ -57,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-
     // -------------------- CONTROL SELECT ZIPCODE && TOWN WITH COMPOSER Guzzle --------------------------------
 
 
@@ -78,13 +77,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $client = new GuzzleHttp\Client(['base_uri' => API_URL]);
 
     // Je recupère les données renvoyés par l'API et le json decode et obtient un Array
-    $response = $client->request('GET', 'communes?codePostal=' . $zipcode . '&fields=nom&format=json');
+    $response = $client->request('GET', 'communes?nom=' . $town . '&fields=nom&format=json');
+
     $response = json_decode($response->getBody()->getContents());
+
     $towns = [];
 
     foreach ($response as $resp) {
         array_push($towns, $resp->nom);
     }
+
     if (!in_array($town, $towns)) {
         $error["town"] = "<small class='text-white'>Veuillez rentrer un nom de ville existant</small>";
     }
@@ -119,7 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $marker_latitude = $markers[1];
     $marker_longitude = $markers[2];
 
-
+    // var_dump($error);
+    // die;
     if (empty($error)) {
         try {
             $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);
