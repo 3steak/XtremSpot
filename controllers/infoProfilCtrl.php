@@ -154,10 +154,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     include_once(__DIR__ . '/../views/templates/header.php');
 
-    if (!empty($_GET) && $_GET['update'] == 'update') {
+    if (!empty($_GET['update']) && $_GET['update'] == 'update') {
         flash('update');
     }
-    if (!empty($_GET) && $_GET['update'] == 'noUpdate') {
+    if (!empty($_GET['update']) && $_GET['update'] == 'noUpdate') {
         flash('noUpdate');
     }
     include(__DIR__ . '/../views/infoProfil.php');
