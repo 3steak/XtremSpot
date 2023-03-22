@@ -199,7 +199,6 @@ label {
     font-weight: 600;
     text-decoration: none !important;
     color: var(--main-bg-color) !important;
-
 }
 
 .fullname {
@@ -233,23 +232,85 @@ label {
 
 /*  AVATAR  */
 
-
-.avatar {
-    width: 10vw;
-    border-radius: 50px;
+.cc-selector input {
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-/* FOR MOBIL */
+
+
+.avatar_0 {
+    background-image: url(/public/assets/uploads/photoProfil/avatar_0.png);
+}
+
+.avatar_1 {
+    background-image: url(/public/assets/uploads/photoProfil/avatar_1.png);
+}
+
+.avatar_2 {
+    background-image: url(/public/assets/uploads/photoProfil/avatar_2.png);
+}
+
+.avatar_3 {
+    background-image: url(/public/assets/uploads/photoProfil/avatar_3.png);
+}
+
+.avatar_4 {
+    background-image: url(/public/assets/uploads/photoProfil/avatar_4.png);
+}
+
+
+.cc-selector input:active+.avatar-cc {
+    opacity: .9;
+}
+
+.cc-selector input:checked+.avatar-cc {
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
+
+.avatar-cc {
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30%;
+    height: 100px;
+    -webkit-transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+.avatar-cc:hover {
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------------- MEDIA QUERIES --------------------- */
 @media only screen and (max-width: 780px) {
     .dNoneMobil {
         display: none;
     }
 
-    .avatar {
-        width: 20vw;
-        border-radius: 50px;
+    .avatar-cc {
+        height: 100px;
+        width: 40%;
     }
-
 
     .content {
         background: var(--main-font-color);

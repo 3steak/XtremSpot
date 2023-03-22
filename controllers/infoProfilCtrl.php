@@ -2,49 +2,37 @@
 session_start();
 require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
-flash('updateOk', 'Information du profil mis à jour !', FLASH_SUCCESS);
-
+require_once(__DIR__ . '/../models/User.php');
+require_once(__DIR__ . '/../models/Category.php');
+require_once(__DIR__ . '/../session.php');
 
 $jsName = 'infoProfilCtrl';
-$sports = ['Skate', 'Roller', 'Bmx', 'Surf', 'Kitesurf', 'Paddle', 'Longboard', 'Bodyboard', 'Planche à voile'];
+
+
 
 try {
-    //  PRENDRE LIST SPORT POUR SELECT
+    if (User::isIdExist($idUser) === false) {
+        throw new Exception("Cet utilisateur n'existe pas", 1);
+    }
+    $profilUser = User::get($idUser);
+    $listCategory = Category::get();
+
+    //  Si profilUser return false
+    if (!$profilUser) {
+        throw new Exception('Id non valide', 1);
+    }
 } catch (\Throwable $th) {
-    //throw $th;
+    $errorMsg = $th->getMessage();
+    include_once(__DIR__ . '/../../views/templates/header.php');
+    include(__DIR__ . '/../../views/error.php');
+    include_once(__DIR__ . '/../../views/templates/footer.php');
+    die;
 }
-
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
-    // ========== FILE AVATAR ======================
 
-    if (isset($_FILES['avatar'])) {
-        // son nom
-        $file = $_FILES['avatar']['name'];
-        // son type
-        $filetype = $_FILES['avatar']['type'];
-
-        if (!empty($file)) {
-            if ($_FILES['avatar']['error'] != 0) {
-                $error['file'] = '<small class="text-white">Une erreur est survenue</small>';
-            } else {
-                // Si l'extension n'est pas dans le format renseigner dans le tableau EXTENSION
-                if (!in_array($filetype, EXTENSION)) {
-                    $error['type'] = '<small class="text-white">Fichier non valide</small>';
-                } else {
-                    $extenstion = pathinfo($file, PATHINFO_EXTENSION);
-                    // AJOUTER $USERID pour nom
-                    $fileName = 'avatarUser.' . $extenstion;
-                    $from = $_FILES['avatar']['tmp_name'];
-                    $to = __DIR__ . '/../public/assets/uploads/profilPicture/' . $fileName;
-                    move_uploaded_file($from, $to);
-                }
-            }
-        }
-    }
     // ============= FIRSTNAME : clean and check ===========
     $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
     // Isnt empty
@@ -78,8 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // ===================== Pseudo : Clean and check =======================
-
-    // !!!!!!!!!!! CONTROL  SI LE PSEUDO N'EST PAS DEJA EXISTANT !!!!!!! 
+    // !!!! CONTROL IF PSEUDOEXIST
     $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS));
     // isnt empty
     if (empty($pseudo)) {
@@ -95,22 +82,85 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // ----------------- SPORT ----------------------- 
-    $sport = trim(filter_input(INPUT_POST, 'sport', FILTER_SANITIZE_SPECIAL_CHARS));
-    if (!empty($sport)) {
-        if (!in_array($sport, $sports)) {
-            $error["sport"] = "<small>Le sport entré n'est pas valide!</small>";
+    // ====================== AVATAR =========================
+    $avatar = trim(filter_input(INPUT_POST, 'avatar', FILTER_SANITIZE_SPECIAL_CHARS));
+    if (empty($avatar)) {
+        $error["avatar"] = '<small class= "text-white">Selectionnez un avatar!!</small>';
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! A CHANGER !
+    $filename = 'C:/laragon/www/XtremSpot/public/assets/uploads/photoProfil/' . $avatar;
+
+    if (!file_exists($filename)) {
+        $error["avatar"] = '<small class= "text-white">Selectionner un avatar parmis ceux proposés!</small>';
+    }
+    //============================= EMAIL ================
+    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+    if (empty($email)) {
+        $error["email"] = '<small class="text-white">L\'email n\'est pas renseigné</small>';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error["email"] = '<small class= "text-white">L\'email ne correspond pas au format requis pour un email</small>';
+    }
+
+    // -------------------- CONTROL SELECT CATEGORY --------------------------------
+    $idCategories = intval(filter_input(INPUT_POST, 'idCategories', FILTER_SANITIZE_NUMBER_INT));
+    if (empty($idCategories) || $idCategories == '') {
+        // Si idCategories n'est pas dans dans la liste
+        $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
+    }
+
+    //  ISMAILEXIST = USER PAS ENCORE INSCRIT
+    if ($profilUser->email != $email) {
+        if (User::isMailExist($email)) {
+            $error["email"] = '<small class= "text-white">Ce mail correspond déjà à un autre utilisateur</small>';
         }
     }
 
+
     if (empty($error)) {
-        // Redirige vers settings 
-        header('location: /controllers/settingsCtrl.php?update=ok');
-        die;
+
+        try {
+            $user = new User;
+            $user->setId($idUser);
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setPseudo($pseudo);
+            $user->setAvatar($avatar);
+            $user->setEmail($email);
+            $user->setIdCategories($idCategories);
+
+            $result = $user->update();
+            if ($result) {
+                flash('update', 'Ton profil a été modifié avec succès ! ', FLASH_SUCCESS);
+                header('location: /controllers/infoProfilCtrl.php?update=update');
+                die;
+            } else {
+                flash('noUpdate', 'Ton profil a été non modifié ! ', FLASH_WARNING);
+                header('location: /controllers/infoProfilCtrl.php?update=noUpdate');
+                die;
+            }
+        } catch (\Throwable $th) {
+            $errorMsg = $th->getMessage();
+            include_once(__DIR__ . '/../views/templates/header.php');
+            include(__DIR__ . '/../views/error.php');
+            include_once(__DIR__ . '/../views/templates/footer.php');
+            die;
+        }
+    } else {
+        include_once(__DIR__ . '/../views/templates/header.php');
+        include(__DIR__ . '/../views/infoProfil.php');
     }
+
     // FIN DU IF 
+} else {
+    include_once(__DIR__ . '/../views/templates/header.php');
+
+    if (!empty($_GET) && $_GET['update'] == 'update') {
+        flash('update');
+    }
+    if (!empty($_GET) && $_GET['update'] == 'noUpdate') {
+        flash('noUpdate');
+    }
+    include(__DIR__ . '/../views/infoProfil.php');
 }
 
-include(__DIR__ . '/../views/templates/header.php');
-include(__DIR__ . '/../views/infoProfil.php');
 include_once(__DIR__ . '/../views/templates/footer.php');

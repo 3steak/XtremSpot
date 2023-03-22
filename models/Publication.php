@@ -245,7 +245,7 @@ class Publication
     {
 
         # return all publications validated
-        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`created_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`created_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`avatar`, `users`.`admin` 
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
@@ -285,7 +285,7 @@ class Publication
 
         #return publication filtered by user id for profil or CRUD
         $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`,
-                        `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+                        `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`,`users`.`avatar`, `users`.`admin` 
                 FROM `publications` 
                 JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                 JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
@@ -308,7 +308,7 @@ class Publication
     {
 
         $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`,
-                             `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+                             `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`,`users`.`avatar`, `users`.`admin` 
                     FROM `publications` 
                     JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                     JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
@@ -336,7 +336,7 @@ class Publication
     public static function getPublicationByCategory(int $idCategories): array
     {
         # return publication filtered by idCategories
-        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`, `users`.`admin` 
+        $sql = 'SELECT `publications`.`id`, `publications`.`title`, `publications`.`description`,`publications`.`image_name`, `publications`.`validated_at`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` as `categoryName`, `publications`.`idUsers`, `users`.`pseudo`,`users`.`avatar`, `users`.`admin` 
                     FROM `publications` 
                     JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                     JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 

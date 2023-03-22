@@ -148,7 +148,7 @@ class Comment
     {
         if ($idPublication) {
             #return commentaires de la publication
-            $sql = 'SELECT `comments`.`id` as `commentId`, `description`, `comments`.`validated_at`, `comments`.`created_at`, `idUsers`, `idPublications`,`users`.`pseudo`
+            $sql = 'SELECT `comments`.`id` as `commentId`, `description`, `comments`.`validated_at`, `comments`.`created_at`, `idUsers`, `idPublications`,`users`.`pseudo`,`users`.`avatar`,
             FROM `comments` 
             JOIN `users` ON `comments`.`idUsers` = `users`.`id`
             WHERE (`validated_at` is not null) AND `idUsers` = :idPublication ;';
@@ -156,7 +156,7 @@ class Comment
             $sth->bindValue(':id', $idPublication, PDO::PARAM_INT);
         } else {
             #return commentaires non validés pour modération
-            $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`, `comments`.`created_at`, `comments`.`idUsers`, `idPublications`,`users`.`pseudo`,
+            $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`, `comments`.`created_at`, `comments`.`idUsers`, `idPublications`,`users`.`pseudo`,`users`.`avatar`,
                     `publications`.`title` AS `publicationTitle`, `publications`.`image_name` as `publicationImg` 
                     FROM `comments` 
                     JOIN `users` ON `comments`.`idUsers` = `users`.`id` 

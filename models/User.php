@@ -12,7 +12,7 @@ class User
     // idcategories recup dans le select value 
     private $idCategories;
     private $admin;
-
+    private $avatar;
 
     /** Allows to register id
      * setId
@@ -118,6 +118,18 @@ class User
     }
 
 
+    /** Allows to set avatar
+     * setAvatar
+     *
+     * @param  mixed $avatar
+     * @return void
+     */
+    public function setAvatar(string $avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+
 
 
 
@@ -196,6 +208,17 @@ class User
     }
 
 
+    /** Allows to get avatar
+     * getAvatar
+     *
+     * @return int
+     */
+    public function getAvatar(): string
+    {
+        return $this->avatar;
+    }
+
+
     /** Allows to get userlist if param is null,
      * If param = $id return user's information 
      * get
@@ -206,7 +229,7 @@ class User
     public static function get(int $id = null): object | array
     {
         if ($id) {
-            $sql = 'SELECT `users`.`id`, `lastname`, `firstname`,`pseudo`,`email`, `admin`, `categories`.`name` AS `category`
+            $sql = 'SELECT `users`.`id`, `lastname`, `firstname`,`pseudo`,`avatar`,`email`, `admin`, `categories`.`name` AS `category`
                     FROM `users` JOIN `categories` ON `users`.`idCategories` = `categories`.`id`
                     WHERE users.id= :id;';
 
@@ -215,7 +238,7 @@ class User
             $sth->execute();
             $users = $sth->fetch();
         } else {
-            $sql = 'SELECT `users`.`id`, `categories`.`name` AS `category` , `lastname`, `firstname`,`pseudo`,`email`, `admin` 
+            $sql = 'SELECT `users`.`id`, `categories`.`name` AS `category` , `lastname`, `firstname`,`pseudo`,`avatar`,`email`, `admin` 
             FROM `users` JOIN `categories` ON `users`.`idCategories` = `categories`.`id`;';
             $sth = Database::connect()->prepare($sql);
             $sth->execute();
@@ -260,7 +283,7 @@ class User
 
             $sql = 'UPDATE `users` 
                     SET  `firstname`=:firstname, `lastname`=:lastname,
-                    `pseudo`=:pseudo,`email`=:email, `idCategories`=:idCategories, `admin`=:admin
+                    `pseudo`=:pseudo,`avatar`=:avatar,`email`=:email, `idCategories`=:idCategories, `admin`=:admin
                     WHERE id = :id ;';
 
             $sth = Database::connect()->prepare($sql);
@@ -269,7 +292,7 @@ class User
         } else {
             $sql = 'UPDATE `users` 
                 SET  `firstname`=:firstname, `lastname`=:lastname,
-                `pseudo`=:pseudo,`email`=:email, `idCategories`=:idCategories,
+                `pseudo`=:pseudo, `avatar`=:avatar,`email`=:email, `idCategories`=:idCategories
                 WHERE id = :id ;';
             $sth = Database::connect()->prepare($sql);
         }
@@ -278,6 +301,7 @@ class User
         $sth->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $sth->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $sth->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
+        $sth->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
         $sth->bindValue(':email', $this->email, PDO::PARAM_STR);
         $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
         $sth->execute();
@@ -320,12 +344,34 @@ class User
     }
 
     //VERIF ID
+    /**
+     * @param int $id
+     * 
+     * @return bool
+     */
     public static function isIdExist(int $id): bool|object
     {
         $request = 'SELECT * FROM `users` WHERE `id` = ? ;';
         $sth = Database::connect()->prepare($request);
         $sth->execute([$id]);
         $result = $sth->fetch();
+        return !empty($result) ?? false;
+    }
+
+
+
+    /**
+     * isPseudoExist
+     *
+     * @param  mixed $pseudo
+     * @return bool
+     */
+    public static function isPseudoExist(string $pseudo)
+    {
+        $request = 'SELECT * FROM `users` WHERE `pseudo` = ? ;';
+        $sth = Database::connect()->prepare($request);
+        $sth->execute([$pseudo]);
+        $result = $sth->fetchAll();
         return !empty($result) ?? false;
     }
 

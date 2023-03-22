@@ -83,7 +83,7 @@ class Favorite
      */
     public static function get(int $idUser): array
     {
-        $sql = 'SELECT `favorites`.`id` AS `idFavorites`, `idPublications`, `publications`.`title`, `publications`.`description`, `publications`.`image_name`,`publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` AS `categoryName`, `publications`.`idUsers` AS `publishBy`, `users`.`pseudo`, `users`.`admin` 
+        $sql = 'SELECT `favorites`.`id` AS `idFavorites`, `idPublications`, `publications`.`title`, `publications`.`description`, `publications`.`image_name`,`publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` AS `categoryName`, `publications`.`idUsers` AS `publishBy`, `users`.`pseudo`,`users`.`avatar`, `users`.`admin` 
             FROM `favorites` 
             JOIN `users` ON `favorites`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
@@ -109,7 +109,6 @@ class Favorite
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
         $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
-
         $sth->execute();
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;

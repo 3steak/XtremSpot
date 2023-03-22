@@ -148,7 +148,7 @@
                 <div class="card text-bg-dark my-2 mb-5 col-lg-8 mx-auto">
                     <div class="col-12 p-2">
                         <div class="d-flex align-items-center ">
-                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur"></a>
+                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $publication->avatar ?>" alt="photo profil utilisateur"></a>
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
                                 <?= htmlentities($publication->pseudo) ?>
                             </a>

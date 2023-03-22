@@ -121,7 +121,7 @@ if (isset($_SESSION['flash'])) {
                 <a class="triggerUdpdate my-2"><i class="fa-solid fa-pen-to-square fa-2xl "></i></a>
             </div>
             <form method="post">
-                <fieldset disabled class="row">
+                <fieldset disabled class="row ">
                     <div class="col-lg-6">
                         <label for="disabledTextInput" class="form-label"></label>
                         <h4 class=" text-white text-start ">Nom</h4>
@@ -142,7 +142,6 @@ if (isset($_SESSION['flash'])) {
                         <select class="form-select " id="admin" name="admin" aria-label="admin">
                             <option value="0" <?= ($profilUser->admin === 0) ? 'selected' : '' ?>>NON</option>
                             <option value="1" <?= ($profilUser->admin === 1) ? 'selected' : '' ?>>OUI</option>
-
                         </select>
                         <small><?= $error['admin'] ?? '' ?></small>
                     </div>
@@ -154,11 +153,40 @@ if (isset($_SESSION['flash'])) {
                     </div>
 
 
-                    <div class="col-lg-8 mx-auto mb-2">
+                    <div class="col-lg-8 mx-auto mb-4">
                         <label for="disabledTextInput" class="form-label"></label>
                         <h4 class=" text-white text-start">Pseudo</h4>
                         <input type="text" id="disabledTextInput" name="pseudo" class="form-control" value="<?= htmlspecialchars($profilUser->pseudo) ?>">
                         <small><?= $error['pseudo'] ?? '' ?></small>
+                    </div>
+                    <div class="col-lg-8 mx-auto mb-2">
+                        <label for="disabledTextInput" class="form-label"></label>
+                        <h4 class=" text-white text-start">Avatar</h4>
+                        <div class="row cc-selector">
+                            <!-- AVATAR DEFAUT -->
+                            <div class=" d-flex flex-column mb-1 ms-2">
+                                <small class="text-white">Avatar par défaut</small>
+                                <input <?= ($profilUser->avatar === "avatar_0.png") ? "checked='checked'" : '' ?> id="avatar_0" type="radio" name="avatar" value="avatar_0.png" />
+                                <label class="avatar-cc avatar_0" for="avatar_0"></label>
+                            </div>
+                            <div class="col-lg-6 d-flex justify-content-around center">
+                                <!-- AVATAR 1 -->
+                                <input <?= ($profilUser->avatar === "avatar_1.png") ? "checked='checked'" : '' ?> id="avatar_1" type="radio" name="avatar" value="avatar_1.png" />
+                                <label class="avatar-cc avatar_1" for="avatar_1"></label>
+                                <!-- AVATAR 2 -->
+                                <input <?= ($profilUser->avatar === "avatar_2.png") ? "checked='checked'" : '' ?> id="avatar_2" type="radio" name="avatar" value="avatar_2.png" />
+                                <label class="avatar-cc avatar_2" for="avatar_2"></label>
+                            </div>
+                            <div class="col-lg-6 d-flex justify-content-around ">
+                                <!-- AVATAR 3 -->
+                                <input <?= ($profilUser->avatar === "avatar_3.png") ? "checked='checked'" : '' ?> id="avatar_3" type="radio" name="avatar" value="avatar_3.png" />
+                                <label class="avatar-cc avatar_3" for="avatar_3"></label>
+                                <!-- AVATAR 4 -->
+                                <input <?= ($profilUser->avatar === "avatar_4.png") ? "checked='checked'" : '' ?> id="avatar_4" type="radio" name="avatar" value="avatar_4.png" />
+                                <label class="avatar-cc avatar_4" for="avatar_4"></label>
+                            </div>
+                        </div>
+                        <small><?= $error['avatar'] ?? '' ?></small>
                     </div>
 
 

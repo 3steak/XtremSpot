@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // ===================== Pseudo : Clean and check =======================
+    // !!!! CONTROL IF PSEUDOEXIST
     $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_SPECIAL_CHARS));
     // isnt empty
     if (empty($pseudo)) {
@@ -81,6 +82,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $error["pseudo"] = '<small class= "text-white">La longueur du pseudo n\'est pas bon</small>';
             }
         }
+    }
+
+    // ====================== AVATAR =========================
+    $avatar = trim(filter_input(INPUT_POST, 'avatar', FILTER_SANITIZE_SPECIAL_CHARS));
+    if (empty($avatar)) {
+        $error["avatar"] = '<small class= "text-white">Selectionnez un avatar!!</small>';
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! A CHANGER !
+    $filename = 'C:/laragon/www/XtremSpot/public/assets/uploads/photoProfil/' . $avatar;
+
+    if (!file_exists($filename)) {
+        $error["avatar"] = '<small class= "text-white">Selectionner un avatar parmis ceux proposés!</small>';
     }
     //============================= EMAIL ================
     $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
@@ -118,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setPseudo($pseudo);
+            $user->setAvatar($avatar);
             $user->setEmail($email);
             $user->setIdCategories($idCategories);
             $user->setAdmin($admin);
