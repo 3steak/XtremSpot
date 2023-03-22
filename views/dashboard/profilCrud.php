@@ -182,9 +182,9 @@ if (isset($_SESSION['flash'])) {
         <!------ PUBLICATIONS   ----->
 
         <div class="container  my-3  ">
-            <div class="row">
+            <div class="row gap-2">
                 <?php foreach ($publications as $publication) { ?>
-                    <div class="card text-bg-dark pb-3 mb-4 col-lg-4 mx-auto">
+                    <div class="card text-bg-dark pb-3 mb-4 col-lg-4 mx-auto ">
                         <div class="col-12 p-2">
                             <div class="d-flex align-items-center ">
                                 Validé le : <?= htmlspecialchars(date('d/m/Y H:i', strtotime($publication->validated_at))) ?>

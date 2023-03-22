@@ -14,17 +14,41 @@
                             <form class="bg-dark rounded-1 p-3" method="post" action="" novalidate enctype="multipart/form-data" autocomplete="off">
 
                                 <div class=" row">
-                                    <div class="d-flex justify-content-center mt-4 mb-1 ">
-                                        <img src="/public/assets/img/avatar.png" class="avatar" alt="avatar" />
-                                    </div>
                                     <!------------------------------- AVATAR --------------->
-                                    <div class="d-flex justify-content-center">
-                                        <div class="btn btn-light mb-4">
-                                            <label class="form-label text-dark m-1 " for="avatar">Choose your
-                                                avatar</label>
-                                            <input type="file" name="avatar" class="form-control d-none" id="avatar" accept="image/png, image/jpeg">
-                                        </div>
+
+                                    <div class="col-lg-6 d-flex justify-content-between ">
+                                        <!-- AVATAR 1 -->
+                                        <input type="radio" id="avatar_1" name="avatar" class="Send_data input-hidden" value="avatar_1" />
+                                        <label for="avatar_1">
+                                            <img src="./../public/assets/uploads/photoProfil/avatar_1.png" class="avatar" />
+                                            <br>
+                                            <span class="text-white">Avatar 1</span>
+                                        </label>
+                                        <!-- AVATAR 2 -->
+                                        <input type="radio" id="avatar_2" name="avatar" class="Send_data input-hidden" value="avatar_2" />
+                                        <label for="avatar_2">
+                                            <img src="./../public/assets/uploads/photoProfil/avatar_2.png" class="avatar" />
+                                            <br>
+                                            <span class="text-white">Avatar 2</span>
+                                        </label>
                                     </div>
+                                    <div class="col-lg-6 d-flex justify-content-between ">
+                                        <!-- AVATAR 3 -->
+                                        <input type="radio" id="avatar_3" name="avatar" class="Send_data input-hidden" value="avatar_3" />
+                                        <label for="avatar_3">
+                                            <img src="./../public/assets/uploads/photoProfil/avatar_3.png" class="avatar" />
+                                            <br>
+                                            <span class="text-white">Avatar 3</span>
+                                        </label>
+                                        <!-- AVATAR 4 -->
+                                        <input type="radio" id="avatar_4" name="avatar" class="Send_data input-hidden" value="avatar_4" />
+                                        <label for="avatar_4">
+                                            <img src="./../public/assets/uploads/photoProfil/avatar_4.png" class="avatar" />
+                                            <br>
+                                            <span class="text-white">Avatar 4</span>
+                                        </label>
+                                    </div>
+
                                     <?= $error['file'] ?? '' ?>
                                     <?= $error['type'] ?? '' ?>
                                     <!------------------------------------------  FIRSTNAME  ---------------------->
@@ -44,30 +68,8 @@
                                     </div>
                                     <?= $error['pseudo'] ?? '' ?>
 
-                                    <!------------------------------------------  PASSWORD  ---------------------->
-                                    <!-- !!!!!!!!!!!!!!!!!   AJOUTER OEIL POUR VOIR PASSWORD !!!!!!!!!!!!!!! -->
-                                    <div class="col-12 p-3 col-lg-6 p-3">
-                                        <input type="text" class="form-control" id="password" name="password" placeholder="Password" value="$password" aria-label="password">
-                                        <small class="text-white d-none" id="passwordHelp">Dois contenir au moins 8 lettres ou plus, une MAJUSCULE et une minuscule ainsi qu'un chiffre.</small><br>
-                                        <small class="text-white mx-auto" id="passwordforce"></small>
-                                    </div>
-                                    <?= $error['password'] ?? '' ?>
-
-                                    <!------------------------------------------  CONFIRM PASSWORD  ---------------------->
-                                    <div class="col-12 p-3 col-lg-6 p-3">
-                                        <input type="confirmPassword" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm your password " aria-label="confirmPassword">
-                                        <small class="text-white" id="passwordDif"></small>
-                                    </div>
-                                    <?= $error['confirmPassword'] ?? '' ?>
-                                    <!------------------------------------------  TOWN  ---------------------->
-                                    <!-- !!!!!!!!!!!!!!!! AJOUT CHAMP RECHERCHE VILLE JSON -->
-                                    <!-- <h3 class="text-white ms-2 pt-3">Ville</h3>
-                                    <div class="col-12 px-3">
-                                        <input type="text" class="form-control" id="townUser" name="userTown" placeholder="userTown" value="$userTown" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="townUser">
-                                    </div> -->
 
                                     <!------------------------------------------  SPORT  ---------------------->
-                                    <!------------------------------------------  AJOUT LISTE DE SPORT  ---------------------->
 
                                     <h3 class="text-white ms-2 pt-3">Sport pratiqué</h3>
                                     <div class="col-12 px-3">

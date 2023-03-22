@@ -8,6 +8,13 @@ flash('updateOk', 'Information du profil mis à jour !', FLASH_SUCCESS);
 $jsName = 'infoProfilCtrl';
 $sports = ['Skate', 'Roller', 'Bmx', 'Surf', 'Kitesurf', 'Paddle', 'Longboard', 'Bodyboard', 'Planche à voile'];
 
+try {
+    //  PRENDRE LIST SPORT POUR SELECT
+} catch (\Throwable $th) {
+    //throw $th;
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

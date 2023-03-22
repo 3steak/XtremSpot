@@ -110,30 +110,36 @@ if (isset($_SESSION['flash'])) {
             <div class="row">
                 <!-- IMG CARD -->
                 <?php foreach ($publications as $publication) { ?>
-
+                    <div class="col-12">
+                        <div class="d-flex align-items-center ">
+                            <small class="text-white"><?= $publication->town ?></small>
+                        </div>
+                        <div class="d-flex  justify-content-between align-items-center ">
+                            <p class="contentUserDescprition text-white"><?= htmlentities($publication->title) ?></p>
+                            <!--  BOUTON OPTION -->
+                            <a href="" class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                            </a>
+                            <!-- dropdown menu  -->
+                            <ul class="dropdown-menu bg-dark">
+                                <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="card text-bg-dark my-3 ">
                         <img src="/../public/assets/uploads/newPicture/<?= htmlentities($publication->image_name) ?>" class="card-img" alt="<?= htmlentities($publication->title) ?>">
                         <div class=" d-flex flex-column justify-content-end ">
                             <div class="row banniereLike p-2 ">
                                 <div class="col-12 dropcenter dropup d-flex align-items-center">
-                                    <a href="#" class=" text-black text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-2x"></i>
+                                    <a href="#" class=" text-white text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-xl"></i>
                                     </a>
                                     <!-- Collapse for comments -->
-                                    <a class="text-black text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
-                                        <i class="fa-solid fa-comment fa-2x"></i>
+                                    <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
+                                        <i class="fa-solid fa-comment fa-xl"></i>
                                     </a>
                                     <!-- BOUTON MAP -->
-                                    <a class=" text-black text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-2x"></i></a>
+                                    <a class=" text-white text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-xl"></i></a>
 
-
-                                    <!--  BOUTON OPTION -->
-                                    <a href="" class="text-black text-decoration-none p-3" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis fa-2x"></i>
-                                    </a>
-                                    <!-- dropdown menu  -->
-                                    <ul class="dropdown-menu bg-dark">
-                                        <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
-                                    </ul>
                                     <!-- BUTTON SEE MORE -->
                                     <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
 

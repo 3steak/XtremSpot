@@ -229,13 +229,26 @@ label {
     margin: auto;
 }
 
+
+
+/*  AVATAR  */
+
+
+.avatar {
+    width: 10vw;
+    border-radius: 50px;
+}
+
 /* FOR MOBIL */
 @media only screen and (max-width: 780px) {
     .dNoneMobil {
         display: none;
     }
 
-
+    .avatar {
+        width: 20vw;
+        border-radius: 50px;
+    }
 
 
     .content {
@@ -250,3 +263,4 @@ label {
     .dNoneTab {
         display: none;
     }
+}

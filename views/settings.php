@@ -20,7 +20,7 @@
 
                             <!-- button settings profil user -->
                             <div class="buttonProfilSettings text-center my-4">
-                                <a href="/controllers/infoProfilCtrl.php" role="button" class="btn btn-info btnProfilSettings">Modifier
+                                <a href="/controllers/infoProfilCtrl.php?id=<?= $idUser ?>" role="button" class="btn btn-info btnProfilSettings">Modifier
                                     les informations du profil</a>
                             </div>
 

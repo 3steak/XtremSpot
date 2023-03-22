@@ -75,12 +75,11 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 
     <!--------------------- FILTER BUTTON ---------------->
-    <div class="container my-3">
+    <div class="container my-1">
         <div class="row">
             <div class=" col-lg-10 mx-auto">
                 <div class="d-flex justify-content-center  p-2">
@@ -140,13 +139,13 @@
 
     <!-------------- CONTENT ------->
 
-    <div class="container  my-3 cardUserContent">
+    <div class="container cardUserContent">
         <div class="row">
             <?= $error['void'] ?? '' ?>
             <?php foreach ($publications as $publication) { ?>
 
 
-                <div class="card text-bg-dark pb-3 col-lg-10 my-5 mx-auto">
+                <div class="card text-bg-dark my-2 mb-5 col-lg-8 mx-auto">
                     <div class="col-12 p-2">
                         <div class="d-flex align-items-center ">
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur"></a>
@@ -161,35 +160,34 @@
                         <div class="d-flex align-items-center ">
                             <small><?= $publication->town ?></small>
                         </div>
-                        <div class="d-flex  justify-content-center align-items-center ">
+                        <div class="d-flex  justify-content-between align-items-center ">
                             <p class="contentUserDescprition"><?= htmlentities($publication->title) ?></p>
+                            <!--  BOUTON OPTION -->
+                            <a href="" class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                            </a>
+                            <!-- dropdown menu  -->
+                            <ul class="dropdown-menu bg-dark">
+                                <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
+                            </ul>
                         </div>
                     </div>
 
                     <img src="/../public/assets/uploads/newPicture/<?= htmlentities($publication->image_name) ?>" class="card-img" alt="<?= htmlentities($publication->title) ?>">
                     <div class=" d-flex flex-column justify-content-end ">
-                        <div class="row banniereLike p-2 ">
+                        <div class="row banniereLike  p-2 ">
                             <div class="col-12 dropcenter dropup">
-                                <a href="#" class=" text-black text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-2x"></i>
-                                </a>
+                                <a href="#" class=" text-white text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-xl me-1"></i><span class="dNoneMobil">J'aime</span></a>
                                 <!-- Collapse for comments -->
-                                <a class="text-black text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
-                                    <i class="fa-solid fa-comment fa-2x"></i>
+                                <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
+                                    <i class="fa-solid fa-comment fa-xl me-1"></i><span class="dNoneMobil">Commenter</span>
                                 </a>
                                 <!-- BOUTON MAP -->
-                                <a class=" text-black text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-2x"></i></a>
+                                <a class=" text-white text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-xl me-1"></i>
+                                    <span class="dNoneMobil">Voir le lieu du spot</span></a>
 
-
-                                <!--  BOUTON OPTION -->
-                                <a href="" class="text-black text-decoration-none p-3" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-ellipsis fa-2x"></i>
-                                </a>
-                                <!-- dropdown menu  -->
-                                <ul class="dropdown-menu bg-dark">
-                                    <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
-                                </ul>
                                 <!-- BUTTON SEE MORE -->
-                                <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
+                                <a class="btn btn-dark btn-sm seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
 
                             </div>
                         </div>
