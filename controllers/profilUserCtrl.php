@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../session.php');
 $jsName = 'feedUserCtrl';
 
 
-// $idUser = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+$idUser = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 
 try {
     if (User::isIdExist($idUser) === false) {

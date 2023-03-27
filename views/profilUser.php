@@ -109,23 +109,24 @@ if (isset($_SESSION['flash'])) {
             <div class="row">
                 <!-- IMG CARD -->
                 <?php foreach ($publications as $publication) { ?>
-                    <div class="col-12">
-                        <div class="d-flex align-items-center ">
-                            <small class="text-white"><?= $publication->town ?></small>
-                        </div>
-                        <div class="d-flex  justify-content-between align-items-center ">
-                            <p class="contentUserDescprition text-white"><?= htmlentities($publication->title) ?></p>
-                            <!--  BOUTON OPTION -->
-                            <a href="" class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
-                            </a>
-                            <!-- dropdown menu  -->
-                            <ul class="dropdown-menu bg-dark">
-                                <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="card text-bg-dark my-3 ">
+                        <div class="col-12 p-2">
+                            <div class="d-flex align-items-center ">
+                                <small class="text-white"><i class="fa-solid fa-signs-post"></i> <?= $publication->town ?></small>
+                            </div>
+                            <div class="d-flex  justify-content-between align-items-center ">
+                                <p class="contentUserDescprition text-white mx-auto"><?= htmlentities($publication->title) ?></p>
+                                <!--  BOUTON OPTION -->
+                                <a href="" class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
+                                </a>
+                                <!-- dropdown menu  -->
+                                <ul class="dropdown-menu bg-dark">
+                                    <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <img src="/../public/assets/uploads/newPicture/<?= htmlentities($publication->image_name) ?>" class="card-img" alt="<?= htmlentities($publication->title) ?>">
                         <div class=" d-flex flex-column justify-content-end ">
                             <div class="row banniereLike p-2 ">
