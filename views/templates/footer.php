@@ -3,7 +3,7 @@
   <footer class="bg-dark ">
       <div class="container-fluid ">
           <div class="row">
-              <div class="col d-flex flex-column text-center">
+              <div class="col d-flex flex-column flex-md-row justify-content-center text-center gap-4 p-2">
                   <a href="#" class="text-decoration-none text-white p-3">Mentions légales</a>
                   <a href="#" class="text-decoration-none text-white p-3">Politique de confidentialité</a>
                   <a href="#" class="text-decoration-none text-white p-3">Plan du site</a>

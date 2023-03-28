@@ -1,8 +1,6 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../helpers/flash.php');
-
-
 require_once(__DIR__ . '/../models/User.php');
 
 //  APRES COPIER COLLER DU LIEN
@@ -13,6 +11,6 @@ if ($isValidatedOk) {
 
     header('location: /controllers/homeCtrl.php?register=validated');
 } else {
-    flash('register', 'Ton compte n\'a pas été validé', FLASH_WARNING);
+    flash('register', 'Ton compte n\'a pas été validé, vérifie le lien envoyé par mail', FLASH_WARNING);
     header('location: /controllers/homeCtrl.php?register=NoValidated');
 }

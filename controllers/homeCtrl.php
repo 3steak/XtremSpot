@@ -51,12 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </div>';
             }
             $_SESSION['user'] = $user;
+            $_SESSION['loggedIn'] = true;
+            if ($_SESSION['user']->admin === 1) {
+                $_SESSION['admin'] = true;
+            }
+            // création function random message
             $random  = function ($messages) {
                 return $messages[array_rand($messages)];
             };
 
             $messages = [' ça va ?', ' la forme ?', 'aller fait voir ton spot !'];
             flash('register', 'Bienvenue ' . $_SESSION['user']->pseudo . ' ' . $random($messages), FLASH_SUCCESS);
+            flash('welcome', 'Bienvenue ' . $_SESSION['user']->pseudo . ' dans l\'espace admin, ici tu peux modérer les publications, commentaires et les signalements, gérer les utilisateurs et ajouter des catégories "sport" ! ', FLASH_INFO);
+
             header('location: /controllers/feedUserCtrl.php?register=bienvenue');
             die;
         }

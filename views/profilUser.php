@@ -108,7 +108,23 @@ if (isset($_SESSION['flash'])) {
 
             <div class="row">
                 <!-- IMG CARD -->
-                <?php foreach ($publications as $publication) { ?>
+
+                <?php
+                if (empty($publications)) { ?>
+                    <div class="card text-bg-dark my-5 p-5 ">
+                        <div class="col-12 p-2">
+                            <div class="d-flex align-items-center ">
+                                <small class="text-white"><i class="fa-solid fa-signs-post"></i> Ici bientôt</small>
+                            </div>
+                            <h1 class="text-white ">Du contenu</h1>
+                        </div>
+
+                        <img src="/public/assets/img/noPublication.jpg" class="card-img" alt="PAS ENCORE DE POST">
+
+                    </div>
+                <?php }
+
+                foreach ($publications as $publication) { ?>
                     <div class="card text-bg-dark my-3 ">
                         <div class="col-12 p-2">
                             <div class="d-flex align-items-center ">

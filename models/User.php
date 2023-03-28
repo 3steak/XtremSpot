@@ -375,7 +375,13 @@ class User
         return !empty($result) ?? false;
     }
 
-    public static function getByMail(string $email)
+    /** Allows to get user by mail in param
+     * getByMail
+     *
+     * @param  mixed $email
+     * @return object
+     */
+    public static function getByMail(string $email): object
     {
         $request = 'SELECT * FROM `users` WHERE `email` = :mail ;';
         $sth = Database::connect()->prepare($request);
@@ -384,7 +390,16 @@ class User
         $user = $sth->fetch();
         return $user;
     }
-    public static function validateMail(string $email)
+
+
+
+    /** Allows to validate user's account with mail in param
+     * validateMail
+     *
+     * @param  mixed $email
+     * @return bool
+     */
+    public static function validateMail(string $email): bool
     {
         $sql = 'UPDATE `users` 
         SET  `validated_at`= NOW()

@@ -1,6 +1,10 @@
 <?php
 
 session_start();
+//  if not connected
+if ($_SESSION['loggedIn'] != true && $_SESSION['admin'] != true) {
+    header('location: /../controllers/homeCtrl.php');
+}
 $jsName = 'profilCrudCtrl';
 require_once(__DIR__ . '/../../helpers/flash.php');
 require_once(__DIR__ . '/../../models/User.php');

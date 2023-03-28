@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 27, 2023 at 09:06 AM
+-- Generation Time: Mar 28, 2023 at 08:35 PM
 -- Server version: 8.0.30
--- PHP Version: 8.2.2
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -139,13 +139,14 @@ CREATE TABLE `users` (
   `firstname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `pseudo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `avatar` varchar(12) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'avatar_0.png',
+  `avatar` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'avatar_0.png',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `validated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
-  `admin` tinyint(1) DEFAULT NULL,
+  `admin` tinyint(1) DEFAULT '0',
   `idCategories` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -153,11 +154,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `pseudo`, `avatar`, `password`, `email`, `created_at`, `updated_at`, `deleted_at`, `admin`, `idCategories`) VALUES
-(1, 'Jean', 'Bon', 'Jeanbonsiisouioui', 'avatar_0.png', 'oioioioioio', 'jean@gmail.com', '2023-03-04 12:26:09', NULL, NULL, 0, 1),
-(2, 'Aqueuse', 'Cat', 'Acqueuse', 'avatar_0.png', 'IOIOIOIO', 'aqueuse@gmail.com', '2023-03-04 12:27:00', NULL, NULL, 0, 1),
-(3, 'Sakai', 'Asinbit', 'Sakai', 'avatar_0.png', 'ouioui', 'sakai@gmail.com', '2023-03-04 12:27:45', NULL, NULL, 1, 2),
-(4, 'Armi', 'Niusnius', 'Arminius', 'avatar_4.png', '$2y$10$6CLksHXjL.wqP6d2reXTzecRsakvdxCiYxhbYnwaEb/07/sXdfpa.', 'Arminius30000@gmail.com', '2023-03-13 22:11:21', NULL, NULL, 0, 5);
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `pseudo`, `avatar`, `password`, `email`, `created_at`, `updated_at`, `validated_at`, `deleted_at`, `admin`, `idCategories`) VALUES
+(1, 'Jean', 'Bon', 'Jeanbonsiisouioui', 'avatar_0.png', 'oioioioioio', 'jean@gmail.com', '2023-03-04 12:26:09', NULL, NULL, NULL, 0, 1),
+(2, 'Aqueuse', 'Cat', 'Acqueuse', 'avatar_0.png', 'IOIOIOIO', 'aqueuse@gmail.com', '2023-03-04 12:27:00', NULL, NULL, NULL, 0, 1),
+(3, 'Sakai', 'Asinbit', 'Sakai', 'avatar_0.png', 'ouioui', 'sakaiasinbit@gmail.com', '2023-03-04 12:27:45', '2023-03-28 22:29:48', NULL, NULL, 1, 2),
+(4, 'Armi', 'Niusnius', 'Arminius', 'avatar_4.png', '$2y$10$6CLksHXjL.wqP6d2reXTzecRsakvdxCiYxhbYnwaEb/07/sXdfpa.', 'Arminius30000@gmail.com', '2023-03-13 22:11:21', NULL, NULL, NULL, 0, 5),
+(6, 'Florian', 'Billault', 'Flo', 'avatar_0.png', '$2y$10$7pBIDSr7iadJ9FKUB6A8tO8ceFjW0KaOR807iWcM7vGhl0.mPNINi', 'florianbillault@gmail.com', '2023-03-28 15:43:37', '2023-03-28 22:31:27', '2023-03-28 15:47:37', NULL, 0, 5);
 
 --
 -- Indexes for dumped tables
@@ -232,7 +234,7 @@ ALTER TABLE `publications`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

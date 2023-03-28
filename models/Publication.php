@@ -249,7 +249,7 @@ class Publication
             FROM `publications` 
             JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
             JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
-            WHERE (`validated_at` is null)
+            WHERE (`publications`.`validated_at` is null)
             ORDER BY `created_at` ASC;';
         $sth = Database::connect()->prepare($sql);
         $sth->execute();
@@ -267,7 +267,7 @@ class Publication
     {
         $sql = 'SELECT DISTINCT `publications`.`town`, `publications`.`id`
                 FROM `publications`
-                WHERE (`validated_at` is not null);';
+                WHERE (`publications`.`validated_at` is not null);';
         $sth = Database::connect()->prepare($sql);
         $sth->execute();
         $towns = $sth->fetchAll();

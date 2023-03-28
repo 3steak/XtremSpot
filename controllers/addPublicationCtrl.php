@@ -8,6 +8,10 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../session.php');
 
 
+if ($_SESSION['loggedIn'] != true) {
+    header('location: /controllers/homeCtrl.php');
+}
+
 use GuzzleHttp\Client;
 
 const API_URL = 'https://geo.api.gouv.fr/';
@@ -121,8 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $marker_latitude = $markers[1];
     $marker_longitude = $markers[2];
 
-    // var_dump($error);
-    // die;
     if (empty($error)) {
         try {
             $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);

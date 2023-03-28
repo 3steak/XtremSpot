@@ -1,5 +1,7 @@
 <!--------- MAIN -------->
-<?php flash('commentEmpty');
+<?php
+
+flash('commentEmpty');
 if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
     flash('register');
 }

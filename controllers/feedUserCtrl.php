@@ -1,5 +1,9 @@
 <?php
 session_start();
+//  if not connected
+if ($_SESSION['loggedIn'] != true) {
+    header('location: /controllers/homeCtrl.php');
+}
 require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../helpers/db.php');
@@ -12,7 +16,6 @@ $listCategory = Category::get();
 $listTowns = Publication::getTowns();
 
 //  -------------------  if $_Session[user]->admin === 1 alors user est admin -------------------
-
 
 try {
     $publications = Publication::get();
