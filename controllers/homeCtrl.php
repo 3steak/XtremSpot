@@ -14,7 +14,6 @@ if (!empty($_GET) && $_GET['register'] == 'NoValidated') {
     flash('register');
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //  TEST MAIL = SI MAIL EXISTE PAS, COMPTE INEXISTANT
