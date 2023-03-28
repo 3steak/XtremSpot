@@ -7,8 +7,8 @@
           <div class="row d-flex justify-content-center">
               <div class="col-10 col-lg-6">
                   <!-------------- FORM  ----------------->
-                  <form class="bg-dark bg-opacity-75 rounded-1 p-3 mb-5" action="" novalidate method="post">
-                      <h2 class="text-white text-center">Inscription</h2>
+                  <form class="bg-dark bg-opacity-75 rounded-1 pt-5 p-3 mb-5" action="" novalidate method="post">
+                      <h2 class="text-white text-center mb-3">Inscription</h2>
                       <div class=" row">
                           <!-- Firstname -->
                           <div class="col-12 col-lg-6 p-3">
