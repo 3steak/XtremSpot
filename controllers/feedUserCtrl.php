@@ -11,6 +11,9 @@ $jsName = 'feedUserCtrl';
 $listCategory = Category::get();
 $listTowns = Publication::getTowns();
 
+//  -------------------  if $_Session[user]->admin === 1 alors user est admin -------------------
+
+
 try {
     $publications = Publication::get();
     // $comments = Comment::get($idPublication);

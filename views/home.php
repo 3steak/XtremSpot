@@ -12,6 +12,7 @@
               </div>
           </div>
           <div class="container main mt-5">
+              <?= $error['noValidated'] ?? '' ?>
               <div class="row d-flex justify-content-center">
                   <div class="col-10 col-lg-6 ">
                       <form class="bg-dark bg-opacity-75 pt-5 pb-2 px-4 mb-5 rounded-1" method="post" action="">
@@ -19,14 +20,17 @@
                           <div class=" row">
                               <div class="input-group p-3">
                                   <span class="input-group-text bg-dark text-white" id="addon-wrapping">@</span>
-                                  <input type="mail" class="form-control" id="email" placeholder="Email *" aria-label="email" aria-describedby="addon-wrapping" required>
+                                  <input type="mail" class="form-control" id="email" name="email" placeholder="Email *" aria-label="email" aria-describedby="addon-wrapping" required>
                               </div>
+                              <?= $error['email'] ?? '' ?>
                               <div class="input-group p-3">
-                                  <input type="password" class="form-control" id="password" placeholder="Password *" aria-label="password" required>
+                                  <input type="password" class="form-control" id="password" name="password" placeholder="Password *" aria-label="password" required>
                                   <span class="input-group-text bg-dark text-white" id="basic-addon2"><i class="fa-regular fa-eye" id="togglePassword"></i></span>
                               </div>
+                              <?= $error['password'] ?? '' ?>
                               <a href="/controllers/forgotMdp.php" class="link-secondary text-white text-center text-decoration-none forgotMdp">Mot de
                                   passe oublié</a>
+
 
 
                               <div class="col-12 py-3 d-flex justify-content-center">

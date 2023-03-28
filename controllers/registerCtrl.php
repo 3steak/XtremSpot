@@ -101,6 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $result = $user->addUser();
             if ($result) {
+                // MAIL DE VERIF
+                $to = $user->getEmail();
+                $subject = 'Email de validation';
+                $link = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/controllers/validateMailCtrl.php?email=' . $user->getEmail();
+                $mailBody = 'Bonjour<br>Merci de valider votre compte en cliquant sur ce lien <a href="' . $link . '">lien</a>!';
+                mail($to, $subject, $mailBody);
                 header('location: /controllers/homeCtrl.php?register=ok');
                 die;
             } else {

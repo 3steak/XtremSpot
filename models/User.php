@@ -181,7 +181,7 @@ class User
      *
      * @return string
      */
-    public function getemail(): string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -373,6 +373,29 @@ class User
         $sth->execute([$pseudo]);
         $result = $sth->fetchAll();
         return !empty($result) ?? false;
+    }
+
+    public static function getByMail(string $email)
+    {
+        $request = 'SELECT * FROM `users` WHERE `email` = :mail ;';
+        $sth = Database::connect()->prepare($request);
+        $sth->bindValue(':mail', $email);
+        $sth->execute();
+        $user = $sth->fetch();
+        return $user;
+    }
+    public static function validateMail(string $email)
+    {
+        $sql = 'UPDATE `users` 
+        SET  `validated_at`= NOW()
+        WHERE email = :mail ;';
+
+        $sth = Database::connect()->prepare($sql);
+
+        $sth->bindValue(':mail', $email);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
     }
 
     //  end of class

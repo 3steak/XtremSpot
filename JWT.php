@@ -26,3 +26,9 @@ password_hash($password1, PASSWORD_DEFAULT);
 if (empty($error)) {
     # code...
 }
+// VOIR HOMECTRL 
+// SI DECONNEXION RENVOYE VERS SIGNOUTCTRL
+// Detruit la session et redirection vers page d'accueil
+unset($_SESSION['user']);
+session_destroy();
+header('location: /');

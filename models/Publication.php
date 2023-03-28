@@ -312,7 +312,7 @@ class Publication
                     FROM `publications` 
                     JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                     JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-                    WHERE (`validated_at` is not null)';
+                    WHERE (`publications`.`validated_at` is not null)';
         $sql .= ($town) ? ' AND `publications`.`town` = :town' : '';
         $sql .= ' ORDER BY `publications`.`validated_at` DESC;';
 
