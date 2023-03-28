@@ -14,6 +14,7 @@ if (!empty($_GET) && $_GET['register'] == 'NoValidated') {
     flash('register');
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //  TEST MAIL = SI MAIL EXISTE PAS, COMPTE INEXISTANT
@@ -51,8 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               </div>';
             }
             $_SESSION['user'] = $user;
+            $random  = function ($messages) {
+                return $messages[array_rand($messages)];
+            };
 
-            header('location: /controllers/feedUserCtrl.php');
+            $messages = [' ça va ?', ' la forme ?', 'aller fait voir ton spot !'];
+            flash('register', 'Bienvenue ' . $_SESSION['user']->pseudo . ' ' . $random($messages), FLASH_SUCCESS);
+            header('location: /controllers/feedUserCtrl.php?register=bienvenue');
             die;
         }
     }

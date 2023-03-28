@@ -289,7 +289,7 @@ class Publication
                 FROM `publications` 
                 JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                 JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-                WHERE (`validated_at` is not null) AND users.id = :id;';
+                WHERE (`publications`.`validated_at` is not null) AND users.id = :id;';
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':id', $userId, PDO::PARAM_INT);
         $sth->execute();
@@ -340,7 +340,7 @@ class Publication
                     FROM `publications` 
                     JOIN `users` ON `publications`.`idUsers` = `users`.`id` 
                     JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-                    WHERE (`validated_at` is not null) AND `publications`.`idCategories` = :idCategories
+                    WHERE (`publications`.`validated_at` is not null) AND `publications`.`idCategories` = :idCategories
                     ORDER BY `publications`.`validated_at` ASC;';
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':idCategories', $idCategories, PDO::PARAM_INT);
