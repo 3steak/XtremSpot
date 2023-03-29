@@ -14,8 +14,7 @@ require_once(__DIR__ . '/../models/Publication.php');
 require_once(__DIR__ . '/../models/Comment.php');
 
 $jsName = 'feedUserCtrl';
-
-if (!empty($GET)) {
+if (!empty($_GET)) {
     $idUser = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 }
 
