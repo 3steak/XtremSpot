@@ -193,23 +193,31 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
 
                                 <!-- BUTTON SEE MORE -->
                                 <a class="btn btn-dark btn-sm seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
-
                             </div>
                         </div>
                         <!-- Collapse for comments -->
                         <div id="collapseComments" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <!-- Listes de commentaires -->
-                            <div class="commentsList px-3 py-1 overflow-auto" id="commentaire">
-                                <div class="commentUser idX">
-                                    <p class="userName fs-5">Pseudo</p>
-                                    <p class="text-white fs-6">Lorem lorem lorem test</p>
-                                    <hr>
-                                </div>
+                            <div class="commentsList px-3 py-1 overflow-auto">
+                                <?php foreach ($comments as $comment) {
+                                    if ($comment->idPublications == $publication->id) { ?>
+                                        <div class="commentUser p-2">
+                                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $comment->avatar ?>" alt="photo profil utilisateur"></a>
+                                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
+                                                <?= htmlentities($comment->pseudo) ?>
+                                            </a><br>
+                                            <small class=" commentsHour mt-4 ms-4">Publié le : <?= htmlentities(date('d/m/Y', strtotime($comment->created_at))) ?> à <?= htmlentities(date('H', strtotime($comment->created_at))) ?>h</small>
+                                            <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+                                            <hr>
+                                        </div>
+                                <?php
+                                    }
+                                } ?>
                             </div>
                             <form action="?id=commentaire" method="post" id="form">
                                 <div class="mb-2 px-3">
                                     <label for="comment" class="col-form-label">Ajouter un commentaire :</label>
-                                    <textarea class="form-control" maxlength="500" name="comment" id="comment"></textarea required>
+                                    <textarea class="form-control" maxlength="500" name="comment" id="comment" placeholder="Ton commentaire sera envoyé en modération avant d'être publié !"></textarea required>
                                 </div>
                                 <?= $error['comment'] ?? '' ?>
                             

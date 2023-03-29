@@ -137,34 +137,41 @@ class Comment
         $comments = $sth->fetchAll();
         return $comments;
     }
-    /** Methode get permet de retourner les commentaires à valider si 0 paramètres rentrés,
-     * Si param = $idPublication la méthode retourne les commentaires validés de la publication
-     * get
+    /** Methode get permet de retourner les commentaires à valider 
+    
      *
-     * @param  mixed $idPublication
      * @return array
      */
-    public static function get(int $idPublication = null): array
+    public static function getNoValidatedComments(): array
     {
-        if ($idPublication) {
-            #return commentaires de la publication
-            $sql = 'SELECT `comments`.`id` as `commentId`, `description`, `comments`.`validated_at`, `comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`
-            FROM `comments` 
-            JOIN `users` ON `comments`.`idUsers` = `users`.`id`
-            WHERE (`comments`.`validated_at` is not null) AND `idPublications` = :idPublication ;';
-            $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':idPublication', $idPublication, PDO::PARAM_INT);
-        } else {
-            #return commentaires non validés pour modération
-            $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`,`comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`,
+        #return commentaires non validés pour modération
+        $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`,`comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`,
                     `publications`.`title` AS `publicationTitle`, `publications`.`image_name` as `publicationImg` 
                     FROM `comments` 
                     JOIN `users` ON `comments`.`idUsers` = `users`.`id` 
                     JOIN `publications` ON `comments`.`idPublications` = `publications`.`id` 
                     WHERE (`comments`.`validated_at` is null) 
                     ORDER BY `comments`.`created_at` ASC;';
-            $sth = Database::connect()->prepare($sql);
-        }
+        $sth = Database::connect()->prepare($sql);
+        $sth->execute();
+        $comments = $sth->fetchAll();
+        return $comments;
+    }
+
+    /** Methode get permet de retourner les commentaires validés
+     *
+     * @return array
+     */
+    public static function getAll(): array
+    {
+        #return commentaires non validés pour modération
+        $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`,`comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`,
+                    `publications`.`title` AS `publicationTitle`, `publications`.`image_name` as `publicationImg` 
+                    FROM `comments` 
+                    JOIN `users` ON `comments`.`idUsers` = `users`.`id` 
+                    JOIN `publications` ON `comments`.`idPublications` = `publications`.`id` 
+                    WHERE (`comments`.`validated_at` is not null)';
+        $sth = Database::connect()->prepare($sql);
         $sth->execute();
         $comments = $sth->fetchAll();
         return $comments;

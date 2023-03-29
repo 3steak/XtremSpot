@@ -15,7 +15,7 @@ require_once(__DIR__ . '/../../models/Comment.php');
 try {
 
     $publications = Publication::getCrudPublications();
-    $comments = Comment::get();
+    $comments = Comment::getNoValidatedComments();
     // var_dump($publications, $comments);
 } catch (\Throwable $th) {
     $errorMsg = $th->getMessage();

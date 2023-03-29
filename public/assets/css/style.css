@@ -55,6 +55,12 @@ p {
     height: 15vh !important;
 }
 
+
+.commentsHour {
+    color: var(--button-bg-color) !important;
+    font-size: 0.7rem;
+}
+
 #message-text {
     background-color: #101010e6;
     color: #EDF7F6;

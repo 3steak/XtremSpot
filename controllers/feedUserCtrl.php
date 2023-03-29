@@ -20,8 +20,8 @@ $listTowns = Publication::getTowns();
 
 try {
     $publications = Publication::get();
-    $idPublication = 3;
-    $comments = Comment::get($idPublication);
+    $comments = Comment::getAll();
+    var_dump($comments);
 } catch (\Throwable $th) {
     //throw $th;
     $errorMsg = $th->getMessage();
@@ -65,11 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             if (!empty($idCategories)) {
                 $publications = Publication::getPublicationByCategory($idCategories);
+                $comments = Comment::getAll();
                 if (count($publications) <= 0) {
                     $error['void'] = '<small class="text-white mx-auto">Aucune publication est publiée pour ce sport</small>';
                 }
             } elseif (!empty($town)) {
                 $publications = Publication::get($town);
+                $comments = Comment::getAll();
             }
             include_once(__DIR__ . '/../views/templates/header.php');
             include(__DIR__ . '/../views/feedUser.php');
@@ -85,8 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include_once(__DIR__ . '/../views/feedUser.php');
     }
 } else {
-    // IF NO POST ( COMMENT OR FILTER)
-    //  faire get all 
+    // IF NO POST COMMENT OR FILTER)
+
 
     include_once(__DIR__ . '/../views/templates/header.php');
     include_once(__DIR__ . '/../views/feedUser.php');
