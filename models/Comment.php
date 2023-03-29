@@ -148,21 +148,21 @@ class Comment
     {
         if ($idPublication) {
             #return commentaires de la publication
-            $sql = 'SELECT `comments`.`id` as `commentId`, `description`, `comments`.`validated_at`, `comments`.`created_at`, `idUsers`, `idPublications`,`users`.`pseudo`,`users`.`avatar`,
+            $sql = 'SELECT `comments`.`id` as `commentId`, `description`, `comments`.`validated_at`, `comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`
             FROM `comments` 
             JOIN `users` ON `comments`.`idUsers` = `users`.`id`
-            WHERE (`validated_at` is not null) AND `idUsers` = :idPublication ;';
+            WHERE (`comments`.`validated_at` is not null) AND `idPublications` = :idPublication ;';
             $sth = Database::connect()->prepare($sql);
-            $sth->bindValue(':id', $idPublication, PDO::PARAM_INT);
+            $sth->bindValue(':idPublication', $idPublication, PDO::PARAM_INT);
         } else {
             #return commentaires non validés pour modération
-            $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`, `comments`.`created_at`, `comments`.`idUsers`, `idPublications`,`users`.`pseudo`,`users`.`avatar`,
+            $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`,`comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`,
                     `publications`.`title` AS `publicationTitle`, `publications`.`image_name` as `publicationImg` 
                     FROM `comments` 
                     JOIN `users` ON `comments`.`idUsers` = `users`.`id` 
                     JOIN `publications` ON `comments`.`idPublications` = `publications`.`id` 
                     WHERE (`comments`.`validated_at` is null) 
-                    ORDER BY `created_at` ASC;';
+                    ORDER BY `comments`.`created_at` ASC;';
             $sth = Database::connect()->prepare($sql);
         }
         $sth->execute();

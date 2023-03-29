@@ -160,7 +160,6 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                             </a>
                             <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
                             <a href="#" class="text-black ms-auto  me-2 fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
-
                         </div>
 
                         <div class="d-flex align-items-center ">
@@ -185,7 +184,7 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                             <div class="col-12 dropcenter dropup">
                                 <a href="#" class=" text-white text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-xl me-1"></i><span class="dNoneMobil">J'aime</span></a>
                                 <!-- Collapse for comments -->
-                                <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
+                                <a class="text-white text-decoration-none p-3" href="" data-bs-toggle="collapse" data-bs-target="#collapseComments">
                                     <i class="fa-solid fa-comment fa-xl me-1"></i><span class="dNoneMobil">Commenter</span>
                                 </a>
                                 <!-- BOUTON MAP -->
@@ -200,19 +199,14 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                         <!-- Collapse for comments -->
                         <div id="collapseComments" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <!-- Listes de commentaires -->
-                            <div class="commentsList px-3 py-1 overflow-auto">
+                            <div class="commentsList px-3 py-1 overflow-auto" id="commentaire">
                                 <div class="commentUser idX">
                                     <p class="userName fs-5">Pseudo</p>
                                     <p class="text-white fs-6">Lorem lorem lorem test</p>
                                     <hr>
                                 </div>
-                                <div class="commentUser idX">
-                                    <p class="userName fs-5">Pseudo</p>
-                                    <p class="text-white fs-6">Lorem lorem lorem test2</p>
-                                    <hr>
-                                </div>
                             </div>
-                            <form method="post">
+                            <form action="?id=commentaire" method="post" id="form">
                                 <div class="mb-2 px-3">
                                     <label for="comment" class="col-form-label">Ajouter un commentaire :</label>
                                     <textarea class="form-control" maxlength="500" name="comment" id="comment"></textarea required>

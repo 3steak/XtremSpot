@@ -8,6 +8,7 @@ require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../helpers/db.php');
 require_once(__DIR__ . '/../models/Category.php');
+require_once(__DIR__ . '/../models/Comment.php');
 require_once(__DIR__ . '/../models/Publication.php');
 $jsName = 'feedUserCtrl';
 
@@ -19,13 +20,14 @@ $listTowns = Publication::getTowns();
 
 try {
     $publications = Publication::get();
-    // $comments = Comment::get($idPublication);
+    $idPublication = 3;
+    $comments = Comment::get($idPublication);
 } catch (\Throwable $th) {
     //throw $th;
     $errorMsg = $th->getMessage();
     include_once(__DIR__ . '/../views/templates/header.php');
     include(__DIR__ . '/../views/error.php');
-    include_once(__DIR__ . '/../../views/templates/footer.php');
+    include_once(__DIR__ . '/../views/templates/footer.php');
     die;
 }
 

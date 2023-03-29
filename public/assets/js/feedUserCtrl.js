@@ -80,3 +80,77 @@ function descModal() {
 
 
 
+
+//  JQUERY LIVE SEARCH
+
+$(document).ready(function () {
+    $("#form").submit(function () {
+
+
+        // inputsearch
+        let input = $(this).val();
+        if (input != "") {
+
+            $.ajax({
+                url: "/../config/liveComment.php",
+                method: "POST",
+                data: { input: input },
+
+                success: function (data) {
+                    let html = `<table class="table table-bordered table-striped mt-4 neumorphic">
+                                    <thead>
+                                            <tr class="">
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>Date</th>
+                                                <th>Heure</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                    </thead>
+                                    <tbody>`
+
+                    if (data) {
+                        appointments = JSON.parse(data);
+
+                        jQuery.each(appointments, function (key, appointment) {
+                            let date = new Date(appointment.dateHour);
+                            let year = date.getFullYear();
+                            let month = date.getMonth() + 1;
+                            month = month < 10 ? '0' + month : month;
+                            let day = date.getDate();
+                            day = day < 10 ? '0' + day : day;
+
+                            let hour = date.getHours();
+                            let minute = date.getMinutes();
+                            minute = minute < 10 ? '0' + minute : minute;
+
+                            html += `
+                                   LE HTML SANS LE COMMENTAIRE
+                                    `
+                        })
+                        html += `</tbody>
+                                        </table >
+                                        <div class="modal fade" id="livesearchModal" tabindex="-1" aria-labelledby="validateModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="validateModalLabel">Suppression du rendez-vous</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    Supprimer le rendez-vous de <span class="fullname"></span> ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <a class="btn btn-primary" id="linkDelete" href="/DeleteAppointment?id=" role="button">Supprimer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                    }
+                    $('#searchresult').html(html);
+                }
+            });
+        }
+    })
+});

@@ -23,7 +23,7 @@
 
     <!--------------------- HEADER  --------------------------->
 
-    <header class="bg-dark bg-opacity-75">
+    <header class="bg-dark bg-opacity-75 mb-5">
         <nav class="navbar  navbar-dark ">
             <div class="container-fluid ">
                 <a class="navbar-brand " href="/controllers/feedUserCtrl.php"><img class="logoPrincipal" src="/public/assets/img/logo-light.png" alt="logo principal"></a>

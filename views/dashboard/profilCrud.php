@@ -95,7 +95,7 @@ if (isset($_SESSION['flash'])) {
         <!-- BANNIERE -->
         <div class="row  p-2 my-2 profilUserBanniere rounded-top ">
             <div class="col-2 col-lg-4  text-end">
-                <a href="profilUser.html"> <img src="/public/assets/img/photoProfilUser.png" alt="photo user profil">
+                <a href="profilUser.html"> <img src="/public/assets/uploads/photoProfil/<?= $profilUser->avatar ?>" alt="photo user profil">
                 </a>
             </div>
             <div class="col-10 col-lg-8 d-flex text-center align-items-center">

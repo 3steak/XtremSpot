@@ -5,11 +5,13 @@ require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Publication.php');
 require_once(__DIR__ . '/../vendor/autoload.php');
-require_once(__DIR__ . '/../session.php');
 
 
 if ($_SESSION['loggedIn'] != true) {
     header('location: /controllers/homeCtrl.php');
+} else {
+    // SET idUser WITH $_SESSION
+    $idUser = $_SESSION['user']->id;
 }
 
 use GuzzleHttp\Client;
@@ -26,14 +28,13 @@ $listCategory = Category::get();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // ID DANS SESSION.PHP
+    // ID DANS SESSION
     // ----------------- CONTROL ID USER -----------------------
 
 
-    // $idUsers = trim(filter_input(INPUT_POST, 'idUsers', FILTER_SANITIZE_NUMBER_INT));
-    // if (empty($idUsers) || $idUsers == '') {
-    //     $error['idUsers'] = '<small class="text-black"> Vous devez être connecté pour publier du contenu.</small>';
-    // }
+    if (empty($idUsers) || $idUsers == '') {
+        $error['idUsers'] = '<small class="text-black"> Vous devez être connecté pour publier du contenu.</small>';
+    }
 
 
     // ----------------- CONTROL INPUT FILE-----------------------
@@ -57,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $error['file'] = '<small class="text-white">Fichier non renseigné</small>';
     }
-    // mettre dans try catch
 
 
 
@@ -80,17 +80,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // j'envoie la requete vers url de l'api 
     $client = new GuzzleHttp\Client(['base_uri' => API_URL]);
 
-    // Je recupère les données renvoyés par l'API et le json decode et obtient un Array
+    // Je recupère les données renvoyés par l'API et le json_decode et obtient un Array
     $response = $client->request('GET', 'communes?nom=' . $town . '&fields=nom&format=json');
 
     $response = json_decode($response->getBody()->getContents());
 
     $towns = [];
 
+    // j'envoi chaque réponse de l'api au format string dans le tableau towns
     foreach ($response as $resp) {
         array_push($towns, $resp->nom);
     }
 
+    // je contrôle dans le tableau town contenant les résultats de l'api si la ville envoyé dans le post s'y trouve
     if (!in_array($town, $towns)) {
         $error["town"] = "<small class='text-white'>Veuillez rentrer un nom de ville existant</small>";
     }
@@ -114,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //  --------------- CONTROL MARKERS ------------------------------------------------------
     // je recup latlng dans input hidden
-
 
     $coordinates = trim((string) filter_input(INPUT_POST, 'latlng', FILTER_SANITIZE_SPECIAL_CHARS));
 
@@ -161,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include_once(__DIR__ . '/../views/templates/footer.php');
             die;
         }
-        // Redirige vers son profil avec passage de valeur en URL pour message si publi envoyé
+        // Redirige vers son profil avec passage de valeur en URL pour message si publication envoyé
 
 
     } else {
