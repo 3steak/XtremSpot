@@ -189,9 +189,8 @@ class Comment
 
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
-        $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
+        $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         $sth->bindValue(':description', $this->description, PDO::PARAM_STR);
-
         $sth->execute();
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;

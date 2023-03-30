@@ -116,7 +116,7 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                             <?= $error['category'] ?? '' ?>
                         </div>
                         <div class=" align-self-center align-self-lg-end">
-                            <a class="btn btn-dark btn-filter " href="/controllers/feedUserCtrl.php" role="button">Reset</a>
+                            <a class="btn btn-dark btn-filter text-white " href="/controllers/feedUserCtrl.php" role="button">Reset</a>
                         </div>
                         <div class=" mx-auto">
                             <p class="text-white mb-2">Lieux</p>
@@ -168,7 +168,7 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                         <div class="d-flex  justify-content-between align-items-center ">
                             <p class="contentUserDescprition"><?= htmlentities($publication->title) ?></p>
                             <!--  BOUTON OPTION -->
-                            <a href="" class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
                             </a>
                             <!-- dropdown menu  -->
@@ -182,9 +182,10 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                     <div class=" d-flex flex-column justify-content-end ">
                         <div class="row banniereLike  p-2 ">
                             <div class="col-12 dropcenter dropup">
-                                <a href="#" class=" text-white text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-xl me-1"></i><span class="dNoneMobil">J'aime</span></a>
+                                <!-- BUTTON LIKE  -->
+                                <i class="fa-solid fa-thumbs-up fa-xl me-1 text-white like-btn" data-publication-id=<?= htmlentities($publication->id) ?>></i><span class="countLike"><?= htmlentities($publication->likes) ?> </span> <span class="dNoneMobil text-white">J'aime</span>
                                 <!-- BUTTON FOR COLLAPSE OF COMMENTS -->
-                                <a class="text-white text-decoration-none p-3" href="" data-bs-toggle="collapse" data-bs-target="#collapseComments<?= $key ?>">
+                                <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments<?= $key ?>">
                                     <i class="fa-solid fa-comment fa-xl me-1"></i><span class="dNoneMobil">Commenter</span>
                                 </a>
                                 <!-- BOUTON MAP -->

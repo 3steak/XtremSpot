@@ -8,52 +8,44 @@ if ($_SESSION['loggedIn'] != true) {
 }
 require_once(__DIR__ . '/../helpers/db.php');
 require_once(__DIR__ . '/../models/Comment.php');
-var_dump($_POST);
-die;
-if (!empty($_POST['description']) && !empty($_POST['idPublications'])) {
+
+
+if (!empty($_POST['description']) && !empty($_POST['idPublication'])) {
 
     //  FILTRE COMMENTAIRE ET IDS
 
-    $idPublications = intval(filter_input(INPUT_POST, 'idPublications', FILTER_SANITIZE_NUMBER_INT));
+    $idPublications = intval(filter_input(INPUT_POST, 'idPublication', FILTER_SANITIZE_NUMBER_INT));
 
     $description = trim((string) filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS));
-
-
-
-    // DISPLAY ERROR IF EMPTY COMMENT
-    if (!empty($_POST['comment'])) {
-        $comment = trim((string) filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS));
-        if (empty($comment)) {
-            $error["comment"] = '<small class="text-white mx-auto">Veuillez renseigner un commentaire</small>';
-        }
+    if (empty($description)) {
+        $error["comment"] = '<small class="text-white mx-auto">Veuillez renseigner un commentaire</small>';
     }
+
 
     if (empty($error)) {
         try {
             $comment = new Comment;
             $comment->setDescription($description);
             $comment->setIdPublications($idPublications);
-            $comment->setIdUsers($idUsers);
+            $comment->setIdUsers($idUser);
 
             $result = $comment->addComments();
+            var_dump($result);
+            die;
             if (!$result) {
                 throw new Exception("Commentaire non ajouté", 1);
                 die;
             }
         } catch (\Throwable $th) {
-            $errorMsg = $th->getMessage();
-            include_once(__DIR__ . '/../views/templates/header.php');
-            include(__DIR__ . '/../../views/errors.php');
-            include_once(__DIR__ . '/../views/templates/footer.php');
+
+            var_dump($errorMsg = $th->getMessage());
             die;
         }
     } else {
-        include_once(__DIR__ . '/../views/templates/header.php');
-        include(__DIR__ . '/../views/feedUser.php');
+        var_dump($error);
+        die;
     }
 } else {
-    include_once(__DIR__ . '/../views/templates/header.php');
-    include(__DIR__ . '/../views/feedUser.php');
+    var_dump('nopost');
+    die;
 }
-
-include_once(__DIR__ . '/../views/templates/footer.php');

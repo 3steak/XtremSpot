@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 28, 2023 at 08:35 PM
+-- Generation Time: Mar 30, 2023 at 10:50 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -68,7 +68,10 @@ INSERT INTO `comments` (`id`, `description`, `validated_at`, `created_at`, `dele
 (2, 'OUI', NULL, '2023-03-07 12:25:50', NULL, 2, 4),
 (3, 'dingue', NULL, '2023-03-07 12:26:37', NULL, 1, 3),
 (4, 'EZ', NULL, '2023-03-07 15:19:30', NULL, 1, 4),
-(5, 'damn', '2023-03-14 16:27:33', '2023-03-14 16:28:18', NULL, 3, 3);
+(5, 'damn', '2023-03-14 16:27:33', '2023-03-14 16:28:18', NULL, 3, 3),
+(6, 'Incroyable ! ', '2023-03-07 12:21:58', '2023-03-29 21:47:23', NULL, 6, 8),
+(7, 'Commentaire sur image name', '2023-03-29 20:09:53', '2023-03-29 22:09:27', NULL, 4, 6),
+(8, 'oui', '2023-03-30 19:44:40', '2023-03-30 21:39:59', NULL, 6, 7);
 
 -- --------------------------------------------------------
 
@@ -110,7 +113,7 @@ CREATE TABLE `publications` (
   `validated_at` datetime DEFAULT NULL,
   `town` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `report` tinyint(1) DEFAULT NULL,
-  `likes` smallint DEFAULT NULL,
+  `likes` smallint DEFAULT '0',
   `idCategories` int DEFAULT NULL,
   `idUsers` int NOT NULL,
   `image_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
@@ -121,12 +124,12 @@ CREATE TABLE `publications` (
 --
 
 INSERT INTO `publications` (`id`, `title`, `description`, `deleted_at`, `created_at`, `marker_longitude`, `marker_latitude`, `validated_at`, `town`, `report`, `likes`, `idCategories`, `idUsers`, `image_name`) VALUES
-(3, 'Superbe spot gngngn', 'Spot rocheux !', NULL, '2023-03-04 12:28:01', '1.3833300', '50.0660720', NULL, 'Le Tréport', NULL, NULL, 4, 1, ''),
-(4, 'Skatepark bien null ', 'une rape a fromage le truc ! ', NULL, '2023-03-04 12:28:01', '2.0810700', '50.0148960', NULL, 'Flixecourt', NULL, NULL, 1, 2, ''),
-(5, 'premiere publication poster en DB', 'FAIT CHIER', NULL, '2023-03-13 12:01:41', '-1.2495090', '44.4745110', '2023-03-15 22:01:14', 'Mont-de-Marsan', NULL, NULL, 3, 3, 'img_640f029599138.3.png'),
-(6, 'Test image name', 'Ceci est un test pour les beaux chiens', NULL, '2023-03-13 16:51:40', '-1.7555490', '48.1160300', '2023-03-19 10:18:10', 'Rennes', NULL, NULL, 3, 3, 'img_640f468c890bc.3.png'),
-(7, 'BMX Sunset', 'test BMX sunset', NULL, '2023-03-13 20:35:31', '1.3862530', '50.0657660', '2023-03-08 16:55:58', 'Le Tréport', NULL, NULL, 3, 3, 'img_640f7b032e357.3.jpg'),
-(8, 'Session bowl avé les copaings', 'test du bowl du prado !', NULL, '2023-03-20 12:32:41', '5.3744280', '43.2519000', '2023-03-20 11:37:23', 'Marseille', NULL, NULL, 2, 4, 'img_64184459cc57b.4.jpg');
+(3, 'Superbe spot gngngn', 'Spot rocheux !', NULL, '2023-03-04 12:28:01', '1.3833300', '50.0660720', NULL, 'Le Tréport', NULL, 0, 4, 1, ''),
+(4, 'Skatepark bien null ', 'une rape a fromage le truc ! ', NULL, '2023-03-04 12:28:01', '2.0810700', '50.0148960', NULL, 'Flixecourt', NULL, 0, 1, 2, ''),
+(5, 'premiere publication poster en DB', 'FAIT CHIER', NULL, '2023-03-13 12:01:41', '-1.2495090', '44.4745110', '2023-03-15 22:01:14', 'Mont-de-Marsan', NULL, 3, 3, 3, 'img_640f029599138.3.png'),
+(6, 'Test image name', 'Ceci est un test pour les beaux chiens', NULL, '2023-03-13 16:51:40', '-1.7555490', '48.1160300', '2023-03-19 10:18:10', 'Rennes', NULL, 6, 3, 3, 'img_640f468c890bc.3.png'),
+(7, 'BMX Sunset', 'test BMX sunset', NULL, '2023-03-13 20:35:31', '1.3862530', '50.0657660', '2023-03-08 16:55:58', 'Le Tréport', NULL, 4, 3, 3, 'img_640f7b032e357.3.jpg'),
+(8, 'Session bowl avé les copaings', 'test du bowl du prado !', NULL, '2023-03-20 12:32:41', '5.3744280', '43.2519000', '2023-03-20 11:37:23', 'Marseille', NULL, 11, 2, 4, 'img_64184459cc57b.4.jpg');
 
 -- --------------------------------------------------------
 
@@ -159,7 +162,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `pseudo`, `avatar`, `passwor
 (2, 'Aqueuse', 'Cat', 'Acqueuse', 'avatar_0.png', 'IOIOIOIO', 'aqueuse@gmail.com', '2023-03-04 12:27:00', NULL, NULL, NULL, 0, 1),
 (3, 'Sakai', 'Asinbit', 'Sakai', 'avatar_0.png', 'ouioui', 'sakaiasinbit@gmail.com', '2023-03-04 12:27:45', '2023-03-28 22:29:48', NULL, NULL, 1, 2),
 (4, 'Armi', 'Niusnius', 'Arminius', 'avatar_4.png', '$2y$10$6CLksHXjL.wqP6d2reXTzecRsakvdxCiYxhbYnwaEb/07/sXdfpa.', 'Arminius30000@gmail.com', '2023-03-13 22:11:21', NULL, NULL, NULL, 0, 5),
-(6, 'Florian', 'Billault', 'Flo', 'avatar_0.png', '$2y$10$7pBIDSr7iadJ9FKUB6A8tO8ceFjW0KaOR807iWcM7vGhl0.mPNINi', 'florianbillault@gmail.com', '2023-03-28 15:43:37', '2023-03-28 22:31:27', '2023-03-28 15:47:37', NULL, 0, 5);
+(6, 'Florian', 'Billault', 'Flo', 'avatar_0.png', '$2y$10$7pBIDSr7iadJ9FKUB6A8tO8ceFjW0KaOR807iWcM7vGhl0.mPNINi', 'florianbillault@gmail.com', '2023-03-28 15:43:37', '2023-03-29 21:28:14', '2023-03-28 15:47:37', NULL, 1, 5);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +219,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `favorites`

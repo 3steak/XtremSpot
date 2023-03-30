@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             } elseif (!empty($town)) {
                 $publications = Publication::get($town);
+
                 $comments = Comment::getAll();
             }
             include_once(__DIR__ . '/../views/templates/header.php');

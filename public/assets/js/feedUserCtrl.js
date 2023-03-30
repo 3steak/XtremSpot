@@ -80,7 +80,7 @@ function descModal() {
 
 
 
-//  JQUERY LIVE SEARCH
+// ------- LIVE COMMENT--------------------
 
 $(document).ready(function () {
     let submits = document.querySelectorAll('.submitButton');
@@ -99,7 +99,6 @@ $(document).ready(function () {
                 });
             }
 
-
             // vider le textaera
 
             document.querySelector(`#comment${submit.id}`).value = "COMMENTAIRE ENVOYE ";
@@ -108,14 +107,34 @@ $(document).ready(function () {
                 document.querySelector(`#comment${submit.id}`).value = "";
                 document.querySelector(`.accordion-collapse${submit.id}`).classList.remove('show');
             }, "500")
-
             // fermer le collapse
         })
     }
 
+    // ------- LIVE LIKES --------------------
 
-
-
+    document.querySelectorAll('.like-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            //Récupération de l'identifiant de la publication
+            let publicationId = btn.dataset.publicationId;
+            if (publicationId != "") {
+                $.ajax({
+                    url: "/config/liveLike.php",
+                    method: "GET",
+                    data: "publicationId=" + publicationId,
+                    success: function () {
+                        let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
+                        // string to int
+                        let likesCount = parseInt(countLikeBefore[0].innerText);
+                        // incrémentation
+                        countLikeBefore[0].innerText = likesCount + 1;
+                    }
+                });
+            }
+        });
+    });
 
 
 });
+
+

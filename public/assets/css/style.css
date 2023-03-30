@@ -72,6 +72,13 @@ p {
     border-radius: 5px 5px 0 0;
 }
 
+/* BOUTON LIKE */
+.fa-thumbs-up {
+    cursor: pointer;
+}
+
+
+
 /* Collapse for comments */
 .commentsList {
     height: 40vh !important;

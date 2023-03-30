@@ -413,6 +413,15 @@ class Publication
         return ($result > 0) ? true : false;
     }
 
+    public function addLikes(): bool
+    {
+        $sql = 'UPDATE `publications` SET `publications`.`likes` = likes + 1 WHERE `publications`.`id` = :idPublication;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':idPublication', $this->id, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
 
 
     /** Allows to delete publication by id
