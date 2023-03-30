@@ -21,7 +21,6 @@ $listTowns = Publication::getTowns();
 try {
     $publications = Publication::get();
     $comments = Comment::getAll();
-    var_dump($comments);
 } catch (\Throwable $th) {
     //throw $th;
     $errorMsg = $th->getMessage();

@@ -148,14 +148,15 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
     <div class="container cardUserContent">
         <div class="row">
             <?= $error['void'] ?? '' ?>
-            <?php foreach ($publications as $publication) { ?>
+            <?php
+            foreach ($publications as $key => $publication) { ?>
 
 
                 <div class="card text-bg-dark my-2 mb-5 col-lg-8 mx-auto">
                     <div class="col-12 p-2">
                         <div class="d-flex align-items-center ">
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $publication->avatar ?>" alt="photo profil utilisateur"></a>
-                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
+                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 fs-2">
                                 <?= htmlentities($publication->pseudo) ?>
                             </a>
                             <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
@@ -163,7 +164,7 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                         </div>
 
                         <div class="d-flex align-items-center ">
-                            <small><?= $publication->town ?></small>
+                            <small class="text-white"><i class="fa-solid fa-signs-post"></i> <?= $publication->town ?></small>
                         </div>
                         <div class="d-flex  justify-content-between align-items-center ">
                             <p class="contentUserDescprition"><?= htmlentities($publication->title) ?></p>
@@ -183,8 +184,8 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                         <div class="row banniereLike  p-2 ">
                             <div class="col-12 dropcenter dropup">
                                 <a href="#" class=" text-white text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-xl me-1"></i><span class="dNoneMobil">J'aime</span></a>
-                                <!-- Collapse for comments -->
-                                <a class="text-white text-decoration-none p-3" href="" data-bs-toggle="collapse" data-bs-target="#collapseComments">
+                                <!-- BUTTON FOR COLLAPSE OF COMMENTS -->
+                                <a class="text-white text-decoration-none p-3" href="" data-bs-toggle="collapse" data-bs-target="#collapseComments<?= $key ?>">
                                     <i class="fa-solid fa-comment fa-xl me-1"></i><span class="dNoneMobil">Commenter</span>
                                 </a>
                                 <!-- BOUTON MAP -->
@@ -196,7 +197,7 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                             </div>
                         </div>
                         <!-- Collapse for comments -->
-                        <div id="collapseComments" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div id="collapseComments<?= $key ?>" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne">
                             <!-- Listes de commentaires -->
                             <div class="commentsList px-3 py-1 overflow-auto">
                                 <?php foreach ($comments as $comment) {

@@ -107,8 +107,6 @@ if (isset($_SESSION['flash'])) {
         <div class="container my-3 cardUserContent col-lg-6 ">
 
             <div class="row">
-                <!-- IMG CARD -->
-
                 <?php
                 if (empty($publications)) { ?>
                     <div class="card text-bg-dark my-5 p-5 ">
@@ -165,18 +163,22 @@ if (isset($_SESSION['flash'])) {
                             <div id="collapseComments" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <!-- Listes de commentaires -->
                                 <div class="commentsList px-3 py-1 overflow-auto">
-                                    <div class="commentUser idX">
-                                        <p class="userName fs-5">Pseudo</p>
-                                        <p class="text-white fs-6">Lorem lorem lorem test</p>
-                                        <hr>
-                                    </div>
-                                    <div class="commentUser idX">
-                                        <p class="userName fs-5">Pseudo</p>
-                                        <p class="text-white fs-6">Lorem lorem lorem test2</p>
-                                        <hr>
-                                    </div>
+                                    <?php foreach ($comments as $comment) {
+                                        if ($comment->idPublications == $publication->id) { ?>
+                                            <div class="commentUser p-2">
+                                                <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $comment->avatar ?>" alt="photo profil utilisateur"></a>
+                                                <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
+                                                    <?= htmlentities($comment->pseudo) ?>
+                                                </a><br>
+                                                <small class=" commentsHour mt-4 ms-4">Publié le : <?= htmlentities(date('d/m/Y', strtotime($comment->created_at))) ?> à <?= htmlentities(date('H', strtotime($comment->created_at))) ?>h</small>
+                                                <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+                                                <hr>
+                                            </div>
+                                    <?php
+                                        }
+                                    } ?>
                                 </div>
-                                <form method="post">
+                                <form action="?id=commentaire" method="post" id="form">
                                     <div class="mb-2 px-3">
                                         <label for="comment" class="col-form-label">Ajouter un commentaire :</label>
                                         <textarea class="form-control" maxlength="500" name="comment" id="comment"></textarea required>

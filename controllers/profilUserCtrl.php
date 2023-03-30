@@ -24,6 +24,8 @@ try {
     }
     $profilUser = User::get($idUser);
     $publications = Publication::getUserPublication($idUser);
+    $comments = Comment::getAll();
+
     //  Si profilUser return false
     if (!$profilUser) {
         throw new Exception('Id non valide', 1);

@@ -105,7 +105,7 @@
                                            <div class="list-group-item d-flex align-items-center ">
                                                Commentaire de la publication : <?= $comment->publicationTitle ?>
                                            </div>
-                                           <div> <img src="/public/assets/uploads/newPicture/<?= $comment->publicationImg ?>" alt="<?= $comment->publicationTitle ?>">
+                                           <div><img class="img-fluid" src="/public/assets/uploads/newPicture/<?= $comment->publicationImg ?>" alt="<?= $comment->publicationTitle ?>">
                                            </div>
 
                                        </div>
