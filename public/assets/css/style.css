@@ -48,9 +48,11 @@ p {
 }
 
 /* css feed user */
-.miniProfilUser {
+.miniProfilUser,
+.miniProfilUserComment {
     width: 4vw;
 }
+
 
 .feedUser h2 {
     font-size: 1rem;
@@ -72,9 +74,12 @@ p {
 
 /* Collapse for comments */
 .commentsList {
-    height: 15vh !important;
+    height: 40vh !important;
 }
 
+.commentsList::-webkit-scrollbar {
+    display: none;
+}
 
 .commentsHour {
     color: var(--button-bg-color) !important;

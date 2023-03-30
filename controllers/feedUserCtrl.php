@@ -51,13 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error["town"] = "<small class='text-white'>Veuillez selectionner une ville !</small>";
         }
     }
-    if (!empty($_POST['comment'])) {
-        $comment = trim((string) filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS));
-        if (empty($comment)) {
-            // $error["comment"] = '<small class="text-white mx-auto">Veuillez renseigner un commentaire</small>';
-            flash('commentEmpty', 'Commentaire vide !', FLASH_WARNING);
-        }
-    }
+
     // IF NO ERRRROOOR 
     if (empty($error)) {
 

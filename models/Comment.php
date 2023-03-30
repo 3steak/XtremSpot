@@ -26,7 +26,7 @@ class Comment
      * @param  mixed $description
      * @return void
      */
-    public function setdescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }

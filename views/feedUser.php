@@ -1,8 +1,7 @@
 <!--------- MAIN -------->
 <?php
 
-flash('commentEmpty');
-if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
+if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
     flash('register');
 }
 ?>
@@ -197,13 +196,13 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                             </div>
                         </div>
                         <!-- Collapse for comments -->
-                        <div id="collapseComments<?= $key ?>" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne">
+                        <div id="collapseComments<?= $key ?>" class="accordion-collapse<?= $publication->id ?> collapse mt-1 rounded-2" aria-labelledby="headingOne">
                             <!-- Listes de commentaires -->
                             <div class="commentsList px-3 py-1 overflow-auto">
                                 <?php foreach ($comments as $comment) {
                                     if ($comment->idPublications == $publication->id) { ?>
                                         <div class="commentUser p-2">
-                                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $comment->avatar ?>" alt="photo profil utilisateur"></a>
+                                            <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUserComment my-auto" src="/public/assets/uploads/photoProfil/<?= $comment->avatar ?>" alt="photo profil utilisateur"></a>
                                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
                                                 <?= htmlentities($comment->pseudo) ?>
                                             </a><br>
@@ -215,15 +214,18 @@ if (!empty($_GET) && $_GET['register'] == 'bienvenue') {
                                     }
                                 } ?>
                             </div>
-                            <form action="?id=commentaire" method="post" id="form">
+                            <form id="form" method="post">
                                 <div class="mb-2 px-3">
+                                    <!-- INPUT HIDDEN  FOR IDPUBLICATION -->
+                                    <input type="hidden" name="idPublications" class="idPublications" id="idPublications<?= $publication->id ?>" value="<?= $publication->id ?>" />
+
                                     <label for="comment" class="col-form-label">Ajouter un commentaire :</label>
-                                    <textarea class="form-control" maxlength="500" name="comment" id="comment" placeholder="Ton commentaire sera envoyé en modération avant d'être publié !"></textarea required>
+                                    <textarea class="form-control" maxlength="500" name="comment" id="comment<?= $publication->id ?>" placeholder="Ton commentaire sera envoyé en modération avant d'être publié !"></textarea required>
                                 </div>
                                 <?= $error['comment'] ?? '' ?>
                             
                                 <div class="d-flex justify-content-center pb-2">
-                                    <button type="submit" class="btn border border-ligth btn-dark ">Commenter</button>
+                                    <input type="sumbit" id="<?= $publication->id ?>" class="btn border border-ligth btn-dark submitButton" value="Commenter">
                                 </div>
                             </form>
                                 
