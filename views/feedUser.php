@@ -225,6 +225,7 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                                 <?= $error['comment'] ?? '' ?>
                             
                                 <div class="d-flex justify-content-center pb-2">
+                                    <!-- test -->
                                     <button type="button" id="<?= $publication->id ?>" class="btn border border-ligth btn-dark submitButton" value="Commenter">Commenter</button>
                                 </div>
                             </form>
