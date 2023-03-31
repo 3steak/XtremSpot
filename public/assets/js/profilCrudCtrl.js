@@ -136,3 +136,61 @@ button.addEventListener('click', (event) => {
     }
 });
 
+
+
+// ------- LIVE COMMENT--------------------
+
+$(document).ready(function () {
+    let submits = document.querySelectorAll('.submitButton');
+    for (let submit of submits) {
+        // je recupere l'id dans le submit (submit.id)
+        submit.addEventListener('click', () => {
+            // PostComment
+            //  `#idPublications${id}` pour récupérer id dans submit 
+            let idPublications = document.querySelector(`#idPublications${submit.id}`).value;
+            let description = document.querySelector(`#comment${submit.id}`).value;
+            if (description != "" && idPublications != "") {
+                $.ajax({
+                    url: "/config/liveComment.php",
+                    method: "POST",
+                    data: "idPublication=" + idPublications + "&description=" + description
+                });
+            }
+
+            // vider le textaera
+
+            document.querySelector(`#comment${submit.id}`).value = "COMMENTAIRE ENVOYE ";
+
+            setTimeout(() => {
+                document.querySelector(`#comment${submit.id}`).value = "";
+                document.querySelector(`.accordion-collapse${submit.id}`).classList.remove('show');
+            }, "500")
+            // fermer le collapse
+        })
+    }
+
+    // ------- LIVE LIKES --------------------
+
+    document.querySelectorAll('.like-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            //Récupération de l'identifiant de la publication
+            let publicationId = btn.dataset.publicationId;
+            if (publicationId != "") {
+                $.ajax({
+                    url: "/config/liveLike.php",
+                    method: "GET",
+                    data: "publicationId=" + publicationId,
+                    success: function () {
+                        let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
+                        // string to int
+                        let likesCount = parseInt(countLikeBefore[0].innerText);
+                        // incrémentation
+                        countLikeBefore[0].innerText = likesCount + 1;
+                    }
+                });
+            }
+        });
+    });
+
+
+});

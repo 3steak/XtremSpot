@@ -7,6 +7,7 @@
                <div class="col-12 m-4">
                    <h1 class="text-white text-center">Nouvelle publication</h1>
                </div>
+               <?= $error['idUsers'] ?? '' ?>
 
                <div class="col-8  card bg-dark p-4 m-2">
                    <!------------------   FORM  ---------------->

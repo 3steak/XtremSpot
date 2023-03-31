@@ -27,6 +27,9 @@ define('AUTHORIZED_IMAGE_FORMAT', ['image/jpeg', 'image/png']);
 // EXTENSION
 define('EXTENSION', ['image/jpeg', 'image/png']);
 
+// POIDS 
+define('MAX_FILESIZE', 15728640);
+
 // ZIPCODE
 define('REGEX_ZIPCODE', '^[0-9]{5}$');
 

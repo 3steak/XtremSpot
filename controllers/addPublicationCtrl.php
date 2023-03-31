@@ -11,7 +11,7 @@ if ($_SESSION['loggedIn'] != true) {
     header('location: /controllers/homeCtrl.php');
 } else {
     // SET idUser WITH $_SESSION
-    $idUser = $_SESSION['user']->id;
+    $idUsers = $_SESSION['user']->id;
 }
 
 use GuzzleHttp\Client;
@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!in_array($inputGroupFile['type'], AUTHORIZED_IMAGE_FORMAT)) {
                 $error['type'] = '<small class="text-white">Fichier non valide</small>';
             }
-            $maxSize = 15728640; //15mb
-            if ($_FILES['inputGroupFile']['size'] > $maxSize) {
+
+            if ($_FILES['inputGroupFile']['size'] > MAX_FILESIZE) {
                 $error['type'] = '<small class="text-white">Fichier trop volumineux</small>';
             }
         }
@@ -126,13 +126,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $marker_latitude = $markers[1];
     $marker_longitude = $markers[2];
 
+
     if (empty($error)) {
         try {
             $extension = pathinfo($inputGroupFile['name'], PATHINFO_EXTENSION);
             $from = $inputGroupFile['tmp_name'];
             $image_name = uniqid('img_') . '.' . $idUsers . '.' . $extension;
             $to = __DIR__ . '/../public/assets/uploads/newPicture/' . $image_name;
+            //  tester le type avant gd_original
+
             $move = move_uploaded_file($from, $to);
+
+            if ($extension == 'png') {
+                $gd_original = imagecreatefrompng($to);
+                $gd_scaled = imagescale($gd_original, 500, -1, IMG_BICUBIC);
+                imagepng($gd_scaled, $to, 100);
+            } else {
+                $gd_original = imagecreatefromjpeg($to);
+                $gd_scaled = imagescale($gd_original, 500, -1, IMG_BICUBIC);
+                imagejpeg($gd_scaled, $to, 100);
+            }
+            // RETIRER EXTENSION POUR AJOUTER à $to .webp
             if (!$move) {
                 throw new Exception("Image non envoyé", 1);
                 die;

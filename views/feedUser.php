@@ -183,7 +183,7 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                         <div class="row banniereLike  p-2 ">
                             <div class="col-12 dropcenter dropup">
                                 <!-- BUTTON LIKE  -->
-                                <i class="fa-solid fa-thumbs-up fa-xl me-1 text-white like-btn" data-publication-id=<?= htmlentities($publication->id) ?>></i><span class="countLike"><?= htmlentities($publication->likes) ?> </span> <span class="dNoneMobil text-white">J'aime</span>
+                                <i class="fa-solid fa-thumbs-up fa-xl me-1 text-white like-btn" data-publication-id=<?= htmlentities($publication->id) ?>></i><span class="countLike"><?= htmlentities($publication->likes) ?> </span> <span class="dNoneMobil text-white"> J'aime</span>
                                 <!-- BUTTON FOR COLLAPSE OF COMMENTS -->
                                 <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments<?= $key ?>">
                                     <i class="fa-solid fa-comment fa-xl me-1"></i><span class="dNoneMobil">Commenter</span>

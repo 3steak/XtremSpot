@@ -145,8 +145,8 @@ if (isset($_SESSION['flash'])) {
                         <div class=" d-flex flex-column justify-content-end ">
                             <div class="row banniereLike p-2 ">
                                 <div class="col-12 dropcenter dropup d-flex align-items-center">
-                                    <a href="#" class=" text-white text-decoration-none p-3"><i class="fa-solid fa-thumbs-up fa-xl"></i>
-                                    </a>
+                                    <!-- BUTTON  LIKE -->
+                                    <i class="fa-solid fa-thumbs-up fa-xl me-1 text-white like-btn" data-publication-id=<?= htmlentities($publication->id) ?>></i><span class="countLike"><?= htmlentities($publication->likes) ?> </span> <span class="dNoneMobil text-white ms-1"> J'aime</span>
                                     <!-- Collapse for comments -->
                                     <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
                                         <i class="fa-solid fa-comment fa-xl"></i>
@@ -178,17 +178,21 @@ if (isset($_SESSION['flash'])) {
                                         }
                                     } ?>
                                 </div>
-                                <form action="?id=commentaire" method="post" id="form">
+                                <form id="form" method="post">
                                     <div class="mb-2 px-3">
+                                        <!-- INPUT HIDDEN  FOR IDPUBLICATION -->
+                                        <input type="hidden" name="idPublications" class="idPublications" id="idPublications<?= $publication->id ?>" value="<?= $publication->id ?>" />
+
                                         <label for="comment" class="col-form-label">Ajouter un commentaire :</label>
-                                        <textarea class="form-control" maxlength="500" name="comment" id="comment"></textarea required>
-                                    </div>
+                                        <textarea class="form-control" maxlength="500" name="comment" id="comment<?= $publication->id ?>" placeholder="Ton commentaire sera envoyé en modération avant d'être publié !"></textarea required>
+                                </div>
                                 <?= $error['comment'] ?? '' ?>
                             
                                 <div class="d-flex justify-content-center pb-2">
-                                    <button type="submit" class="btn border border-ligth btn-dark ">Commenter</button>
+                                    <!-- test -->
+                                    <button type="button" id="<?= $publication->id ?>" class="btn border border-ligth btn-dark submitButton" value="Commenter">Commenter</button>
                                 </div>
-                                </form>
+                            </form>
                             </div>
                         </div>
                     </div>
