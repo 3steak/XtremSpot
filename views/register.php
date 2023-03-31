@@ -61,10 +61,10 @@
                               <?= $error['confirmPassword'] ?? '' ?>
 
                               <div class="col-12 py-3  d-flex justify-content-center">
-                                  <button type="submit" id="register" class="btn btn-dark px-5 w-75">S'inscrire</button>
+                                  <button type="submit" id="register" class="btn btn-dark px-5 w-75 text-white">S'inscrire</button>
                               </div>
                               <div class="col-12 py-4 d-flex justify-content-end">
-                                  <a class="btn btn-sm btn-dark px-5 mt-2" id="connexion" type="submit" href="/controllers/homeCtrl.php" role="button">Se connecter</a>
+                                  <a class="btn btn-sm btn-dark px-5 mt-2 text-white" id="connexion" type="submit" href="/controllers/homeCtrl.php" role="button">Se connecter</a>
                               </div>
                           </div>
                   </form>

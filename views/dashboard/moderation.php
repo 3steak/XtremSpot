@@ -57,15 +57,15 @@
                                <div class="card col-lg-5 d-flex mx-auto  text-bg-dark pb-3 m-2">
                                    <div class="col-12 p-2 ">
                                        <div class="list-group-item d-flex align-items-center ">
-                                           <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto " src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
+                                           <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto " src="/public/assets/uploads/photoProfil/<?= $publication->avatar ?>" alt="photo profil utilisateur">
                                                <a href="#" class="text-decoration-none text-white p-2 ">
                                                    <?= htmlspecialchars($publication->pseudo) ?>
                                                </a>
                                        </div>
                                        <div>
                                            <p> Crée le <?= htmlspecialchars(date('d/m/Y H:i', strtotime($publication->created_at))) ?></p>
-                                           <p><?= htmlspecialchars($publication->title) ?></p>
-                                           <p><?= htmlentities($publication->description) ?></p>
+                                           <p><?= $publication->title ?></p>
+                                           <p><?= $publication->description ?></p>
                                        </div>
                                    </div>
                                    <img src="/public/assets/uploads/newPicture/<?= $publication->image_name ?>" class="card-img" alt="<?= $publication->title ?>">
@@ -88,8 +88,8 @@
                                    <div class="row justify-content-around">
                                        <div class="col-4 p-2 ">
                                            <div class="list-group-item d-flex align-items-center ">
-                                               <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/img/miniProfilUser.png" alt="photo profil utilisateur">
-                                                   <a href="#" class="text-decoration-none text-white p-2 ">
+                                               <a href="profilUser.html"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $comment->avatar ?>" alt="photo profil utilisateur">
+                                                   <a href="/../../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" class="text-decoration-none text-white p-2 ">
                                                        <?= $comment->pseudo ?>
                                                    </a>
                                            </div>
@@ -98,7 +98,7 @@
                                            </div>
                                            <div class="input-group">
 
-                                               <textarea class="form-control"><?= htmlspecialchars($comment->description) ?></textarea>
+                                               <textarea class="form-control"><?= $comment->description ?></textarea>
                                            </div>
                                        </div>
                                        <div class="col-4 p-2">

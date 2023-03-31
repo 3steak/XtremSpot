@@ -108,16 +108,13 @@ for (let trashComment of trashesComment) {
 }
 function modalComment() {
     // Attributs data
-
     let idComment = this.dataset.idcomment;
     let pseudo = this.dataset.pseudo;
 
     // Injection in modal
     document.querySelector("#deleteComment .pseudo").innerText = pseudo;
     let link = document.querySelector("#linkDeleteComment");
-    let href = link.getAttribute('href');
-    href = href.substring(0, href.length - 1)
-
+    let href = '/controllers/dashboard/deleteCommentCtrl.php?id=';
     link.setAttribute('href', href + idComment)
 }
 

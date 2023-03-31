@@ -318,7 +318,7 @@ class User
      */
     public static function delete($id): bool
     {
-        $sql = 'DELETE FROM `uers` WHERE id = :id;';
+        $sql = 'DELETE FROM `users` WHERE id = :id;';
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':id', $id, PDO::PARAM_INT);
         $sth->execute();

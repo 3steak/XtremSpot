@@ -37,7 +37,7 @@
                                   <button type="submit" id="connexion" class="btn btn-dark px-5 w-75">Connexion</button>
                               </div>
                               <div class="col-12 py-3 d-flex justify-content-end">
-                                  <a class="btn btn-sm btn-dark px-5 mt-2" id="register" type="submit" href="/controllers/registerCtrl.php" role="button">S'inscrire</a>
+                                  <a class="btn btn-sm btn-dark px-5 mt-2 text-white" id="register" type="submit" href="/controllers/registerCtrl.php" role="button">S'inscrire</a>
                               </div>
                           </div>
                       </form>

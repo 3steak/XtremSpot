@@ -278,9 +278,9 @@ class Publication
      * getUserPublication
      *
      * @param  mixed $userId
-     * @return void
+     * @return array
      */
-    public static function getUserPublication(int $userId)
+    public static function getUserPublication(int $userId): array
     {
 
         #return publication filtered by user id for profil or CRUD

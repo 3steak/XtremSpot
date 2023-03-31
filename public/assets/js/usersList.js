@@ -39,6 +39,6 @@ function persoModal() {
     // Injection in modal
     document.querySelector("#validateModal .fullname").innerText = name;
     let link = document.querySelector("#linkDelete");
-    let href = link.getAttribute('href');
+    let href = '/controllers/dashboard/deleteUserCtrl.php?id=';
     link.setAttribute('href', href + id)
 }

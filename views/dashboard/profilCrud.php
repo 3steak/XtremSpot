@@ -83,7 +83,7 @@ if (isset($_SESSION['flash'])) {
                 </div>
                 <div class="modal-footer">
                     <a role="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</a>
-                    <a class="btn btn-primary " id="linkDeleteComment" href="/deleteCommentCrudCtrl?id==" role="button">Supprimer</a>
+                    <a class="btn btn-primary " id="linkDeleteComment" href="/deleteCommentCtrl.php?id=" role="button">Supprimer</a>
                 </div>
             </div>
         </div>
@@ -112,16 +112,11 @@ if (isset($_SESSION['flash'])) {
         </div>
 
 
-
         <!-------------- FORM FOR UPDATE USER, HIS PUBLICATIONS AND COMMENT ------->
         <div class="content bg-dark">
 
-            <div class="d-flex flex-column">
-                <p class="text-white mb-2">Cliquer sur le boutton ci-dessous pour accéder à la modification</p>
-                <a class="triggerUdpdate my-2"><i class="fa-solid fa-pen-to-square fa-2xl "></i></a>
-            </div>
             <form method="post">
-                <fieldset disabled class="row ">
+                <fieldset class="row ">
                     <div class="col-lg-6">
                         <label for="disabledTextInput" class="form-label"></label>
                         <h4 class=" text-white text-start ">Nom</h4>
@@ -245,10 +240,10 @@ if (isset($_SESSION['flash'])) {
         <div class="container  my-3 ">
             <div class="row">
                 <?php foreach ($comments as $comment) { ?>
-                    <div class="card text-bg-dark pb-3 col-lg-4 mx-auto">
+                    <div class="card text-bg-dark pb-3 mb-4 col-lg-4 mx-auto">
                         <div class="col-12 p-2">
                             <div class="d-flex align-items-center ">
-                                Commentaire validé le : <?= htmlspecialchars($comment->validated_at) ?>
+                                Commentaire validé le : <?= htmlentities(date('d/m/Y', strtotime($comment->validated_at))) ?> à <?= htmlentities(date('H', strtotime($comment->validated_at))) ?>h<?= htmlentities(date('m', strtotime($comment->validated_at))) ?>
                             </div>
                         </div>
                         <div class=" d-flex flex-column justify-content-end ">
