@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 31, 2023 at 02:47 PM
+-- Generation Time: Apr 02, 2023 at 08:29 PM
 -- Server version: 8.0.30
--- PHP Version: 8.2.2
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -67,7 +67,7 @@ INSERT INTO `comments` (`id`, `description`, `validated_at`, `created_at`, `dele
 (6, 'Incroyable ! ', '2023-03-07 12:21:58', '2023-03-29 21:47:23', NULL, 6, 8),
 (7, 'Commentaire sur image name', '2023-03-29 20:09:53', '2023-03-29 22:09:27', NULL, 4, 6),
 (8, 'oui', '2023-03-30 19:44:40', '2023-03-30 21:39:59', NULL, 6, 7),
-(10, 'hello !', NULL, '2023-03-31 14:01:44', NULL, 6, 7);
+(22, 'gfgfg', NULL, '2023-04-02 22:25:39', NULL, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -80,6 +80,26 @@ CREATE TABLE `favorites` (
   `idPublications` int NOT NULL,
   `idUsers` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `idUsers` int NOT NULL,
+  `idPublications` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`id`, `created_at`, `idUsers`, `idPublications`) VALUES
+(10, '2023-04-02 18:55:13', 6, 8);
 
 -- --------------------------------------------------------
 
@@ -109,9 +129,9 @@ CREATE TABLE `publications` (
 --
 
 INSERT INTO `publications` (`id`, `title`, `description`, `deleted_at`, `created_at`, `marker_longitude`, `marker_latitude`, `validated_at`, `town`, `report`, `likes`, `idCategories`, `idUsers`, `image_name`) VALUES
-(6, 'Test image name', 'Ceci est un test pour les beaux chiens', NULL, '2023-03-13 16:51:40', '-1.7555490', '48.1160300', '2023-03-19 10:18:10', 'Rennes', NULL, 6, 3, 3, 'img_640f468c890bc.3.png'),
-(7, 'BMX Sunset', 'test BMX sunset', NULL, '2023-03-13 20:35:31', '1.3862530', '50.0657660', '2023-03-08 16:55:58', 'Le Tréport', NULL, 4, 3, 3, 'img_640f7b032e357.3.jpg'),
-(8, 'Session bowl avé les copaings', 'test du bowl du prado !', NULL, '2023-03-20 12:32:41', '5.3744280', '43.2519000', '2023-03-20 11:37:23', 'Marseille', NULL, 2, 2, 4, 'img_64184459cc57b.4.jpg');
+(6, 'Test image name', 'Ceci est un test pour les beaux chiens', NULL, '2023-03-13 16:51:40', '-1.7555490', '48.1160300', '2023-03-19 10:18:10', 'Rennes', NULL, 0, 3, 3, 'img_640f468c890bc.3.png'),
+(7, 'BMX Sunset', 'test BMX sunset', NULL, '2023-03-13 20:35:31', '1.3862530', '50.0657660', '2023-03-08 16:55:58', 'Le Tréport', NULL, 0, 3, 3, 'img_640f7b032e357.3.jpg'),
+(8, 'Session bowl avé les copaings', 'test du bowl du prado !', NULL, '2023-03-20 12:32:41', '5.3744280', '43.2519000', '2023-03-20 11:37:23', 'Marseille', NULL, 1, 2, 4, 'img_64184459cc57b.4.jpg');
 
 -- --------------------------------------------------------
 
@@ -171,6 +191,14 @@ ALTER TABLE `favorites`
   ADD KEY `idUsers` (`idUsers`);
 
 --
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUsers` (`idUsers`),
+  ADD KEY `idPublications` (`idPublications`);
+
+--
 -- Indexes for table `publications`
 --
 ALTER TABLE `publications`
@@ -199,13 +227,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `publications`
@@ -236,6 +270,13 @@ ALTER TABLE `comments`
 ALTER TABLE `favorites`
   ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`idPublications`) REFERENCES `publications` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`idUsers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`idUsers`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`idPublications`) REFERENCES `publications` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `publications`
