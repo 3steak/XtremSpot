@@ -1,26 +1,28 @@
        <!-- MODAL SIGNALEMENT  -->
        <!-- Modal -->
-       <div class="modal fade" id="report" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
+       <div class="modal fade" id="refuseComment" tabindex="-1" aria-labelledby="refuseCommentLabel" aria-hidden="true">
            <div class="modal-dialog">
                <div class="modal-content">
-                   <form action="" method="post">
+                   <form id="linkDeleteComment" action="/deleteCommentCtrl?id=" action method="post">
                        <div class="modal-header">
-                           <h1 class="modal-title" id="reportLabel">Pourquoi refuser ?</h1>
+                           <h1 class="modal-title" id="refuseCommentLabel">Pourquoi refuser ?</h1>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                        </div>
                        <div class="modal-body">
                            <div class="btn-group col-12 d-flex flex-column p-3">
                                <h3 class="text-black ms-2 pt-3 mb-2">Choissisez un motif de signalement</h3>
-                               <input type="radio" class="btn-check" value="Contenu indésirable" name="report_msg" id="contentUndesirable" checked />
+                               <input type="hidden" class="emailComment" name="email" value="">
+
+                               <input type="radio" class="btn-check" value="Contenu indésirable" name="refuseMsg" id="contentUndesirable" checked />
                                <label class="btn btn-light mx-auto w-100" for="contentUndesirable">Contenu indésirable</label>
 
-                               <input type="radio" class="btn-check" value="Nudité" name="report_msg" id="nudity" />
+                               <input type="radio" class="btn-check" value="Nudité" name="refuseMsg" id="nudity" />
                                <label class="btn btn-light mx-auto w-100" for="nudity">Nudité</label>
 
-                               <input type="radio" class="btn-check" value="Discours ou symboles haineux" name="report_msg" id="racism" />
+                               <input type="radio" class="btn-check" value="Discours ou symboles haineux" name="refuseMsg" id="racism" />
                                <label class="btn btn-light mx-auto w-100" for="racism">Discours ou symboles haineux</label>
 
-                               <input type="radio" class="btn-check" value="Fausses informations" name="report_msg" id="wrongInfo" />
+                               <input type="radio" class="btn-check" value="Fausses informations" name="refuseMsg" id="wrongInfo" />
                                <label class="btn btn-light mx-auto w-100" for="wrongInfo">Fausses informations</label>
                            </div>
                        </div>
@@ -82,8 +84,11 @@
                        <div class="row">
                            <div class="col-12">
                                <h2 class="text-white text-center m-2">Commentaires</h2>
+                               <?= $error['refuseMsg'] ?? '' ?>
+                               <?= $error['email'] ?? '' ?>
                            </div>
                            <?php foreach ($comments as $comment) { ?>
+
                                <div class="card col-lg-10 mx-auto text-bg-dark pb-3 m-2">
                                    <div class="row justify-content-around">
                                        <div class="col-4 p-2 ">
@@ -110,8 +115,9 @@
 
                                        </div>
                                    </div>
-                                   <div class=" d-flex gap-2 mt-1"> <a href="/controllers/dashboard/moderationCtrl.php?idComment=<?= $comment->commentId ?>" role="button" class="btn btn-primary w-50 mx-auto">ACCEPTER</a>
-                                       <button type="button" class="btn btn-primary w-50 mx-auto" data-bs-toggle="modal" data-bs-target="#report">REFUSER</button>
+                                   <div class=" d-flex gap-2 mt-1">
+                                       <a href="/controllers/dashboard/moderationCtrl.php?idComment=<?= $comment->commentId ?>" role="button" class="btn btn-primary w-50 mx-auto">ACCEPTER</a>
+                                       <a type="button" href="" class="btn btn-primary w-50 mx-auto refuseComment" data-bs-toggle="modal" data-bs-target="#refuseComment" data-id=<?= $comment->commentId ?> data-email=<?= $comment->email ?>>REFUSER</a>
                                    </div>
                                </div>
                            <?php } ?>

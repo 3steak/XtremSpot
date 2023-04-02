@@ -42,3 +42,11 @@ define('REGEXP_BIRTHDAY', "^((19\d{2}|20[01]\d|202[1-3])\-(0[1-9]|1[0-2])\-(0[1-
 
 // LATLNG
 define('REGEXP_LATLNG', "/LatLng\(([-]?\d+\.\d+), ([-]?\d+\.\d+)\)/");
+
+// REFUSE MESSAGES
+define('REFUSE_MESSAGES', [
+    'Contenu indésirable',
+    'Nudité',
+    'Discours ou symboles haineux',
+    'Fausses informations'
+]);

@@ -145,7 +145,7 @@ class Comment
     public static function getNoValidatedComments(): array
     {
         #return commentaires non validés pour modération
-        $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`,`comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`,
+        $sql = 'SELECT `comments`.`id` as `commentId`, `comments`.`description`, `comments`.`validated_at`,`comments`.`created_at`, `comments`.`idUsers`, `comments`.`idPublications`,`users`.`pseudo`,`users`.`avatar`,`users`.`email`,
                     `publications`.`title` AS `publicationTitle`, `publications`.`image_name` as `publicationImg` 
                     FROM `comments` 
                     JOIN `users` ON `comments`.`idUsers` = `users`.`id` 

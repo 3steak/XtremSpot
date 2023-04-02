@@ -4,6 +4,8 @@ session_start();
 if ($_SESSION['loggedIn'] != true && $_SESSION['admin'] != true) {
     header('location: /../controllers/homeCtrl.php');
 }
+$jsName = 'moderation';
+
 require_once(__DIR__ . '/../../models/Publication.php');
 require_once(__DIR__ . '/../../models/Comment.php');
 
