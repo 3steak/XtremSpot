@@ -20,6 +20,7 @@ $listTowns = Publication::getTowns();
 
 try {
     $publications = Publication::get();
+
     $comments = Comment::getAll();
 } catch (\Throwable $th) {
     //throw $th;

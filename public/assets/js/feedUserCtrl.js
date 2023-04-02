@@ -113,27 +113,46 @@ $(document).ready(function () {
 
     // ------- LIVE LIKES --------------------
 
+    // Création variable pour stocker les publications likés par user
+    let likedPublications = [];
     document.querySelectorAll('.like-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
             //Récupération de l'identifiant de la publication
             let publicationId = btn.dataset.publicationId;
+            // control si user a deja aimé
+            if (likedPublications.includes(publicationId)) {
+                // Je stop le script 
+                return;
+            }
+
             if (publicationId != "") {
                 $.ajax({
                     url: "/config/liveLike.php",
                     method: "GET",
                     data: "publicationId=" + publicationId,
-                    success: function () {
+                    success: function (result) {
+                        //  COMMENT Y ARRIVER  ??? 
+                        if (result === 'false') {
+                            alert('Vous avez déjà aimé cette publication');
+                            return;
+                        }
+                        // Ajout idPublication dans tableau
+                        likedPublications.push(publicationId);
                         let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
                         // string to int
                         let likesCount = parseInt(countLikeBefore[0].innerText);
                         // incrémentation
                         countLikeBefore[0].innerText = likesCount + 1;
+                    },
+                    // xhr status et error sont des erreurs fournis par jQuery 
+                    error: function (xhr, status, error) {
+
+                        alert('ERROR !');
                     }
                 });
             }
         });
     });
-
 
 });
 
