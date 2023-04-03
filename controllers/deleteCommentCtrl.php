@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 
 //  if not connected
@@ -6,7 +8,7 @@ if ($_SESSION['loggedIn'] != true) {
     header('location: /controllers/homeCtrl.php');
 }
 
-require_once(__DIR__ . '/../models/Publication.php');
+require_once(__DIR__ . '/../models/Comment.php');
 require_once(__DIR__ . '/../helpers/flash.php');
 
 
@@ -20,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($error)) {
         try {
             // SUPPRESION
-            $result = Publication::delete($id);
+            $result = Comment::delete($id);
             if ($result) {
-                flash('deletePublication', 'Votre publication a bien été supprimé ! ', FLASH_SUCCESS);
+                flash('deleteComment', 'Votre commentaire a bien été supprimé ! ', FLASH_SUCCESS);
                 header('location: /controllers/feedUserCtrl.php');
                 die;
             } else {
-                throw new Exception("Publication non supprimé", 1);
+                throw new Exception("Commentaire non supprimé", 1);
                 die;
             }
         } catch (\Throwable $th) {
@@ -38,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         include_once(__DIR__ . '/../views/templates/header.php');
-        include(__DIR__ . '/../views/feedUser.php');
+        include(__DIR__ . '/../views/profilUser.php');
     }
 }
 

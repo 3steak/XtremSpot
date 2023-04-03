@@ -5,7 +5,7 @@ if ($_SESSION['loggedIn'] != true) {
     header('location: /controllers/homeCtrl.php');
 } else {
     // SET idUser WITH $_SESSION
-    $idUser = $_SESSION['user']->id;
+    $idSession = $_SESSION['user']->id;
 }
 
 require_once(__DIR__ . '/../helpers/flash.php');
@@ -21,6 +21,7 @@ if (!isset($_GET['isSent'])) {
 if (empty($_GET)) {
     $idUser = $_SESSION['user']->id;
 }
+
 
 try {
     if (User::isIdExist($idUser) === false) {
@@ -42,10 +43,11 @@ try {
     die;
 }
 
+
+include_once(__DIR__ . '/../views/templates/header.php');
 if (!empty($_GET) && isset($_GET['isSent']) == 'ok') {
     flash('formNewContentOk');
 }
 
-include_once(__DIR__ . '/../views/templates/header.php');
 include_once(__DIR__ . '/../views/profilUser.php');
 require_once(__DIR__ . '/../views/templates/footer.php');

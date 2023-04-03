@@ -103,6 +103,47 @@ if (isset($_SESSION['flash'])) {
             </div>
         </div>
 
+        <!-- MODAL SUPPRESION PUBLICATION  -->
+        <div class="modal fade" id="deletePublication" tabindex="-1" aria-labelledby="deletePublicationLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="linkDeletePublication" action="/deletePublicationCtrl?id=" action method="post">
+
+                        <div class="modal-header">
+                            <h1 class="modal-title" id="deletePublicationLabel">Supprimer votre publication ?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL SUPPRESION COMMENT  -->
+        <div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="linkDeleteComment" action="/deleteCommentCtrl?id=" action method="post">
+
+                        <div class="modal-header">
+                            <h1 class="modal-title" id="deleteCommentLabel">Supprimer votre commentaire ?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
         <!------- CONTENT  ---------->
         <div class="container my-3 cardUserContent col-lg-6 ">
 
@@ -122,7 +163,7 @@ if (isset($_SESSION['flash'])) {
                     </div>
                 <?php }
 
-                foreach ($publications as $publication) { ?>
+                foreach ($publications as $key => $publication) { ?>
                     <div class="card text-bg-dark my-3 ">
                         <div class="col-12 p-2">
                             <div class="d-flex align-items-center ">
@@ -137,6 +178,9 @@ if (isset($_SESSION['flash'])) {
                                 <!-- dropdown menu  -->
                                 <ul class="dropdown-menu bg-dark">
                                     <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
+                                    <?php if ($idSession === $publication->idUsers) { ?>
+                                        <li><a class="dropdown-item text-white deletePublication" href="" data-bs-toggle="modal" data-bs-target="#deletePublication" data-id=<?= $publication->id ?>>Supprimer</a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -145,22 +189,21 @@ if (isset($_SESSION['flash'])) {
                         <div class=" d-flex flex-column justify-content-end ">
                             <div class="row banniereLike p-2 ">
                                 <div class="col-12 dropcenter dropup d-flex align-items-center">
-                                    <!-- BUTTON  LIKE -->
-                                    <i class="fa-solid fa-thumbs-up fa-xl me-1 text-white like-btn" data-publication-id=<?= htmlentities($publication->id) ?>></i><span class="countLike"><?= htmlentities($publication->likes) ?> </span> <span class="dNoneMobil text-white ms-1"> J'aime</span>
-                                    <!-- Collapse for comments -->
-                                    <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments">
-                                        <i class="fa-solid fa-comment fa-xl"></i>
+                                    <!-- BUTTON LIKE  -->
+                                    <i class="fa-solid fa-thumbs-up fa-xl me-1 text-white like-btn" data-publication-id=<?= htmlentities($publication->id) ?>></i><span class="countLike"><?= htmlentities($publication->likes)  ?> </span> <span class="dNoneMobil text-white"> J'aime</span>
+                                    <!-- BUTTON FOR COLLAPSE OF COMMENTS -->
+                                    <a class="text-white text-decoration-none p-3" data-bs-toggle="collapse" data-bs-target="#collapseComments<?= $key ?>">
+                                        <i class="fa-solid fa-comment fa-xl me-1"></i><span class="dNoneMobil">Commenter</span>
                                     </a>
                                     <!-- BOUTON MAP -->
-                                    <a class=" text-white text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-xl"></i></a>
-
+                                    <a class=" text-white text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $publication->pseudo ?>"><i class="fa-solid fa-location-dot fa-xl me-1"></i>
+                                        <span class="dNoneMobil">Voir le lieu du spot</span></a>
                                     <!-- BUTTON SEE MORE -->
                                     <a class="btn btn-dark btn-sm ms-2 seeMore" data-bs-toggle="modal" data-bs-target="#description" data-titledesc="<?= $publication->title ?>" data-description="<?= $publication->description ?>" role="button">En savoir plus</a>
-
                                 </div>
                             </div>
                             <!-- Collapse for comments -->
-                            <div id="collapseComments" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div id="collapseComments<?= $key ?>" class="accordion-collapse collapse mt-1 rounded-2" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <!-- Listes de commentaires -->
                                 <div class="commentsList px-3 py-1 overflow-auto">
                                     <?php foreach ($comments as $comment) {
@@ -170,8 +213,15 @@ if (isset($_SESSION['flash'])) {
                                                 <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
                                                     <?= htmlentities($comment->pseudo) ?>
                                                 </a><br>
+
                                                 <small class=" commentsHour mt-4 ms-4">Publié le : <?= htmlentities(date('d/m/Y', strtotime($comment->created_at))) ?> à <?= htmlentities(date('H', strtotime($comment->created_at))) ?>h</small>
-                                                <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+
+                                                <div class="d-flex  justify-content-between align-items-center ">
+                                                    <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+                                                    <?php if ($idSession === $comment->idUsers) { ?>
+                                                        <a class="m-1 deleteComment text-white" title="Supprimer mon commentaire" href="" data-bs-toggle="modal" data-bs-target="#deleteComment" data-id=<?= $comment->commentId ?>><i class="fa-regular fa-circle-xmark "></i></a>
+                                                    <?php } ?>
+                                                </div>
                                                 <hr>
                                             </div>
                                     <?php
@@ -187,9 +237,8 @@ if (isset($_SESSION['flash'])) {
                                         <textarea class="form-control" maxlength="500" name="comment" id="comment<?= $publication->id ?>" placeholder="Ton commentaire sera envoyé en modération avant d'être publié !"></textarea required>
                                 </div>
                                 <?= $error['comment'] ?? '' ?>
-                            
+                
                                 <div class="d-flex justify-content-center pb-2">
-                                    <!-- test -->
                                     <button type="button" id="<?= $publication->id ?>" class="btn border border-ligth btn-dark submitButton" value="Commenter">Commenter</button>
                                 </div>
                             </form>

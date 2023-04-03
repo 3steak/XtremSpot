@@ -152,7 +152,7 @@ $(document).ready(function () {
 
 
 
-    // Récupération des data-set pour REFUS PUBLICATION
+    //  DELETE PUBLICATION
     let buttonsDltPublication = document.querySelectorAll('.deletePublication');
     for (let trash of buttonsDltPublication) {
         trash.addEventListener('click', persoModal)
@@ -164,6 +164,22 @@ $(document).ready(function () {
         // Injection in modal
         let link = document.querySelector("#linkDeletePublication");
         let action = '/controllers/deletePublicationCtrl.php?id=';
+        link.setAttribute('action', action + id);
+    }
+
+
+    //  DELTE COMMENT
+    let buttons = document.querySelectorAll('.deleteComment');
+    for (let trash of buttons) {
+        trash.addEventListener('click', persoModal)
+    }
+    function persoModal() {
+        // Attributs data
+        let id = this.dataset.id;
+
+        // Injection in modal
+        let link = document.querySelector("#linkDeleteComment");
+        let action = '/controllers/deleteCommentCtrl.php?id=';
         link.setAttribute('action', action + id);
     }
     // fin document ready
