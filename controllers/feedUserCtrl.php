@@ -3,6 +3,9 @@ session_start();
 //  if not connected
 if ($_SESSION['loggedIn'] != true) {
     header('location: /controllers/homeCtrl.php');
+} else {
+    // SET idUser WITH $_SESSION
+    $idUser = $_SESSION['user']->id;
 }
 require_once(__DIR__ . '/../config/constants.php');
 require_once(__DIR__ . '/../helpers/flash.php');

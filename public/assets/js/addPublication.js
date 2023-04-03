@@ -18,13 +18,14 @@ $(document).ready(function () {
 
         // this refers to zipcode input 
         let code = $(this).val();
-
+        // FAIRE LA PREMIERE REQUETE AVEC DATAGOUVAPI
         let url = 'http://api.openweathermap.org/geo/1.0/zip?zip=' + code + ',FR&appid=' + apiKey;
         // Send request to API
         fetch(url, { method: 'get' }).then(response => response.json()).then(result => {
             $(city).find('option').remove();
             if (result.code !== '') {
                 $(city).append('<option value ="' + result.name + '">' + result.name + '</option>');
+                //  refaire une requete API a  openweather avec result.name
                 function init() {
                     if (code.match(regexZipcode) === null) {
                         $(errorMessage).text('Rentrer un code postal').show();

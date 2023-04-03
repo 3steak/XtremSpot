@@ -16,7 +16,6 @@ class Database
             $dsn = 'mysql:host=' . self::$host . ';dbname=' . self::$dbname;
             self::$connexion = new PDO($dsn, self::$user, self::$password);
             self::$connexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            var_dump('HELLO ! ');
         }
         return self::$connexion;
     }

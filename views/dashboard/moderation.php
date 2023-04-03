@@ -1,9 +1,9 @@
        <!-- MODAL SIGNALEMENT  -->
-       <!-- Modal -->
+       <!-- Modal REFUSE COMMENT -->
        <div class="modal fade" id="refuseComment" tabindex="-1" aria-labelledby="refuseCommentLabel" aria-hidden="true">
            <div class="modal-dialog">
                <div class="modal-content">
-                   <form id="linkDeleteComment" action="/deleteCommentCtrl?id=" action method="post">
+                   <form id="linkDeleteComment" action="/deleteCommentCrudCtrl?id=" action method="post">
                        <div class="modal-header">
                            <h1 class="modal-title" id="refuseCommentLabel">Pourquoi refuser ?</h1>
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -24,6 +24,44 @@
 
                                <input type="radio" class="btn-check" value="Fausses informations" name="refuseMsg" id="wrongInfo" />
                                <label class="btn btn-light mx-auto w-100" for="wrongInfo">Fausses informations</label>
+                           </div>
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+                           <!--  ENVOI MAIL AVEC MOTIF ENVOYER EN POST  -->
+                           <button type="submit" class="btn btn-primary">Confirmer le refus</button>
+                       </div>
+                   </form>
+               </div>
+
+           </div>
+       </div>
+       <!-- MODAL REFUSE PUBLICATION -->
+       <div class="modal fade" id="refusePublication" tabindex="-1" aria-labelledby="refusePublicationLabel" aria-hidden="true">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <form id="linkDeletePublication" action="/deletePublicationCrudCtrl?id=" action method="post">
+                       <div class="modal-header">
+                           <h1 class="modal-title" id="refusePublicationLabel">Pourquoi refuser la publication?</h1>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body">
+                           <div class="btn-group col-12 d-flex flex-column p-3">
+                               <h3 class="text-black ms-2 pt-3 mb-2">Choissisez un motif de signalement</h3>
+                               <input type="hidden" class="emailPublication" name="email" value="">
+
+                               <input type="radio" class="btn-check" value="Contenu indésirable" name="refuseMsg" id="contentUndesirablex" checked />
+                               <label class="btn btn-light mx-auto w-100" for="contentUndesirablex">Contenu indésirable</label>
+
+                               <input type="radio" class="btn-check" value="Nudité" name="refuseMsg" id="nudityx" />
+                               <label class="btn btn-light mx-auto w-100" for="nudityx">Nudité</label>
+
+                               <input type="radio" class="btn-check" value="Discours ou symboles haineux" name="refuseMsg" id="racismx" />
+                               <label class="btn btn-light mx-auto w-100" for="racismx">Discours ou symboles haineux</label>
+
+                               <input type="radio" class="btn-check" value="Fausses informations" name="refuseMsg" id="wrongInfox" />
+                               <label class="btn btn-light mx-auto w-100" for="wrongInfox">Fausses informations</label>
                            </div>
                        </div>
                        <div class="modal-footer">
@@ -72,7 +110,7 @@
                                    </div>
                                    <img src="/public/assets/uploads/newPicture/<?= $publication->image_name ?>" class="card-img" alt="<?= $publication->title ?>">
                                    <div class="col-12 d-flex gap-2 mt-1"> <a href="/controllers/dashboard/moderationCtrl.php?idPublication=<?= $publication->id ?>" role="button" class="btn btn-primary w-50 mx-auto">ACCEPTER</a>
-                                       <button role="button" class="btn btn-primary w-50 mx-auto" data-bs-toggle="modal" data-bs-target="#report">REFUSER</button>
+                                       <a type="button" href="" class="btn btn-primary w-50 mx-auto refusePublication" data-bs-toggle="modal" data-bs-target="#refusePublication" data-id=<?= $publication->id ?> data-email=<?= $publication->email ?>>REFUSER</a>
                                    </div>
                                </div>
                            <?php } ?>
@@ -124,7 +162,6 @@
                        </div>
                    </div>
                </div>
-
            </div>
            </div>
        </main>

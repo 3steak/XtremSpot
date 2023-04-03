@@ -11,25 +11,25 @@ require_once(__DIR__ . '/../models/Publication.php');
 require_once(__DIR__ . '/../models/Like.php');
 
 
-if (!empty($_GET['publicationId'])) {
 
-    $idPublication = intval(filter_input(INPUT_GET, 'publicationId', FILTER_SANITIZE_NUMBER_INT));
 
-    try {
-        $like = new Like;
-        $like->setIdPublications($idPublication);
-        $like->setIdUsers($idUser);
-        $result = $like->addLikes($idUser, $idPublication);
-        if ($result) {
-            # INCREMENTATION
-        } else {
-            # like existe deja
-        }
-    } catch (\Throwable $th) {
-        var_dump($errorMsg = $th->getMessage());
-        die;
+$idPublication = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
+
+try {
+    $like = new Like;
+    $like->setIdPublications($idPublication);
+    $like->setIdUsers($idUser);
+    $result = $like->addLikes($idUser, $idPublication);
+    if ($result) {
+        # INCREMENTATION
+        $response = 1;
+        echo (json_encode($response));
+    } else {
+        # like existe deja
+        $response = 0;
+        echo (json_encode($response));
     }
-} else {
-    var_dump($error);
+} catch (\Throwable $th) {
+    var_dump($errorMsg = $th->getMessage());
     die;
 }

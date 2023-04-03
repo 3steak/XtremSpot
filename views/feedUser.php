@@ -4,6 +4,7 @@
 if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
     flash('register');
 }
+flash('deletePublication');
 ?>
 <main>
     <!-- MODALMAP -->
@@ -77,6 +78,25 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-primary">Confirmer le signalement</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL SUPPRESION PUBLICATION  -->
+    <div class="modal fade" id="deletePublication" tabindex="-1" aria-labelledby="deletePublicationLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="linkDeletePublication" action="/deletePublicationCtrl?id=" action method="post">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="deletePublicationLabel">Supprimer votre publication ?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
                     </div>
                 </form>
             </div>
@@ -173,7 +193,11 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
                             </a>
                             <!-- dropdown menu  -->
                             <ul class="dropdown-menu bg-dark">
-                                <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
+                                <li><a class="dropdown-item text-white" href="" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
+
+                                <?php if ($idUser === $publication->idUsers) { ?>
+                                    <li><a class="dropdown-item text-white deletePublication" href="" data-bs-toggle="modal" data-bs-target="#deletePublication" data-id=<?= $publication->id ?>>Supprimer</a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>

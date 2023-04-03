@@ -48,22 +48,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // IF OK ENVOI MAIL
                 $mail = new PHPMailer(true);
-                $mail->setLanguage('fr', '/optional/path/to/language/directory/');
+                $mail->setLanguage('fr', '/../../vendor/phpmailer/phpmailer/language/');
+
 
                 try {
-
-
                     //Server settings
-                    $mail->isSMTP();                                            //Send using SMTP
-                    $mail->Host       = '127.0.0.1';                     //Set the SMTP server to send through
-                    $mail->SMTPAuth   = false;                                   //Enable SMTP authentication
-                    $mail->SMTPAutoTLS = true;
+                    $mail->isSMTP();
+                    //Send using SMTP
+                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                    $mail->Port = 443;
+                    $mail->Port = 465;
+                    $mail->Username = 'cyprien.bocquet@gmail.com';
+                    $mail->Password = 'tuyfehkfrlnfwgmv';
                     //Recipients
                     $mail->setFrom('xtremspot@site.fr');
-                    $mail->addAddress($email);               //Name is optional
 
+                    // Remplace $mail par mon mail
+                    $mail->addAddress('cyprien.bocquet@gmail.com');               //Name is optional
 
                     //Content
                     $mail->isHTML(true);                                  //Set email format to HTML
@@ -71,12 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $mail->Body    = 'Votre commentaire a été supprimé pour ce motif, ' . $refuseMsg . ', veuillez respecter les règles d\'utilisation du site !<br> Belle journée ! ';
 
                     $mail->send();
-                    echo 'Message has been sent';
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    header('location: /controllers/dashboard/moderationCtrl.php');
+                    die;
+                } catch (\Throwable $th) {
+                    throw new Exception($mail->ErrorInfo, 1);
                 }
-                header('location: /controllers/dashboard/moderationCtrl.php');
-                die;
             } else {
                 throw new Exception("Commentaire non supprimé", 1);
                 die;

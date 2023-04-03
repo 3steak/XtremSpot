@@ -97,6 +97,7 @@ $(document).ready(function () {
                     method: "POST",
                     data: "idPublication=" + idPublications + "&description=" + description
                 });
+
             }
 
             // vider le textaera
@@ -122,38 +123,50 @@ $(document).ready(function () {
             // control si user a deja aimé
             if (likedPublications.includes(publicationId)) {
                 // Je stop le script 
+
                 return;
             }
 
             if (publicationId != "") {
-                $.ajax({
-                    url: "/config/liveLike.php",
-                    method: "GET",
-                    data: "publicationId=" + publicationId,
-                    success: function (result) {
-                        //  COMMENT Y ARRIVER  ??? 
-                        if (result === 'false') {
-                            alert('Vous avez déjà aimé cette publication');
-                            return;
-                        }
-                        // Ajout idPublication dans tableau
-                        likedPublications.push(publicationId);
-                        let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
-                        // string to int
-                        let likesCount = parseInt(countLikeBefore[0].innerText);
-                        // incrémentation
-                        countLikeBefore[0].innerText = likesCount + 1;
-                    },
-                    // xhr status et error sont des erreurs fournis par jQuery 
-                    error: function (xhr, status, error) {
-
-                        alert('ERROR !');
-                    }
-                });
+                fetch('/config/liveLike.php?id=' + publicationId)
+                    .then(response => {
+                        return (response.json())
+                            .then(data => {
+                                if (data == '0') {
+                                    return;
+                                }
+                                // Ajout idPublication dans tableau
+                                likedPublications.push(publicationId);
+                                let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
+                                // string to int
+                                let likesCount = parseInt(countLikeBefore[0].innerText);
+                                // incrémentation
+                                countLikeBefore[0].innerText = likesCount + 1;
+                            })
+                    })
+                // fin si idpublication est pas vide
             }
         });
     });
 
+
+
+
+    // Récupération des data-set pour REFUS PUBLICATION
+    let buttonsDltPublication = document.querySelectorAll('.deletePublication');
+    for (let trash of buttonsDltPublication) {
+        trash.addEventListener('click', persoModal)
+    }
+    function persoModal() {
+        // Attributs data
+        let id = this.dataset.id;
+
+        // Injection in modal
+        let link = document.querySelector("#linkDeletePublication");
+        let action = '/controllers/deletePublicationCtrl.php?id=';
+        link.setAttribute('action', action + id);
+    }
+    // fin document ready
 });
 
 
