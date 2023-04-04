@@ -40,7 +40,15 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white p-3" href="/controllers/profilUserCtrl.php">
-                                Profil
+                                Mon profil
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="border border-light border-2 ">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white p-3" href="/controllers/favoriteCtrl.php">
+                                Mes favoris
                             </a>
                         </li>
                         <li>

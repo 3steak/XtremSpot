@@ -204,7 +204,7 @@ $(document).ready(function () {
                                     return;
                                 }
                                 // METTRRE BOOKMARK EN SOLID
-                                btn.classList.toggle('fa-solid')
+                                btn.classList.add('fa-solid')
                                 btn.classList.remove('fa-regular')
                             })
                     })
