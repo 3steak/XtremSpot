@@ -97,17 +97,16 @@ $(document).ready(function () {
                     method: "POST",
                     data: "idPublication=" + idPublications + "&description=" + description
                 });
-
             }
 
             // vider le textaera
 
-            document.querySelector(`#comment${submit.id}`).value = "COMMENTAIRE ENVOYE ";
+            document.querySelector(`#comment${submit.id}`).value = "COMMENTAIRE ENVOYE EN MODERATION ";
 
             setTimeout(() => {
                 document.querySelector(`#comment${submit.id}`).value = "";
                 document.querySelector(`.accordion-collapse${submit.id}`).classList.remove('show');
-            }, "500")
+            }, "1000")
             // fermer le collapse
         })
     }
@@ -182,6 +181,39 @@ $(document).ready(function () {
         let action = '/controllers/deleteCommentCtrl.php?id=';
         link.setAttribute('action', action + id);
     }
+
+
+    // LIVE ADD TO FAVORITE
+    document.querySelectorAll('.favoriteBtn').forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+            event.preventDefault()
+            //Récupération de l'identifiant de la publication
+            let publicationId = btn.dataset.publicationId;
+            // control si user a deja aimé
+
+
+            if (publicationId != "") {
+                fetch('/config/liveFavorite.php?id=' + publicationId)
+                    .then(response => {
+                        return (response.json())
+                            .then(data => {
+                                if (data == '0') {
+                                    // METTRE BOOKMARK EN VIDE 
+                                    btn.classList.add('fa-regular')
+                                    btn.classList.remove('fa-solid')
+                                    return;
+                                }
+                                // METTRRE BOOKMARK EN SOLID
+                                btn.classList.toggle('fa-solid')
+                                btn.classList.remove('fa-regular')
+                            })
+                    })
+                // fin si idpublication est pas vide
+            }
+        });
+    });
+
+
     // fin document ready
 });
 

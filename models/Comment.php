@@ -158,6 +158,16 @@ class Comment
         return $comments;
     }
 
+    public static function get(int $idComments): object
+    {
+        $sql = 'SELECT `comments`.`idUsers` FROM `comments` WHERE id = :id;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':id', $idComments, PDO::PARAM_INT);
+        $sth->execute();
+        $comment = $sth->fetch();
+        return $comment;
+    }
+
     /** Methode get permet de retourner les commentaires validés
      *
      * @return array

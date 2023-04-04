@@ -6,6 +6,8 @@ session_start();
 //  if not connected
 if ($_SESSION['loggedIn'] != true) {
     header('location: /controllers/homeCtrl.php');
+} else {
+    $idUsers = $_SESSION['user']->id;
 }
 
 require_once(__DIR__ . '/../models/Comment.php');
@@ -15,14 +17,17 @@ require_once(__DIR__ . '/../helpers/flash.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
-    // FILTRE ID Publiacation 
+    // FILTRE ID Comment 
     $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 
 
     if (empty($error)) {
         try {
             // SUPPRESION
-            $result = Comment::delete($id);
+            $comment = Comment::get($id);
+            if ($comment->idUsers == $idUsers) {
+                $result = Comment::delete($id);
+            }
             if ($result) {
                 flash('deleteComment', 'Votre commentaire a bien été supprimé ! ', FLASH_SUCCESS);
                 header('location: /controllers/feedUserCtrl.php');

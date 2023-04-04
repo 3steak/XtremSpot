@@ -12,6 +12,7 @@ require_once(__DIR__ . '/../helpers/flash.php');
 require_once(__DIR__ . '/../helpers/db.php');
 require_once(__DIR__ . '/../models/Category.php');
 require_once(__DIR__ . '/../models/Comment.php');
+require_once(__DIR__ . '/../models/Favorite.php');
 require_once(__DIR__ . '/../models/Publication.php');
 $jsName = 'feedUserCtrl';
 
@@ -19,12 +20,13 @@ $jsName = 'feedUserCtrl';
 $listCategory = Category::get();
 $listTowns = Publication::getTowns();
 
+
 //  -------------------  if $_Session[user]->admin === 1 alors user est admin -------------------
 
 try {
     $publications = Publication::get();
-
     $comments = Comment::getAll();
+    $favorites = Favorite::get($idUser);
 } catch (\Throwable $th) {
     //throw $th;
     $errorMsg = $th->getMessage();

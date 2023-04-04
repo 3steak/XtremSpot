@@ -5,6 +5,7 @@ if (!empty($_GET['register']) && $_GET['register'] == 'bienvenue') {
     flash('register');
 }
 flash('deletePublication');
+flash('deleteComment');
 ?>
 <main>
     <!-- MODALMAP -->
@@ -102,7 +103,25 @@ flash('deletePublication');
             </div>
         </div>
     </div>
+    <!-- MODAL SUPPRESION COMMENT  -->
+    <div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="linkDeleteComment" action="/deleteCommentCtrl?id=" action method="post">
 
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="deleteCommentLabel">Supprimer votre commentaire ?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!--------------------- FILTER BUTTON ---------------->
     <div class="container my-1">
         <div class="row">
@@ -179,7 +198,27 @@ flash('deletePublication');
                                 <?= htmlentities($publication->pseudo) ?>
                             </a>
                             <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
-                            <a href="#" class="text-black ms-auto  me-2 fa-2xl"><i class="fa-regular fa-bookmark"></i></a>
+                            <?php
+
+                            if (empty($favorites)) { ?>
+                                <a href="" class="text-black ms-auto  me-2 fa-2xl favoriteBtn  fa-bookmark fa-regular" id="favoriteBtn" data-publication-id=<?= htmlentities($publication->id) ?>></a>
+                                <?php
+                            } else {
+                                $isInFav = 0;
+                                foreach ($favorites as $favorite) {
+                                    if ($favorite->idUsers === $idUser && $publication->id === $favorite->idPublications) {
+                                        $isInFav = 1;
+                                    }
+                                }
+                                if ($isInFav) { ?>
+                                    <a href="" class=" text-black ms-auto  me-2 fa-2xl favoriteBtn  fa-bookmark fa-solid" id="favoriteBtn" data-publication-id=<?= htmlentities($publication->id) ?>></a>
+
+                                <?php  } else { ?>
+                                    <a href="" class="text-black ms-auto  me-2 fa-2xl favoriteBtn  fa-bookmark fa-regular" id="favoriteBtn" data-publication-id=<?= htmlentities($publication->id) ?>></a>
+                                <?php } ?>
+
+                            <?php
+                            } ?>
                         </div>
 
                         <div class="d-flex align-items-center ">
@@ -232,7 +271,12 @@ flash('deletePublication');
                                                 <?= htmlentities($comment->pseudo) ?>
                                             </a><br>
                                             <small class=" commentsHour mt-4 ms-4">Publié le : <?= htmlentities(date('d/m/Y', strtotime($comment->created_at))) ?> à <?= htmlentities(date('H', strtotime($comment->created_at))) ?>h</small>
-                                            <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+                                            <div class="d-flex  justify-content-between align-items-center ">
+                                                <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+                                                <?php if ($idUser === $comment->idUsers) { ?>
+                                                    <a class="m-1 deleteComment text-white" title="Supprimer mon commentaire" href="" data-bs-toggle="modal" data-bs-target="#deleteComment" data-id=<?= $comment->commentId ?>><i class="fa-regular fa-circle-xmark "></i></a>
+                                                <?php } ?>
+                                            </div>
                                             <hr>
                                         </div>
                                 <?php
