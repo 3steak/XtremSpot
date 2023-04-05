@@ -1,4 +1,5 @@
-//------------------------ MODAL FOR IFRAME FEEDUSER.PHP -----------------------------------------
+//------------------------ MODAL FOR MAP FEEDUSER.PHP -----------------------------------------
+
 let pings = document.querySelectorAll('.ping');
 for (let ping of pings) {
     ping.addEventListener('click', mapModal)
@@ -55,8 +56,7 @@ function mapModal() {
     }
     setTimeout(() => {
         init();
-    }, "10");
-
+    }, "300");
 }
 
 
@@ -78,6 +78,7 @@ function descModal() {
 
 }
 
+
 // ---------------------- SUPPRESSION PUBLICATION  ----------------------------------------
 let trashes = document.querySelectorAll('.deleteApt');
 for (let trash of trashes) {
@@ -88,15 +89,13 @@ for (let trash of trashes) {
 function persoModal() {
     // Attributs data
     let id = this.dataset.id;
-    let name = this.dataset.name;
-
+    let email = this.dataset.email;
     // Injection in modal
-    document.querySelector("#validateModal .fullname").innerText = name;
-    let link = document.querySelector("#linkDelete");
-    let href = link.getAttribute('href');
-    href = href.substring(0, href.length - 1)
-
-    link.setAttribute('href', href + id)
+    let link = document.querySelector("#linkDeletePublication");
+    let inputEmail = document.querySelector('.emailPublication');
+    let action = '/controllers/dashboard/deletePublicationCrudProfilCtrl.php?id=';
+    link.setAttribute('action', action + id);
+    inputEmail.value = email;
 
 }
 
@@ -109,29 +108,21 @@ for (let trashComment of trashesComment) {
 function modalComment() {
     // Attributs data
     let idComment = this.dataset.idcomment;
-    let pseudo = this.dataset.pseudo;
+    let email = this.dataset.email;
+
+    console.log(email);
 
     // Injection in modal
-    document.querySelector("#deleteComment .pseudo").innerText = pseudo;
     let link = document.querySelector("#linkDeleteComment");
-    let href = '/controllers/dashboard/deleteCommentCtrl.php?id=';
-    link.setAttribute('href', href + idComment)
+    let inputEmail = document.querySelector('.emailComment');
+    let action = '/controllers/dashboard/deleteCommentCrudProfilCtrl.php?id=';
+    link.setAttribute('action', action + idComment);
+    inputEmail.value = email;
 }
 
 
 
-//  ENLEVE LE DISABLE DU FORM PROFILPATIENT
 
-let button = document.querySelector('.triggerUdpdate');
-let fieldset = document.querySelector('fieldset');
-
-button.addEventListener('click', (event) => {
-    if (fieldset.hasAttribute('disabled')) {
-        fieldset.removeAttribute('disabled');
-    } else {
-        fieldset.setAttribute('disabled', 'disabled');
-    }
-});
 
 
 

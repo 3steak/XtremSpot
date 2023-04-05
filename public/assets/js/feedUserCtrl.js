@@ -1,4 +1,5 @@
 //------------------------ MODAL FOR MAP FEEDUSER.PHP -----------------------------------------
+
 let pings = document.querySelectorAll('.ping');
 for (let ping of pings) {
     ping.addEventListener('click', mapModal)
@@ -154,12 +155,12 @@ $(document).ready(function () {
     //  DELETE PUBLICATION
     let buttonsDltPublication = document.querySelectorAll('.deletePublication');
     for (let trash of buttonsDltPublication) {
-        trash.addEventListener('click', persoModal)
+        trash.addEventListener('click', deletePub)
     }
-    function persoModal() {
+    function deletePub() {
         // Attributs data
-        let id = this.dataset.id;
-
+        let id = this.dataset.idpublication;
+        console.log(id);
         // Injection in modal
         let link = document.querySelector("#linkDeletePublication");
         let action = '/controllers/deletePublicationCtrl.php?id=';
@@ -174,6 +175,7 @@ $(document).ready(function () {
     }
     function persoModal() {
         // Attributs data
+        console.log('coucou');
         let id = this.dataset.id;
 
         // Injection in modal

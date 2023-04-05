@@ -235,7 +235,7 @@ flash('deleteComment');
                                 <li><a class="dropdown-item text-white" href="" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
 
                                 <?php if ($idUser === $publication->idUsers) { ?>
-                                    <li><a class="dropdown-item text-white deletePublication" href="" data-bs-toggle="modal" data-bs-target="#deletePublication" data-id=<?= $publication->id ?>>Supprimer</a></li>
+                                    <li><a class="dropdown-item text-white deletePublication" href="" data-bs-toggle="modal" data-bs-target="#deletePublication" data-idpublication=<?= $publication->id ?>>Supprimer</a></li>
                                 <?php } ?>
                             </ul>
                         </div>

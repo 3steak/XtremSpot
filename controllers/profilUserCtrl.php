@@ -18,9 +18,15 @@ $jsName = 'feedUserCtrl';
 if (!isset($_GET['isSent'])) {
     $idUser = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 }
+if (!empty($_GET)) {
+    $idUser = $_SESSION['user']->id;
+    flash('formNewContentOk');
+}
 if (empty($_GET)) {
     $idUser = $_SESSION['user']->id;
+    flash('formNewContentOk');
 }
+
 
 
 try {
@@ -45,9 +51,6 @@ try {
 
 
 include_once(__DIR__ . '/../views/templates/header.php');
-if (!empty($_GET) && isset($_GET['isSent']) == 'ok') {
-    flash('formNewContentOk');
-}
 
 include_once(__DIR__ . '/../views/profilUser.php');
 require_once(__DIR__ . '/../views/templates/footer.php');

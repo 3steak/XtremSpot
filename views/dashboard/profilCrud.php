@@ -48,46 +48,83 @@ if (isset($_SESSION['flash'])) {
             </div>
         </div>
     </div>
-
-    <!-- MODAL SUPPRESION PUBLICATION-->
-    <div class="modal fade" id="validateModal" tabindex="-1" aria-labelledby="validateModalLabel" aria-hidden="true">
+    <!-- DELETE COMMENT -->
+    <div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="refuseCommentLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="validateModalLabel">Suppression de la publication</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Supprimer la publication de <span class="fullname"></span> ? <br>
-                    Cela n'affectera pas ses publications et ses commentaires
-                </div>
-                <div class="modal-footer">
-                    <a role="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</a>
-                    <a class="btn btn-primary " id="linkDelete" href="/deletePublicationCrudCtrl?id==" role="button">Supprimer</a>
-                </div>
+                <form id="linkDeleteComment" action="/deleteCommentCrudProfilCtrl?id=" action method="post">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="refuseCommentLabel">Pourquoi supprimer ?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="btn-group col-12 d-flex flex-column p-3">
+                            <h3 class="text-black ms-2 pt-3 mb-2">Choissisez un motif de suppresion</h3>
+                            <input type="hidden" class="emailComment" name="email" value="">
+
+                            <input type="radio" class="btn-check" value="Contenu indésirable" name="refuseMsg" id="contentUndesirable" checked />
+                            <label class="btn btn-light mx-auto w-100" for="contentUndesirable">Contenu indésirable</label>
+
+                            <input type="radio" class="btn-check" value="Nudité" name="refuseMsg" id="nudity" />
+                            <label class="btn btn-light mx-auto w-100" for="nudity">Nudité</label>
+
+                            <input type="radio" class="btn-check" value="Discours ou symboles haineux" name="refuseMsg" id="racism" />
+                            <label class="btn btn-light mx-auto w-100" for="racism">Discours ou symboles haineux</label>
+
+                            <input type="radio" class="btn-check" value="Fausses informations" name="refuseMsg" id="wrongInfo" />
+                            <label class="btn btn-light mx-auto w-100" for="wrongInfo">Fausses informations</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+                        <!--  ENVOI MAIL AVEC MOTIF ENVOYER EN POST  -->
+                        <button type="submit" class="btn btn-primary">Confirmer le refus</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- MODAL SUPPRESION COMMENT-->
-    <div class="modal fade" id="deleteComment" tabindex="-1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+    <!-- MODAL DELETE PUBLICATION -->
+    <div class="modal fade" id="validateModal" tabindex="-1" aria-labelledby="refusePublicationLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteCommentLabel">Suppression du commentaire</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Supprimer le commentaire <span class="pseudo"></span> ? <br>
-                    Cela n'affectera pas ses publications et ses commentaires
-                </div>
-                <div class="modal-footer">
-                    <a role="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</a>
-                    <a class="btn btn-primary " id="linkDeleteComment" href="/deleteCommentCtrl.php?id=" role="button">Supprimer</a>
-                </div>
+                <form id="linkDeletePublication" action="/deletePublicationCrudProfilCtrl?id=" action method="post">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="refusePublicationLabel">Pourquoi refuser la publication?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="btn-group col-12 d-flex flex-column p-3">
+                            <h3 class="text-black ms-2 pt-3 mb-2">Choissisez un motif de signalement</h3>
+                            <input type="hidden" class="emailPublication" name="email" value="">
+
+                            <input type="radio" class="btn-check" value="Contenu indésirable" name="refuseMsg" id="contentUndesirablex" checked />
+                            <label class="btn btn-light mx-auto w-100" for="contentUndesirablex">Contenu indésirable</label>
+
+                            <input type="radio" class="btn-check" value="Nudité" name="refuseMsg" id="nudityx" />
+                            <label class="btn btn-light mx-auto w-100" for="nudityx">Nudité</label>
+
+                            <input type="radio" class="btn-check" value="Discours ou symboles haineux" name="refuseMsg" id="racismx" />
+                            <label class="btn btn-light mx-auto w-100" for="racismx">Discours ou symboles haineux</label>
+
+                            <input type="radio" class="btn-check" value="Fausses informations" name="refuseMsg" id="wrongInfox" />
+                            <label class="btn btn-light mx-auto w-100" for="wrongInfox">Fausses informations</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+
+                        <!--  ENVOI MAIL AVEC MOTIF ENVOYER EN POST  -->
+                        <button type="submit" class="btn btn-primary">Confirmer le refus</button>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
+
     <!----- BANNIERE ---->
 
     <div class="container-fluid my-3">
@@ -226,7 +263,7 @@ if (isset($_SESSION['flash'])) {
                                     <a class=" text-black text-decoration-none p-3 ping" title="Voir le lieu du spot" data-bs-toggle="modal" data-bs-target="#mapModal" data-title="<?= $publication->title ?>" data-marker_longitude="<?= $publication->marker_longitude ?>" data-marker_latitude="<?= $publication->marker_latitude ?>" data-pseudo="<?= $profilUser->pseudo ?>"><i class="fa-solid fa-location-dot fa-2x"></i></a>
 
                                     <!-- BOUTON DELETE PUBLICATION  -->
-                                    <a class="text-decoration-none p-3 deleteApt" title="Supprimer la publication" data-bs-toggle="modal" data-bs-target="#validateModal" data-name="<?= $profilUser->pseudo ?>" data-id="<?= $publication->id ?>">
+                                    <a class="text-decoration-none p-3 deleteApt deletePublication" title="Supprimer la publication" data-bs-toggle="modal" data-bs-target="#validateModal" data-name="<?= $profilUser->pseudo ?>" data-id="<?= $publication->id ?>" data-email="<?= $profilUser->email ?>">
                                         <i class="fa-regular fa-trash-can m-1 fa-2x"></i></a>
                                 </div>
                             </div>
@@ -254,7 +291,7 @@ if (isset($_SESSION['flash'])) {
                                 <div class="col-12 text-center">
 
                                     <!-- BOUTON DELETE COMMENT  -->
-                                    <a href="" class="text-decoration-none p-3 deleteComment" title="Supprimer le commentaire" data-bs-toggle="modal" data-bs-target="#deleteComment" data-pseudo="<?= $profilUser->pseudo ?>" data-idcomment="<?= $comment->commentId ?>">
+                                    <a href="" class="text-decoration-none p-3 deleteComment" title="Supprimer le commentaire" data-bs-toggle="modal" data-bs-target="#deleteComment" data-pseudo="<?= $profilUser->pseudo ?>" data-idcomment="<?= $comment->commentId ?>" data-email="<?= $profilUser->email ?>">
                                         <i class="fa-regular fa-trash-can m-1 fa-2x"></i></a>
                                 </div>
                             </div>

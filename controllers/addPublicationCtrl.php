@@ -19,7 +19,6 @@ use GuzzleHttp\Client;
 const API_URL = 'https://geo.api.gouv.fr/';
 $jsName = 'addPublication';
 
-flash('formNewContentOk', 'Votre publication va être lue par nos plus beaux modérateurs', FLASH_SUCCESS);
 
 // category list 
 $listCategory = Category::get();
@@ -163,7 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $result = $publication->addPublication();
             if ($result) {
-                header('location: /controllers/profilUserCtrl.php?isSent=ok');
+                flash('formNewContentOk', 'Votre publication va être lue par nos plus beaux modérateurs', FLASH_SUCCESS);
+                header('location: /controllers/profilUserCtrl.php');
                 die;
             } else {
                 throw new Exception("Publication non ajouté", 1);
