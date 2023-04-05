@@ -1,7 +1,6 @@
       <!----------- START MAIN  -------------->
       <main class="d-flex align-items-center">
 
-
           <div class="container containerHome  main mt-5">
               <?= $error['noValidated'] ?? '' ?>
               <div class="row  justify-content-center">
