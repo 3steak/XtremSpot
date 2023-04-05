@@ -103,12 +103,13 @@ class Favorite
      */
     public static function get(int $idUser): array
     {
-        $sql = 'SELECT `favorites`.`id` AS `idFavorites`,`favorites`.`idUsers`, `idPublications`, `publications`.`title`, `publications`.`description`, `publications`.`image_name`,`publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` AS `categoryName`, `publications`.`idUsers` AS `publishBy`, `users`.`pseudo`,`users`.`avatar`, `users`.`admin` 
-            FROM `favorites` 
-            JOIN `users` ON `favorites`.`idUsers` = `users`.`id` 
-            JOIN `categories` ON `categories`.`id` = `users`.`idCategories` 
-            JOIN `publications` ON `favorites`.idPublications = `publications`.`id` 
-            WHERE `users`.`id` = :id;';
+        $sql = 'SELECT `favorites`.`id` AS `idFavorites`, `favorites`.`idUsers`, `idPublications`, `publications`.`title`, `publications`.`description`, `publications`.`image_name`, `publications`.`marker_longitude`, `publications`.`marker_latitude`, `publications`.`town`, `publications`.`likes`, `categories`.`name` AS `categoryName`, `publications`.`idUsers` AS `publishBy`, `users`.`pseudo`, `users`.`avatar`, `users`.`admin`, `pubUser`.`pseudo` AS `pubUserPseudo`, `pubUser`.`avatar` AS `pubUserAvatar`
+        FROM `favorites`
+        JOIN `users` ON `favorites`.`idUsers` = `users`.`id`
+        JOIN `categories` ON `categories`.`id` = `users`.`idCategories`
+        JOIN `publications` ON `favorites`.idPublications = `publications`.`id`
+        JOIN `users` AS `pubUser` ON `publications`.`idUsers` = `pubUser`.`id`
+        WHERE `users`.`id` = :id;';
         $sth = Database::connect()->prepare($sql);
         $sth->bindValue(':id', $idUser, PDO::PARAM_INT);
         $sth->execute();
@@ -128,6 +129,7 @@ class Favorite
         $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
         $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
         $sth->execute();
+
         $result = $sth->fetch();
 
         if (!empty($result->created_at)) {

@@ -169,9 +169,9 @@ if (isset($_SESSION['flash'])) {
                     <div class="card text-bg-dark my-3 ">
                         <div class="col-12 p-2">
                             <div class="d-flex align-items-center ">
-                                <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $publication->avatar ?>" alt="photo profil utilisateur"></a>
-                                <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 fs-2">
-                                    <?= htmlentities($publication->pseudo) ?>
+                                <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->publishBy)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $publication->pubUserAvatar ?>" alt="photo profil utilisateur"></a>
+                                <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->publishBy)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 fs-2">
+                                    <?= htmlentities($publication->pubUserPseudo) ?>
                                 </a>
                                 <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
 
@@ -190,9 +190,7 @@ if (isset($_SESSION['flash'])) {
                                 <!-- dropdown menu  -->
                                 <ul class="dropdown-menu bg-dark">
                                     <li><a class="dropdown-item text-white" data-bs-toggle="modal" data-bs-target="#report">Signaler</a></li>
-                                    <?php if ($idSession === $publication->idUsers) { ?>
-                                        <li><a class="dropdown-item text-white deletePublication" href="" data-bs-toggle="modal" data-bs-target="#deletePublication" data-id=<?= $publication->idPublications ?>>Supprimer</a></li>
-                                    <?php } ?>
+
                                 </ul>
                             </div>
                         </div>

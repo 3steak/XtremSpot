@@ -23,6 +23,10 @@ main {
     min-height: 90vh;
 }
 
+footer {
+    min-height: 10vh;
+}
+
 .smallSpot {
     color: var(--button-bg-color);
 }

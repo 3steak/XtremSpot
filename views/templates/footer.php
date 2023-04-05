@@ -3,13 +3,11 @@
   <footer class="bg-dark ">
       <div class="container-fluid ">
           <div class="row">
-              <div class="col d-flex flex-column flex-md-row justify-content-center text-center gap-4 p-2">
-                  <a href="#" class="text-decoration-none text-white p-3">Mentions légales</a>
-                  <a href="#" class="text-decoration-none text-white p-3">Politique de confidentialité</a>
+              <div class="col d-flex flex-column flex-md-row   justify-content-center text-center gap-4 p-2">
+                  <a href="/controllers/mentionsCtrl.php" class="text-decoration-none text-white p-3">Mentions légales</a>
+                  <a href="/controllers/politiqueCtrl.php" class="text-decoration-none text-white p-3">Politique de confidentialité</a>
                   <a href="#" class="text-decoration-none text-white p-3">Plan du site</a>
-                  <a href="#" class="text-decoration-none text-white p-3">Réseaux sociaux</a>
-                  <a href="#" class="text-decoration-none text-white p-3">Localisation</a>
-                  <a href="#" class="text-decoration-none text-white p-3"><small>&copy; Copyright 2023</small> </a>
+                  <a href="" class="text-decoration-none text-white p-3"><small>&copy; Copyright 2023</small> </a>
               </div>
           </div>
       </div>

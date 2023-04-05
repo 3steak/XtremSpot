@@ -1,12 +1,11 @@
     <!---------------- START MAIN --------------->
-    <main>
-        <div class="container main containerCrud mt-5">
+    <main class="d-flex align-items-center">
+        <div class="container main containerCrud ">
             <div class="row d-flex gap-2 justify-content-center">
                 <div class="col-12">
                     <h1 class="text-white text-center m-2">Paramètres</h1>
                 </div>
                 <div class="col-11 m-4">
-
                     <!-- CARD SETTINGS -->
                     <div class="cardSettings  d-flex justify-content-center m-4 p-2">
                         <div class="row gap-5">

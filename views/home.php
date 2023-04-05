@@ -1,13 +1,13 @@
       <!----------- START MAIN  -------------->
-      <main>
+      <main class="d-flex align-items-center">
           <!-- Background video -->
 
           <video id="background-video" autoplay loop muted>
               <source src="/public/assets/img/video_home.mp4" type="video/mp4">
           </video>
-          <div class="container containerHome main mt-5">
+          <div class="container containerHome  main mt-5">
               <?= $error['noValidated'] ?? '' ?>
-              <div class="row d-flex justify-content-center">
+              <div class="row  justify-content-center">
                   <div class="col-10 col-lg-5 bg-dark bg-opacity-75 pt-5 pb-2 px-4 mb-5 rounded-1">
                       <h1 class="text-center ">
                           <span class="xtrem">XTREM</span><span class="spot">SPOT</span><br>
@@ -42,7 +42,6 @@
                           </div>
                       </form>
                   </div>
-                  <div class="my-5"></div>
               </div>
           </div>
       </main>
