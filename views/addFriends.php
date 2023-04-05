@@ -1,6 +1,6 @@
     <!---------------- MAIN --------------->
     <main>
-        <div class="container-fluid main mt-5">
+        <div class="container-fluid containerCrud main mt-5">
             <div class="row d-flex justify-content-center mb-4">
                 <div class="col-10 ">
                     <form class="bg-dark bg-opacity-75 py-5 px-4 rounded-1" action="">

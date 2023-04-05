@@ -1,23 +1,23 @@
-      <!-- Background video -->
-      <video id="background-video" autoplay loop muted>
-          <source src="/public/assets/img/video_home.mp4" type="video/mp4">
-      </video>
       <!----------- START MAIN  -------------->
       <main>
-          <div class="container-fluid my-5 bg-white bg-opacity-75 ">
-              <div class="row">
-                  <div class="col-12">
-                      <h1 class="text-center text-dark"><img src="/public/assets/img/logo-removebg-.png" class="logoHome" alt="Logo Home"></h1>
-                  </div>
-                  <div class="col-12">
-                      <h1 class="text-center text-dark"><img src="/public/assets/img/XtremSpot.png" class="Slogan" alt="Slogan"></h1>
-                  </div>
-              </div>
-          </div>
-          <div class="container main mt-5">
+          <!-- Background video -->
+
+          <video id="background-video" autoplay loop muted>
+              <source src="/public/assets/img/video_home.mp4" type="video/mp4">
+          </video>
+          <div class="container containerHome main mt-5">
               <?= $error['noValidated'] ?? '' ?>
               <div class="row d-flex justify-content-center">
-                  <div class="col-10 col-lg-6 ">
+                  <div class="col-10 col-lg-5 bg-dark bg-opacity-75 pt-5 pb-2 px-4 mb-5 rounded-1">
+                      <h1 class="text-center ">
+                          <span class="xtrem">XTREM</span><span class="spot">SPOT</span><br>
+                          <hr class="hrSlogan mx-auto"><span class="publication">Une Publication</span><br><span class="petitspot"> Un Spot</span>
+                      </h1>
+                      <p class="text-white text-center explainHome pt-2"> Rejoins notre communauté de <span class="smallSpot">rideur</span> !</p><br>
+                      <p class="text-white text-center explainHome">🏄 Partage les <span class="smallSpot">photos</span> de ton sport extrême favoris 🚲</p><br>
+                      <p class="text-white text-center explainHome"> 📍 Grâce à cette application partage et retrouve le <span class="smallSpot">Spot</span> lié aux photos publiées 📷</p><br>
+                  </div>
+                  <div class="col-10 col-lg-5 ">
                       <form class="bg-dark bg-opacity-75 pt-5 pb-2 px-4 mb-5 rounded-1" method="post" action="">
                           <h2 class="text-white text-center p-3">Connexion</h2>
                           <div class=" row">
@@ -33,9 +33,6 @@
                               <?= $error['password'] ?? '' ?>
                               <a href="/controllers/forgotMdp.php" class="link-secondary text-white text-center text-decoration-none forgotMdp">Mot de
                                   passe oublié</a>
-
-
-
                               <div class="col-12 py-3 d-flex justify-content-center">
                                   <button type="submit" id="connexion" class="btn btn-dark px-5 w-75">Connexion</button>
                               </div>
@@ -45,8 +42,8 @@
                           </div>
                       </form>
                   </div>
+                  <div class="my-5"></div>
               </div>
           </div>
       </main>
       <!----------- END OF MAIN  -------------->
-      </main>

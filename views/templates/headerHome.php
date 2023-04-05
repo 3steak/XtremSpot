@@ -14,3 +14,5 @@
 
     <title>XtremSpot • Une publication un spot</title>
 </head>
+
+<body class="body">

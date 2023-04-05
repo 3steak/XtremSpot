@@ -3,15 +3,29 @@
     padding: 0;
 }
 
+
 /* FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;900&display=swap');
 
 :root {
     --main-bg-color: #101010;
-    --button-bg-color: #2B59C3;
+    --button-bg-color: #6072B1;
     --main-red-color: #FF0000;
+    --main-white-color: #EDF7F6;
 }
 
+
+.explainHome {
+    font-size: 1.2rem;
+}
+
+main {
+    min-height: 90vh;
+}
+
+.smallSpot {
+    color: var(--button-bg-color);
+}
 
 h1,
 h2 {
@@ -34,6 +48,8 @@ p {
 .body {
     background-color: var(--main-bg-color);
 }
+
+
 
 #background-video {
     height: 100vh;
@@ -95,7 +111,7 @@ p {
 
 #message-text {
     background-color: #101010e6;
-    color: #EDF7F6;
+    color: var(--main-white-color);
 }
 
 .accordion-collapse {
@@ -109,7 +125,7 @@ p {
 }
 
 .cardNotif {
-    background-color: #EDF7F6 !important;
+    background-color: var(--main-white-color) !important;
 }
 
 /* ProfilUser */
@@ -177,8 +193,49 @@ p {
 }
 
 .logoHome {
-    width: 250px;
+    width: 200px;
+}
 
+.xtrem {
+    color: var(--main-white-color);
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 900;
+}
+
+.spot {
+    color: var(--button-bg-color);
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 900;
+}
+
+.publication {
+    color: var(--main-white-color);
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 300;
+}
+
+.petitspot {
+    color: var(--button-bg-color);
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 300;
+}
+
+.hrSlogan {
+    width: 50%;
+    height: 5px;
+    border-style: solid;
+    border-color: var(--button-bg-color);
+    border-width: 10px 0 0 0;
+    border-radius: 15px;
+}
+
+.hrSlogan:before {
+    display: block;
+    height: 5px;
+    border-style: solid;
+    border-color: var(--button-bg-color);
+    border-width: 0 0 10px 0;
+    border-radius: 15px;
 }
 
 /* MAP ADD PUBLICATION */

@@ -1,11 +1,11 @@
     <!---------------- MAIN --------------->
     <main>
-        <div class="container-fluid main mt-5">
+        <div class="container-fluid containerCrud main mt-5">
             <div class="row d-flex gap-2 justify-content-center">
                 <div class="col-12">
                     <h1 class="text-white text-center m-2">CRUD ADMIN</h1>
                 </div>
-                <div class="col-11 m-4">
+                <div class="col-11 mx-4">
 
                     <!-- BOUTONS DE MODERATION -->
                     <div class="cardCrud col-12 col-lg-8 mx-auto  d-flex flex-column gap-2 m-2 p-4 rounded-4">
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                </form>
+
             </div>
         </div>
     </main>

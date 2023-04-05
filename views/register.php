@@ -1,14 +1,17 @@
   <!-- Background video -->
   <video id="background-video" autoplay loop muted>
-      <source src="/public/assets/img/video_register.mp4" type="video/mp4">
+      <source src="/public/assets/img/video_register (1).mp4" type="video/mp4">
   </video>
   <main>
+
       <div class="container main mt-5">
           <div class="row d-flex justify-content-center">
+
               <div class="col-10 col-lg-6">
                   <!-------------- FORM  ----------------->
                   <form class="bg-dark bg-opacity-75 rounded-1 pt-5 p-3 mb-5" action="" novalidate method="post">
-                      <h2 class="text-white text-center mb-3">Inscription</h2>
+                      <h2 class="text-center text-dark"><img src="/public/assets/img/logo-light.png" class="logoHome" alt="Logo Home"></h2>
+                      <h1 class="text-white text-center mb-3">Inscription</h1>
                       <div class=" row">
                           <!-- Firstname -->
                           <div class="col-12 col-lg-6 p-3">
@@ -37,7 +40,7 @@
                           <!------ CATEGORY ------->
                           <div class="col-12 p-3">
                               <select class="form-select " id="nativeTown" name="idCategories" aria-label="Pratique">
-                                  <option disabled>Sport pratiqué ? *</option>
+                                  <option selected>Sport pratiqué ? *</option>
                                   <?php
                                     foreach ($listCategory as $category) { ?>
                                       <option value="<?= $category->id ?>" <?= (!empty($_POST['idCategories']) === $category->id) ? 'selected' : '' ?>><?= $category->name ?></option>

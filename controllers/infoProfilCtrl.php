@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('location: /controllers/infoProfilCtrl.php?update=update');
                 die;
             } else {
-                flash('noUpdate', 'Ton profil a été non modifié ! ', FLASH_WARNING);
+                flash('noUpdate', 'Ton profil n\'a pas été modifié ! ', FLASH_WARNING);
                 header('location: /controllers/infoProfilCtrl.php?update=noUpdate');
                 die;
             }

@@ -1,6 +1,6 @@
     <!---------------- START MAIN --------------->
     <main>
-        <div class="container main mt-5">
+        <div class="container main containerCrud mt-5">
             <div class="row d-flex gap-2 justify-content-center">
                 <div class="col-12">
                     <h1 class="text-white text-center m-2">Paramètres</h1>
