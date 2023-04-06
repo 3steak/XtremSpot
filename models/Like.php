@@ -51,13 +51,15 @@ class Like
         $result = $sth->fetch();
 
         if (!empty($result->created_at)) {
+
             return false;
         }
 
         if (empty($result)) {
 
             // insert dans table likes 
-            $sql = "INSERT INTO `likes` (`idUsers`, `idPublications`, `created_at`) VALUES (:idUsers, :idPublications, NOW())";
+            $sql = "INSERT INTO `likes` (`idUsers`, `idPublications`, `created_at`)
+             VALUES (:idUsers, :idPublications, NOW())";
             $sth = Database::connect()->prepare($sql);
             $sth->bindValue(':idPublications', $this->idPublications, PDO::PARAM_INT);
             $sth->bindValue(':idUsers', $this->idUsers, PDO::PARAM_INT);
@@ -73,7 +75,31 @@ class Like
         }
     }
 
+    public static function getOne(int $idUsers, int $idPublication)
+    {
+        $sql = "SELECT * FROM `likes` WHERE `likes`.`idUsers` = :idUsers AND `idPublications` = :idPublications";
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':idPublications', $idPublication, PDO::PARAM_INT);
+        $sth->bindValue(':idUsers', $idUsers, PDO::PARAM_INT);
+        $sth->execute();
+        $like = $sth->fetch();
+        return $like;
+    }
 
+    public static function delete(int $idLike, int $idPublication): bool
+    {
+        $sql = 'DELETE FROM `likes` WHERE id = :id;';
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':id', $idLike, PDO::PARAM_INT);
+        $sth->execute();
+        // update colonne like dans table publication 
+        $sql = "UPDATE `publications` SET `likes` = likes - 1 WHERE `publications`.`id` = :idPublications";
+        $sth = Database::connect()->prepare($sql);
+        $sth->bindValue(':idPublications', $idPublication, PDO::PARAM_INT);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
 
     // END CLASS 
 }

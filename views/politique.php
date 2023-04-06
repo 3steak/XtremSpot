@@ -22,7 +22,7 @@
                       <p class="text-white text-justify">Vous pouvez accéder, modifier ou supprimer les informations personnelles que vous avez fournies sur notre site Web en vous connectant à votre compte et en accédant à la page de profil correspondante.</p>
                       <br>
                       <h2 class="text-white">Contact</h2>
-                      <p class="text-white text-justify">Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité ou nos pratiques de collecte de données, veuillez nous contacter à l'adresse e-mail suivante : <mail:to>cyprien.bocquet@gmail.com</mail:to> .</p>
+                      <p class="text-white text-justify">Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité ou nos pratiques de collecte de données, veuillez nous contacter à l'adresse e-mail suivante : <a href="mailto:">cyprien.bocquet@gmail.com</a>.</p>
                       <br>
                       <h2 class="text-white">Modifications de la politique </h2>
                       <p class="text-white text-justify">Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment et sans préavis. Votre utilisation continue de notre site Web après la publication de modifications apportées à cette politique de confidentialité constitue votre acceptation de ces modifications.</p>

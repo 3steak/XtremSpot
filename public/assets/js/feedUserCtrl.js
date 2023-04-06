@@ -122,8 +122,20 @@ $(document).ready(function () {
             let publicationId = btn.dataset.publicationId;
             // control si user a deja aimé
             if (likedPublications.includes(publicationId)) {
-                // Je stop le script 
-
+                fetch('/config/removeLike.php?id=' + publicationId)
+                    .then(response => {
+                        return (response.json())
+                            .then(data => {
+                                if (data == '0') {
+                                    // Retirer l'ID de publication du tableau likedPublications
+                                    likedPublications.splice(likedPublications.indexOf(publicationId), 1);
+                                    // Décrémenter le nombre de likes visuellement
+                                    let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
+                                    let likesCount = parseInt(countLikeBefore[0].innerText);
+                                    countLikeBefore[0].innerText = likesCount - 1;
+                                }
+                            })
+                    })
                 return;
             }
 
@@ -133,15 +145,22 @@ $(document).ready(function () {
                         return (response.json())
                             .then(data => {
                                 if (data == '0') {
-                                    return;
+                                    console.log('deja like');
+                                    likedPublications.splice(likedPublications.indexOf(publicationId), 1);
+                                    let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
+                                    // string to int
+                                    let likesCount = parseInt(countLikeBefore[0].innerText);
+                                    // incrémentation
+                                    countLikeBefore[0].innerText = likesCount - 1;
+                                } else if (data == '1') {  // Ajout idPublication dans tableau
+                                    likedPublications.push(publicationId);
+                                    let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
+                                    // string to int
+                                    let likesCount = parseInt(countLikeBefore[0].innerText);
+                                    // incrémentation
+                                    countLikeBefore[0].innerText = likesCount + 1;
                                 }
-                                // Ajout idPublication dans tableau
-                                likedPublications.push(publicationId);
-                                let countLikeBefore = btn.parentNode.querySelectorAll('.countLike');
-                                // string to int
-                                let likesCount = parseInt(countLikeBefore[0].innerText);
-                                // incrémentation
-                                countLikeBefore[0].innerText = likesCount + 1;
+
                             })
                     })
                 // fin si idpublication est pas vide
@@ -175,7 +194,6 @@ $(document).ready(function () {
     }
     function persoModal() {
         // Attributs data
-        console.log('coucou');
         let id = this.dataset.id;
 
         // Injection in modal

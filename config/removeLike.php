@@ -16,25 +16,13 @@ require_once(__DIR__ . '/../models/Like.php');
 $idPublication = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
 
 try {
-    $like = new Like;
-    $like->setIdPublications($idPublication);
-    $like->setIdUsers($idUser);
-    $result = $like->addLikes($idUser, $idPublication);
+    # like existe deja donc delete 
+    $like = Like::getOne($idUser, $idPublication);
 
+    $result = Like::delete($like->id, $idPublication);
     if ($result) {
-        # INCREMENTATION
-        $response = 1;
+        $response = 0;
         echo (json_encode($response));
-    } else {
-
-        # like existe deja donc delete 
-        $like = Like::getOne($idUser, $idPublication);
-
-        $result = Like::delete($like->id, $idPublication);
-        if ($result) {
-            $response = 0;
-            echo (json_encode($response));
-        }
     }
 } catch (\Throwable $th) {
     var_dump($errorMsg = $th->getMessage());
