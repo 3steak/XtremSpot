@@ -26,7 +26,6 @@ let passwordDif = document.getElementById('passwordDif');
 
 password.addEventListener("focus", () => {
     passwordHelp.classList.remove("d-none");
-
 })
 
 //  ENVOI HTML SI MATCH AVEC DIFFERENTE REGEX

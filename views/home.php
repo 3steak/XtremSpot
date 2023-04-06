@@ -15,9 +15,9 @@
                           <span class="xtrem">XTREM</span><span class="spot">SPOT</span><br>
                           <hr class="hrSlogan mx-auto"><span class="publication">Une Publication</span><br><span class="petitspot"> Un Spot</span>
                       </h1>
-                      <p class="text-white text-center explainHome pt-2"> Rejoins notre communauté de <span class="smallSpot">rideur</span> !</p><br>
-                      <p class="text-white text-center explainHome">🏄 Partage les <span class="smallSpot">photos</span> de ton sport extrême favoris 🚲</p><br>
-                      <p class="text-white text-center explainHome"> 📍 Grâce à cette application partage et retrouve le <span class="smallSpot">Spot</span> lié aux photos publiées 📷</p><br>
+                      <p class="text-white text-center explainHome pt-2"> Rejoins notre communauté de passionés de sports <span class="smallSpot">extrêmes</span> !</p><br>
+                      <p class="text-white text-center explainHome">🏄 Partage tes plus belles <span class="smallSpot">photos</span> de ride !📷</p><br>
+                      <p class="text-white text-center explainHome"> 📍Découvre de nouveaux <span class="smallSpot">spots</span> incroyables dans ta région grâce à notre application de partage de spots 🤙</p><br>
                   </div>
                   <div class="col-10 col-lg-5 ">
                       <form class="bg-dark bg-opacity-75 pt-5 pb-2 px-4 mb-5 rounded-1" method="post" action="">

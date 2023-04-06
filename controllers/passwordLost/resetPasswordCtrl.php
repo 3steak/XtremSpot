@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error['confirmPassword'] = '<small class="text-white">Veuillez entrer le même mot de passe</small>';
         } else {
             // VERIF PAR REGEX
+
         }
         // Encodage du MDP
         $password = password_hash($password, PASSWORD_DEFAULT);
