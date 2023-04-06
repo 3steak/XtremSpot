@@ -9,7 +9,7 @@
 
               <div class="col-10 col-lg-6">
                   <!-------------- FORM  ----------------->
-                  <form class="bg-dark bg-opacity-75 rounded-1 pt-5 p-3 mb-5" action="" novalidate method="post">
+                  <form class="bg-dark bg-opacity-75 rounded-1 pt-5 p-3 mb-5" action="" method="post">
                       <h2 class="text-center text-dark"><img src="/public/assets/img/logo-light.png" class="logoHome" alt="Logo Home"></h2>
                       <h1 class="text-white text-center mb-3">Inscription</h1>
                       <div class=" row">

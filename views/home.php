@@ -5,7 +5,9 @@
           <video id="background-video" autoplay loop muted>
               <source src="/public/assets/img/video_home.mp4" type="video/mp4">
           </video>
+
           <div class="container containerHome  main mt-5">
+              <?php flash('newPass') ?? '' ?>
               <?= $error['noValidated'] ?? '' ?>
               <div class="row  justify-content-center">
                   <div class="col-10 col-lg-5 bg-dark bg-opacity-75 pt-5 pb-2 px-4 mb-5 rounded-1">
@@ -31,7 +33,7 @@
                                   <span class="input-group-text bg-dark text-white" id="basic-addon2"><i class="fa-regular fa-eye" id="togglePassword"></i></span>
                               </div>
                               <?= $error['password'] ?? '' ?>
-                              <a href="/controllers/forgotMdp.php" class="link-secondary text-white text-center text-decoration-none forgotMdp">Mot de
+                              <a href="/controllers/passwordLost/verifMailCtrl.php" class="link-secondary text-white text-center text-decoration-none forgotMdp">Mot de
                                   passe oublié</a>
                               <div class="col-12 py-3 d-flex justify-content-center">
                                   <button type="submit" id="connexion" class="btn btn-dark px-5 w-75">Connexion</button>

@@ -309,6 +309,24 @@ class User
         return ($result > 0) ? true : false;
     }
 
+    /** Allows to update password
+     * newPass
+     *
+     * @return bool
+     */
+    public function newPass(): bool
+    {
+        $sql = 'UPDATE `users`
+                SET `password`=:password
+                WHERE id = :id;';
+        $sth = Database::connect()->prepare($sql);
+
+        $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $sth->bindValue(':password', $this->password, PDO::PARAM_STR);
+        $sth->execute();
+        $result = $sth->rowCount();
+        return ($result > 0) ? true : false;
+    }
 
     /** Allows to delete user 
      * delete
