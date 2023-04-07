@@ -112,6 +112,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Si idCategories n'est pas dans dans la liste
         $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
     }
+    // =========== Password ========== 
+    $password = filter_input(INPUT_POST, 'password');
+    $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
+
+    if (empty($password) || empty($confirmPassword)) {
+        $error['password'] = '<small class="text-danger">Veuillez renseigner un mot de passe</small>';
+    } else {
+        if ($password != $confirmPassword) {
+            $error['confirmPassword'] = '<small class="text-danger">Veuillez entrer le même mot de passe</small>';
+        } else {
+            // VERIF PAR REGEX
+            $isOk = filter_var($password, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEXP_PASSWORD . '/')));
+            if (!$isOk) {
+                $error["password"] = '<small class= "text-danger">Le mot de passe ne respecte pas les critères !!</small>';
+            }
+        }
+        // Encodage du MDP
+        $password = password_hash($password, PASSWORD_DEFAULT);
+    }
 
     //  ISMAILEXIST = USER PAS ENCORE INSCRIT
     if ($profilUser->email != $email) {
@@ -131,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user->setPseudo($pseudo);
             $user->setAvatar($avatar);
             $user->setEmail($email);
+            $user->setPassword($password);
             $user->setIdCategories($idCategories);
 
             $result = $user->update();

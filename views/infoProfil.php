@@ -81,6 +81,27 @@
                                         </select>
                                     </div>
                                     <?= $error['sport'] ?? '' ?>
+                                    <!-- Password -->
+                                    <div class="col-12 col-lg-6 px-3">
+                                        <label for="password" class="form-label">
+                                            <h4 class=" text-white ms-2 pt-3 ">Password</h4>
+                                        </label>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password *" aria-label="password" required>
+                                        <small class="text-white d-none" id="passwordHelp">Dois contenir au moins 8 lettres ou plus, une MAJUSCULE et une minuscule ainsi qu'un chiffre.</small><br>
+                                        <small class="text-white mx-auto" id="passwordforce"></small>
+                                    </div>
+                                    <?= $error['password'] ?? '' ?>
+
+                                    <!-- confirmPassword -->
+                                    <div class="col-12 col-lg-6 px-3">
+                                        <label for="confirmPassword" class="form-label">
+                                            <h4 class=" text-white ms-2 pt-3 ">Confirmer votre mot de passe</h4>
+                                        </label>
+                                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirmer votre password *" aria-label="confirmPassword" required>
+                                        <small class="text-white" id="passwordDif"></small>
+                                    </div>
+                                    <?= $error['confirmPassword'] ?? '' ?>
+
                                     <div class="col-12 text-center mt-4"><button type="submit" class="btn btn-info">Modifier</button>
                                     </div>
                             </form>

@@ -292,7 +292,7 @@ class User
         } else {
             $sql = 'UPDATE `users` 
                 SET  `firstname`=:firstname, `lastname`=:lastname,
-                `pseudo`=:pseudo, `avatar`=:avatar,`email`=:email, `idCategories`=:idCategories
+                `pseudo`=:pseudo, `avatar`=:avatar,`email`=:email,`password`=:password, `idCategories`=:idCategories
                 WHERE id = :id ;';
             $sth = Database::connect()->prepare($sql);
         }
@@ -303,6 +303,7 @@ class User
         $sth->bindValue(':pseudo', $this->pseudo, PDO::PARAM_STR);
         $sth->bindValue(':avatar', $this->avatar, PDO::PARAM_STR);
         $sth->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $sth->bindValue(':password', $this->password, PDO::PARAM_STR);
         $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
         $sth->execute();
         $result = $sth->rowCount();
