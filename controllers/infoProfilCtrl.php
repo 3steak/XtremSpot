@@ -88,9 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // ====================== AVATAR =========================
-    $avatar = trim(filter_input(INPUT_POST, 'avatar', FILTER_SANITIZE_SPECIAL_CHARS));
+    $avatar = filter_input(INPUT_POST, 'avatar', FILTER_SANITIZE_SPECIAL_CHARS);
     if (empty($avatar)) {
-        $error["avatar"] = '<small class= "text-white">Selectionnez un avatar!!</small>';
+        $avatar = $profilUser->avatar;
+    } else {
+        $avatar = trim($avatar);
     }
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! A CHANGER !
     $filename = 'C:/laragon/www/XtremSpot/public/assets/uploads/photoProfil/' . $avatar;
@@ -113,11 +115,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error["category"] = "<small class='text-white'>Veuillez selectionner un sport !</small>";
     }
     // =========== Password ========== 
+
     $password = filter_input(INPUT_POST, 'password');
     $confirmPassword = filter_input(INPUT_POST, 'confirmPassword');
-
     if (empty($password) || empty($confirmPassword)) {
-        $error['password'] = '<small class="text-danger">Veuillez renseigner un mot de passe</small>';
+        $password = $profilUser->password;
     } else {
         if ($password != $confirmPassword) {
             $error['confirmPassword'] = '<small class="text-danger">Veuillez entrer le même mot de passe</small>';
@@ -151,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user->setAvatar($avatar);
             $user->setEmail($email);
             $user->setPassword($password);
+
             $user->setIdCategories($idCategories);
 
             $result = $user->update();

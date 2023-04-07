@@ -229,7 +229,7 @@ class User
     public static function get(int $id = null): object | array
     {
         if ($id) {
-            $sql = 'SELECT `users`.`id`, `lastname`, `firstname`,`pseudo`,`avatar`,`email`, `admin`, `categories`.`name` AS `category`
+            $sql = 'SELECT `users`.`id`, `lastname`, `firstname`,`pseudo`,`avatar`,`password`,`email`, `admin`, `categories`.`name` AS `category`
                     FROM `users` JOIN `categories` ON `users`.`idCategories` = `categories`.`id`
                     WHERE users.id= :id;';
 
@@ -279,16 +279,18 @@ class User
     public function update(int $admin = null): bool
     {
 
-        if ($admin === 0 || $admin === 1) {
+        if ($admin === 1 || $admin == 0) {
 
             $sql = 'UPDATE `users` 
-                    SET  `firstname`=:firstname, `lastname`=:lastname,
-                    `pseudo`=:pseudo,`avatar`=:avatar,`email`=:email, `idCategories`=:idCategories, `admin`=:admin
+                    SET  `admin`=:admin
                     WHERE id = :id ;';
 
             $sth = Database::connect()->prepare($sql);
-
+            $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
             $sth->bindValue(':admin', $this->admin, PDO::PARAM_INT);
+            $sth->execute();
+            $result = $sth->rowCount();
+            return ($result > 0) ? true : false;
         } else {
             $sql = 'UPDATE `users` 
                 SET  `firstname`=:firstname, `lastname`=:lastname,

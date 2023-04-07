@@ -153,86 +153,18 @@ if (isset($_SESSION['flash'])) {
         <div class="content bg-dark">
 
             <form method="post">
-                <fieldset class="row ">
-                    <div class="col-lg-6">
-                        <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start ">Nom</h4>
-                        <input type="text" id="disabledTextInput" name="lastname" class="form-control" value="<?= htmlspecialchars($profilUser->lastname) ?>">
-                        <small><?= $error['lastname'] ?? '' ?></small>
-                    </div>
+                <fieldset class="row justify-content-center">
 
-                    <div class="col-lg-6">
-                        <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start ">Prénom</h4>
-                        <input type="text" id="disabledTextInput" name="firstname" class="form-control" value="<?= htmlspecialchars($profilUser->firstname) ?>">
-                        <small><?= $error['firstname'] ?? '' ?></small>
-                    </div>
 
-                    <div class="col-lg-6">
+
+                    <div class="col-lg-6 col-6 ">
                         <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start ">Admin ?</h4>
+                        <h4 class=" text-white text-center p-2">Administrateur ?</h4>
                         <select class="form-select " id="admin" name="admin" aria-label="admin">
                             <option value="0" <?= ($profilUser->admin === 0) ? 'selected' : '' ?>>NON</option>
                             <option value="1" <?= ($profilUser->admin === 1) ? 'selected' : '' ?>>OUI</option>
                         </select>
                         <small><?= $error['admin'] ?? '' ?></small>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start ">Email</h4>
-                        <input type="text" id="disabledTextInput" name="email" class="form-control" value="<?= htmlspecialchars($profilUser->email) ?>">
-                        <p><?= $error['email'] ?? '' ?></p>
-                    </div>
-
-
-                    <div class="col-lg-8 mx-auto mb-4">
-                        <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start">Pseudo</h4>
-                        <input type="text" id="disabledTextInput" name="pseudo" class="form-control" value="<?= htmlspecialchars($profilUser->pseudo) ?>">
-                        <small><?= $error['pseudo'] ?? '' ?></small>
-                    </div>
-                    <div class="col-lg-8 mx-auto mb-2">
-                        <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start">Avatar</h4>
-                        <div class="row cc-selector">
-                            <!-- AVATAR DEFAUT -->
-                            <div class=" d-flex flex-column mb-1 ms-2">
-                                <small class="text-white">Avatar par défaut</small>
-                                <input <?= ($profilUser->avatar === "avatar_0.png") ? "checked='checked'" : '' ?> id="avatar_0" type="radio" name="avatar" value="avatar_0.png" />
-                                <label class="avatar-cc avatar_0" for="avatar_0"></label>
-                            </div>
-                            <div class="col-lg-6 d-flex justify-content-around center">
-                                <!-- AVATAR 1 -->
-                                <input <?= ($profilUser->avatar === "avatar_1.png") ? "checked='checked'" : '' ?> id="avatar_1" type="radio" name="avatar" value="avatar_1.png" />
-                                <label class="avatar-cc avatar_1" for="avatar_1"></label>
-                                <!-- AVATAR 2 -->
-                                <input <?= ($profilUser->avatar === "avatar_2.png") ? "checked='checked'" : '' ?> id="avatar_2" type="radio" name="avatar" value="avatar_2.png" />
-                                <label class="avatar-cc avatar_2" for="avatar_2"></label>
-                            </div>
-                            <div class="col-lg-6 d-flex justify-content-around ">
-                                <!-- AVATAR 3 -->
-                                <input <?= ($profilUser->avatar === "avatar_3.png") ? "checked='checked'" : '' ?> id="avatar_3" type="radio" name="avatar" value="avatar_3.png" />
-                                <label class="avatar-cc avatar_3" for="avatar_3"></label>
-                                <!-- AVATAR 4 -->
-                                <input <?= ($profilUser->avatar === "avatar_4.png") ? "checked='checked'" : '' ?> id="avatar_4" type="radio" name="avatar" value="avatar_4.png" />
-                                <label class="avatar-cc avatar_4" for="avatar_4"></label>
-                            </div>
-                        </div>
-                        <small><?= $error['avatar'] ?? '' ?></small>
-                    </div>
-
-
-                    <div class="col-lg-8 mx-auto mb-2">
-                        <label for="disabledTextInput" class="form-label"></label>
-                        <h4 class=" text-white text-start">Sport pratiqué</h4>
-                        <select class="form-select " id="idCategories" name="idCategories" aria-label="Pratique">
-                            <?php
-                            foreach ($listCategory as $category) { ?>
-                                <option value="<?= $category->id ?>" <?= ($profilUser->category === $category->name) ? 'selected' : '' ?>><?= $category->name ?></option>
-                            <?php }
-                            ?>
-                        </select>
-                        <small><?= $error['category'] ?? '' ?></small>
                     </div>
 
                     <button type="submit" class="btn btn-primary text-white mt-2 w-75 btnUpdate">Modifier</button>

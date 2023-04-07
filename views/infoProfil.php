@@ -86,7 +86,7 @@
                                         <label for="password" class="form-label">
                                             <h4 class=" text-white ms-2 pt-3 ">Password</h4>
                                         </label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password *" aria-label="password" required>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password *" aria-label="password">
                                         <small class="text-white d-none" id="passwordHelp">Dois contenir au moins 8 lettres ou plus, une MAJUSCULE et une minuscule ainsi qu'un chiffre.</small><br>
                                         <small class="text-white mx-auto" id="passwordforce"></small>
                                     </div>
@@ -97,7 +97,7 @@
                                         <label for="confirmPassword" class="form-label">
                                             <h4 class=" text-white ms-2 pt-3 ">Confirmer votre mot de passe</h4>
                                         </label>
-                                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirmer votre password *" aria-label="confirmPassword" required>
+                                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirmer votre password *" aria-label="confirmPassword">
                                         <small class="text-white" id="passwordDif"></small>
                                     </div>
                                     <?= $error['confirmPassword'] ?? '' ?>
