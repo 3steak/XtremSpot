@@ -1,7 +1,6 @@
 <?php
 session_start();
-var_dump('oui');
-die;
+
 //  if not connected
 if ($_SESSION['loggedIn'] != true && $_SESSION['admin'] != true) {
     header('location: /../controllers/homeCtrl.php');
