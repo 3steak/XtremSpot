@@ -51,7 +51,7 @@
                               <!-- Password -->
                               <div class="col-12 p-3">
                                   <input type="password" class="form-control" name="password" id="password" placeholder="Password *" aria-label="password" required>
-                                  <small class="text-white d-none" id="passwordHelp">Dois contenir au moins 8 lettres ou plus, une MAJUSCULE et une minuscule ainsi qu'un chiffre.</small><br>
+                                  <small class="text-white d-none" id="passwordHelp">Doit contenir au moins 8 lettres ou plus, une majuscule et une minuscule ainsi qu'un chiffre.</small><br>
                                   <small class="text-white mx-auto" id="passwordforce"></small>
                               </div>
                               <?= $error['password'] ?? '' ?>
