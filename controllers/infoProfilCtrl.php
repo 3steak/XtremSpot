@@ -155,8 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user->setPassword($password);
 
             $user->setIdCategories($idCategories);
-
             $result = $user->update();
+
             if ($result) {
                 flash('update', 'Ton profil a été modifié avec succès ! ', FLASH_SUCCESS);
                 header('location: /controllers/infoProfilCtrl.php?update=update');

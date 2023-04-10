@@ -227,7 +227,7 @@ if (isset($_SESSION['flash'])) {
                                                 <small class=" commentsHour mt-4 ms-4">Publié le : <?= htmlentities(date('d/m/Y', strtotime($comment->created_at))) ?> à <?= htmlentities(date('H', strtotime($comment->created_at))) ?>h</small>
 
                                                 <div class="d-flex  justify-content-between align-items-center ">
-                                                    <p class="text-white mt-1 fs-6"><?= htmlentities($comment->description) ?></p>
+                                                    <p class="text-white mt-1 fs-6"><?= $comment->description ?></p>
                                                     <?php if ($idSession === $comment->idUsers) { ?>
                                                         <a class="m-1 deleteComment text-white" title="Supprimer mon commentaire" href="" data-bs-toggle="modal" data-bs-target="#deleteComment" data-id=<?= $comment->commentId ?>><i class="fa-regular fa-circle-xmark "></i></a>
                                                     <?php } ?>

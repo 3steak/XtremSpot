@@ -279,7 +279,7 @@ class User
     public function update(int $admin = null): bool
     {
 
-        if ($admin === 1 || $admin == 0) {
+        if ($admin === 0 || $admin === 1) {
 
             $sql = 'UPDATE `users` 
                     SET  `admin`=:admin
@@ -307,6 +307,7 @@ class User
         $sth->bindValue(':email', $this->email, PDO::PARAM_STR);
         $sth->bindValue(':password', $this->password, PDO::PARAM_STR);
         $sth->bindValue(':idCategories', $this->idCategories, PDO::PARAM_INT);
+
         $sth->execute();
         $result = $sth->rowCount();
         return ($result > 0) ? true : false;

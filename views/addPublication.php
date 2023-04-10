@@ -5,7 +5,7 @@
        <div class="container-fluid mb-5">
            <div class="row d-flex justify-content-center">
                <div class="col-12 m-4">
-                   <h1 class="text-white text-center">Nouvelle publication</h1>
+                   <h1 class="text-white text-center"><span class="xtrem">NOUVELLE</span> <span class="spot">PUBLICATION</span></h1>
                </div>
                <?= $error['idUsers'] ?? '' ?>
 

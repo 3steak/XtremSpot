@@ -138,11 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($extension == 'png') {
                 $gd_original = imagecreatefrompng($to);
-                $gd_scaled = imagescale($gd_original, 700, -1, IMG_BICUBIC);
+                $gd_scaled = imagescale($gd_original, 800, -1, IMG_BICUBIC);
                 imagepng($gd_scaled, $to, 100);
             } else {
                 $gd_original = imagecreatefromjpeg($to);
-                $gd_scaled = imagescale($gd_original, 700, -1, IMG_BICUBIC);
+                $gd_scaled = imagescale($gd_original, 800, -1, IMG_BICUBIC);
                 imagejpeg($gd_scaled, $to, 100);
             }
             // RETIRER EXTENSION POUR AJOUTER à $to .webp
