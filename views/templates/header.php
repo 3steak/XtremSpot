@@ -37,7 +37,7 @@
             <div class="container-fluid ">
                 <a class="navbar-brand " href="/controllers/feedUserCtrl.php"><img class="logoPrincipal" src="/public/assets/img/logo-light.png" alt="logo principal"></a>
                 <!-- CE BOUTON CRUD APPARAIT SI USER = ADMIN -->
-                <?= (!empty($_SESSION['admin']) === true) ? '<a class="btn btn-primary " href="/controllers/dashboard/CRUDCtrl.php" role="button">DASHBOARD</a>'
+                <?= (!empty($_SESSION['admin']) === true) ? '<a class="btn btn-primary text-white " href="/controllers/dashboard/CRUDCtrl.php" role="button"><span class="xtrem">DASH</span><span class="xtrem">BOARD</span></a>'
                     : '' ?>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -73,7 +73,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white p-3" href="/controllers/feedUserCtrl.php">
-                                Feed
+                                Fil des publications
                             </a>
                         </li>
                         <li>

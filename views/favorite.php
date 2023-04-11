@@ -25,7 +25,7 @@ if (isset($_SESSION['flash'])) {
                     </div>
                 </div>
             </div>
-            <h1 class="text-white text-center">Mes Favoris</h1>
+            <h1 class="text-white text-center"><span class="xtrem">MES FAVO</span><span class="spot">RIS</span><br></h1>
         </div>
 
         <!-- MODALMAP -->
