@@ -195,7 +195,7 @@ flash('deleteComment');
                         <div class="d-flex align-items-center ">
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUser my-auto" src="/public/assets/uploads/photoProfil/<?= $publication->avatar ?>" alt="photo profil utilisateur"></a>
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 fs-2">
-                                <?= htmlentities($publication->pseudo) ?>
+                                <?= htmlspecialchars($publication->pseudo) ?>
                             </a>
                             <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
                             <?php
@@ -225,7 +225,7 @@ flash('deleteComment');
                             <small class="text-white"><i class="fa-solid fa-signs-post"></i> <?= $publication->town ?></small>
                         </div>
                         <div class="d-flex  justify-content-between align-items-center ">
-                            <p class="contentUserDescprition"><?= htmlentities($publication->title) ?></p>
+                            <p class="contentUserDescprition"><?= strip_tags($publication->title) ?></p>
                             <!--  BOUTON OPTION -->
                             <a class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis-vertical fa-xl"></i>
@@ -268,7 +268,7 @@ flash('deleteComment');
                                         <div class="commentUser p-2">
                                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil"><img class="img-fluid miniProfilUserComment my-auto" src="/public/assets/uploads/photoProfil/<?= $comment->avatar ?>" alt="photo profil utilisateur"></a>
                                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($comment->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 ">
-                                                <?= htmlentities($comment->pseudo) ?>
+                                                <?= strip_tags($comment->pseudo) ?>
                                             </a><br>
                                             <small class=" commentsHour mt-4 ms-4">Publié le : <?= htmlentities(date('d/m/Y', strtotime($comment->created_at))) ?> à <?= htmlentities(date('H', strtotime($comment->created_at))) ?>h</small>
                                             <div class="d-flex  justify-content-between align-items-center ">
