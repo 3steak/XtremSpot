@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 02, 2023 at 08:29 PM
+-- Generation Time: Apr 12, 2023 at 12:36 PM
 -- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- PHP Version: 8.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,10 +64,12 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `description`, `validated_at`, `created_at`, `deleted_at`, `idUsers`, `idPublications`) VALUES
-(6, 'Incroyable ! ', '2023-03-07 12:21:58', '2023-03-29 21:47:23', NULL, 6, 8),
-(7, 'Commentaire sur image name', '2023-03-29 20:09:53', '2023-03-29 22:09:27', NULL, 4, 6),
-(8, 'oui', '2023-03-30 19:44:40', '2023-03-30 21:39:59', NULL, 6, 7),
-(22, 'gfgfg', NULL, '2023-04-02 22:25:39', NULL, 6, 6);
+(59, 'Dingue !', '2023-04-10 20:41:08', '2023-04-10 22:35:00', NULL, 6, 34),
+(60, 'C&#39;est fat !!', '2023-04-10 20:41:12', '2023-04-10 22:35:11', NULL, 6, 32),
+(61, 'oui c&#39;était super !', '2023-04-10 20:47:05', '2023-04-10 22:42:13', NULL, 16, 36),
+(62, 'Magnifique !', '2023-04-10 20:47:09', '2023-04-10 22:42:42', NULL, 16, 32),
+(63, 'jy suis deja allé c&#39;est super !', NULL, '2023-04-10 22:43:30', NULL, 15, 38),
+(66, 'damn&#10;', '2023-04-12 07:34:56', '2023-04-12 09:34:46', NULL, 6, 36);
 
 -- --------------------------------------------------------
 
@@ -78,8 +80,16 @@ INSERT INTO `comments` (`id`, `description`, `validated_at`, `created_at`, `dele
 CREATE TABLE `favorites` (
   `id` int NOT NULL,
   `idPublications` int NOT NULL,
-  `idUsers` int NOT NULL
+  `idUsers` int NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`id`, `idPublications`, `idUsers`, `created_at`) VALUES
+(51, 34, 16, '2023-04-10 22:42:22');
 
 -- --------------------------------------------------------
 
@@ -99,7 +109,9 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`id`, `created_at`, `idUsers`, `idPublications`) VALUES
-(10, '2023-04-02 18:55:13', 6, 8);
+(41, '2023-04-10 22:34:55', 6, 34),
+(43, '2023-04-10 22:42:28', 16, 34),
+(50, '2023-04-12 13:46:00', 6, 38);
 
 -- --------------------------------------------------------
 
@@ -129,9 +141,12 @@ CREATE TABLE `publications` (
 --
 
 INSERT INTO `publications` (`id`, `title`, `description`, `deleted_at`, `created_at`, `marker_longitude`, `marker_latitude`, `validated_at`, `town`, `report`, `likes`, `idCategories`, `idUsers`, `image_name`) VALUES
-(6, 'Test image name', 'Ceci est un test pour les beaux chiens', NULL, '2023-03-13 16:51:40', '-1.7555490', '48.1160300', '2023-03-19 10:18:10', 'Rennes', NULL, 0, 3, 3, 'img_640f468c890bc.3.png'),
-(7, 'BMX Sunset', 'test BMX sunset', NULL, '2023-03-13 20:35:31', '1.3862530', '50.0657660', '2023-03-08 16:55:58', 'Le Tréport', NULL, 0, 3, 3, 'img_640f7b032e357.3.jpg'),
-(8, 'Session bowl avé les copaings', 'test du bowl du prado !', NULL, '2023-03-20 12:32:41', '5.3744280', '43.2519000', '2023-03-20 11:37:23', 'Marseille', NULL, 1, 2, 4, 'img_64184459cc57b.4.jpg');
+(32, 'Petit aprem non loin d&#39;Angresse', 'Le spot est à Hossegor sur la plage centrale', NULL, '2023-04-10 22:20:02', '-1.4433550', '43.6651280', '2023-04-10 20:34:03', 'Angresse', NULL, 0, 4, 14, 'img_64346f71e8b9f.14.jpg'),
+(33, 'Skate à Mers les Bains !', 'Super pool à Mers les Bains ! la mer est pas loin en plus !', NULL, '2023-04-10 22:22:09', '1.3860660', '50.0656790', NULL, 'Mers-les-Bains', NULL, 0, 1, 14, 'img_64346ff16bceb.14.jpg'),
+(34, 'Gros air !', 'Test du skatepark de toulouse', NULL, '2023-04-10 22:25:58', '1.4165540', '43.6113540', '2023-04-10 20:34:10', 'Toulouse', NULL, 2, 3, 15, 'img_643470d64bc8e.15.jpg'),
+(35, 'Champ de bosses à Toulouse', '', NULL, '2023-04-10 22:27:23', '1.4126830', '43.6000470', NULL, 'Toulouse', NULL, 0, 3, 15, 'img_6434712af2c35.15.jpg'),
+(36, 'Journée au lac', 'balade en solo au lac blanc :)', NULL, '2023-04-10 22:32:16', '7.0906280', '48.1264200', '2023-04-10 20:34:19', 'Orbey', NULL, 0, 5, 16, 'img_6434725029662.16.jpg'),
+(38, 'Bowl du grand marais Amiens', 'Skatepark du Grand Marais Amiens', NULL, '2023-04-10 22:40:45', '2.2619220', '49.9198880', '2023-04-10 20:40:59', 'Amiens', NULL, 1, 2, 6, 'img_6434744dc6bcb.6.jpg');
 
 -- --------------------------------------------------------
 
@@ -160,9 +175,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `pseudo`, `avatar`, `password`, `email`, `created_at`, `updated_at`, `validated_at`, `deleted_at`, `admin`, `idCategories`) VALUES
-(3, 'Sakai', 'Asinbit', 'Sakai', 'avatar_0.png', 'ouioui', 'sakaiasinbit@gmail.com', '2023-03-04 12:27:45', '2023-03-28 22:29:48', NULL, NULL, 1, 2),
-(4, 'Armi', 'Niusnius', 'Arminius', 'avatar_4.png', '$2y$10$6CLksHXjL.wqP6d2reXTzecRsakvdxCiYxhbYnwaEb/07/sXdfpa.', 'Arminius30000@gmail.com', '2023-03-13 22:11:21', NULL, NULL, NULL, 0, 5),
-(6, 'Florian', 'Billault', 'Flo', 'avatar_1.png', '$2y$10$7pBIDSr7iadJ9FKUB6A8tO8ceFjW0KaOR807iWcM7vGhl0.mPNINi', 'florianbillault@gmail.com', '2023-03-28 15:43:37', '2023-03-31 15:08:40', '2023-03-28 15:47:37', NULL, 1, 5);
+(6, 'Florian', 'Billault', 'Flo', 'avatar_1.png', '$2y$10$bpW9luf/x62pj1cqSAUrfunlIW7HOhcXDXwiB1q85Io/U7Ym2x0KW', 'florianbillault@gmail.com', '2023-03-28 15:43:37', '2023-04-12 12:01:31', '2023-03-28 15:47:37', NULL, 1, 2),
+(14, 'Cyprien', 'Bocquet', 'Cyp', 'avatar_1.png', '$2y$10$9KJc5KK2RfwS5.bSzbIt/OO61a8mVVfqjQr4w/X8Fgn5Lktgeqnx6', 'cyprien.bocquet@gmail.com', '2023-04-10 21:49:52', '2023-04-10 22:15:57', '2023-04-10 21:50:14', NULL, 0, 1),
+(15, 'Jean', 'BMXman', 'JeanBmx', 'avatar_4.png', '$2y$10$mflvXcQtMqwIcxe/LDyMquOhFd0SN6agDEaPmkY9kUM15TOkW4wj.', 'jean@gmail.com', '2023-04-10 22:23:13', '2023-04-11 12:26:48', '2023-04-10 22:23:28', NULL, 0, 3),
+(16, 'Jade', 'Paddle', 'JadePaddle', 'avatar_3.png', '$2y$10$eNyqTgrsjGjDKaRHySxkuOSvXtnfVTw9W6w99fp8x0QH.D9busD9S', 'Jade@gmail.com', '2023-04-10 22:28:26', '2023-04-10 22:32:30', '2023-04-10 22:28:43', NULL, 0, 5);
 
 --
 -- Indexes for dumped tables
@@ -221,37 +237,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `publications`
 --
 ALTER TABLE `publications`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
