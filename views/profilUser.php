@@ -17,7 +17,7 @@ if (isset($_SESSION['flash'])) {
             <div class="col-10 col-lg-8 d-flex text-center align-items-center">
                 <div class="row">
                     <div class="col-12">
-                        <h4 class="text-decoration-none text-white "><?= htmlentities($profilUser->pseudo) ?><i class="fa-solid fa-square-plus mx-2"></i></h4>
+                        <h4 class="text-decoration-none text-white "><?= htmlentities($profilUser->pseudo) ?></h4>
                     </div>
                     <div class="col-12">
                         <h5 href="#" class="text-decoration-none text-white"><?= htmlentities($profilUser->category) ?></a>
@@ -157,9 +157,7 @@ if (isset($_SESSION['flash'])) {
                             </div>
                             <h1 class="text-white ">Du contenu</h1>
                         </div>
-
                         <img src="/public/assets/img/noPublication.jpg" class="card-img" alt="PAS ENCORE DE POST">
-
                     </div>
                 <?php }
 
@@ -167,7 +165,7 @@ if (isset($_SESSION['flash'])) {
                     <div class="card text-bg-dark my-3 ">
                         <div class="col-12 p-2">
                             <div class="d-flex align-items-center ">
-                                <small class="text-white"><i class="fa-solid fa-signs-post"></i> <?= $publication->town ?></small>
+                                <p class="text-white"><i class="fa-solid fa-signs-post"></i> <?= $publication->town ?></p>
                             </div>
                             <div class="d-flex  justify-content-between align-items-center ">
                                 <p class="contentUserDescprition text-white mx-auto"><?= htmlentities($publication->title) ?></p>

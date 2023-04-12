@@ -3,7 +3,7 @@
         <div class="container main mt-5 mb-4">
             <div class="row gap-2 flex-column justify-content-center">
                 <div class="col-12">
-                    <h1 class="text-white text-center m-2">CATEGORIES</h1>
+                    <h1 class="text-white text-center m-2"><span class="xtrem">CATE</span><span class="spot">GORIES</span></h1>
                 </div>
                 <div class="col-8 mx-auto">
                     <form method="post" action="/controllers/dashboard/CRUDCtrl.php">

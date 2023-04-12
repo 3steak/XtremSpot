@@ -12,6 +12,7 @@
     --button-bg-color: #6072B1;
     --main-red-color: #FF0000;
     --main-white-color: #EDF7F6;
+    --main-yellow-color: #9fcc2e;
 }
 
 .alert-success {
@@ -52,6 +53,7 @@ a {
 
 p {
     margin-bottom: 0 !important;
+    font-size: 1.2rem;
 }
 
 .body {
@@ -190,11 +192,19 @@ p {
     background-color: var(--button-bg-color) !important;
 }
 
-.btn-filter {
+.btn-filter,
+.seeMore {
     background-color: var(--button-bg-color) !important;
 }
 
+
 #favoriteBtn {
+    color: var(--button-bg-color) !important;
+}
+
+
+.fa-signs-post,
+.fa-ellipsis-vertical {
     color: var(--button-bg-color) !important;
 }
 

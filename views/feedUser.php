@@ -136,7 +136,7 @@ flash('deleteComment');
             </div>
             <div class=" col-lg-10  mx-auto">
                 <div class="collapse " id="collapseFilters">
-                    <h4 class="text-white">Filtrer par :</h4>
+                    <h4 class="text-white text-center mt-2">Filtrer par :</h4>
                     <div class="d-flex flex-column flex-md-row justify-content-around gap-4 m-2">
                         <div class=" mx-auto">
                             <p class="text-white mb-2">Sport</p>
@@ -197,7 +197,6 @@ flash('deleteComment');
                             <a href="/../controllers/profilUserCtrl.php?id=<?= htmlentities($publication->idUsers)  ?>" title="Voir profil" class="text-decoration-none text-white p-2 fs-2">
                                 <?= htmlspecialchars($publication->pseudo) ?>
                             </a>
-                            <a href="#" class="text-black p-2"><i class="fa-solid fa-circle-plus"></i></a>
                             <?php
 
                             if (empty($favorites)) { ?>
@@ -222,9 +221,10 @@ flash('deleteComment');
                         </div>
 
                         <div class="d-flex align-items-center ">
-                            <small class="text-white"><i class="fa-solid fa-signs-post"></i> <?= $publication->town ?></small>
+                            <p class="text-white"><i class="fa-solid fa-signs-post fa-lg"></i> <?= $publication->town ?></p>
                         </div>
                         <div class="d-flex  justify-content-between align-items-center ">
+                            <p></p>
                             <p class="contentUserDescprition"><?= strip_tags($publication->title) ?></p>
                             <!--  BOUTON OPTION -->
                             <a class="text-white text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">

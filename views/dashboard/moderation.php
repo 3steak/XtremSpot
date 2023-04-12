@@ -82,7 +82,7 @@
            <div class="container main mt-5">
                <div class="row d-flex gap-2 justify-content-center">
                    <div class="col-12">
-                       <h1 class="text-white text-center m-2">MODERATION</h1>
+                       <h1 class="text-white text-center m-2"><span class="xtrem">MODE</span><span class="spot">RATION</span></h1>
                    </div>
 
 
@@ -90,7 +90,7 @@
                    <div class="container-fluid  my-3 cardUserContent">
                        <div class="row">
                            <div class="col-12">
-                               <h2 class="text-white text-center m-2">Publications</h2>
+                               <h2 class="text-white text-center m-2"><span class="xtrem">Publi</span><span class="spot">cations</span></h2>
                            </div>
                            <?php foreach ($publications as $publication) { ?>
 
@@ -104,8 +104,8 @@
                                        </div>
                                        <div>
                                            <p> Crée le <?= htmlspecialchars(date('d/m/Y H:i', strtotime($publication->created_at))) ?></p>
-                                           <p><?= $publication->title ?></p>
-                                           <p><?= $publication->description ?></p>
+                                           <p><span class="spot">Titre : </span><?= $publication->title ?></p>
+                                           <p><span class="spot">Descirption : </span><?= $publication->description ?></p>
                                        </div>
                                    </div>
                                    <img src="/public/assets/uploads/newPicture/<?= $publication->image_name ?>" class="card-img" alt="<?= $publication->title ?>">
@@ -121,7 +121,7 @@
                    <div class="container my-3 cardUserContent">
                        <div class="row">
                            <div class="col-12">
-                               <h2 class="text-white text-center m-2">Commentaires</h2>
+                               <h2 class="text-white text-center m-2"><span class="xtrem">Comm</span><span class="spot">entaires</span></h2>
                                <?= $error['refuseMsg'] ?? '' ?>
                                <?= $error['email'] ?? '' ?>
                            </div>
@@ -146,7 +146,7 @@
                                        </div>
                                        <div class="col-4 p-2">
                                            <div class="list-group-item d-flex align-items-center ">
-                                               Commentaire de la publication : <?= $comment->publicationTitle ?>
+                                               Publication : <?= $comment->publicationTitle ?>
                                            </div>
                                            <div><img class="img-fluid" src="/public/assets/uploads/newPicture/<?= $comment->publicationImg ?>" alt="<?= $comment->publicationTitle ?>">
                                            </div>
