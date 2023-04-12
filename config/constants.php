@@ -9,10 +9,10 @@ define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'testXtremspot');
 
 // Nom de l'utilisateur MySQL
-define('DB_USER', 'root');
+define('DB_USER', 'cyprienboc');
 
 // Mot de passe de l'utilisateur
-define('DB_PASS', '');
+define('DB_PASS', 'RMbj[hT]]afr@TZK');
 
 
 
