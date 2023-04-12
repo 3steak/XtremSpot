@@ -1,13 +1,13 @@
 // Récupération des data-set pour REFUS COMMENT
 let buttons = document.querySelectorAll('.refuseComment');
 for (let trash of buttons) {
-    trash.addEventListener('click', persoModal)
+    trash.addEventListener('click', persoModalComment)
 }
-function persoModal() {
+function persoModalComment() {
     // Attributs data
     let id = this.dataset.id;
     let email = this.dataset.email;
-
+    console.log(id);
 
     // Injection in modal
     let link = document.querySelector("#linkDeleteComment");

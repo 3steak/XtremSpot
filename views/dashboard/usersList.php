@@ -3,7 +3,7 @@
         <div class="container main containerHome mt-5">
             <div class="row d-flex gap-2 justify-content-center">
                 <div class="col-12">
-                    <h1 class="text-white text-center m-2">UTILISATEURS</h1>
+                    <h1 class="text-white text-center m-2"><span class="xtrem">UTILI</span><span class="spot">SATEURS</span></h1>
                 </div>
                 <div class="container  my-3 ">
                     <div class="row bg-table">
@@ -28,7 +28,7 @@
                                             <td><a id="pseudo" title="Voir profil" href="/../../controllers/profilUserCtrl.php?id=<?= $user->id ?>"><?= htmlspecialchars($user->pseudo) ?></a></td>
                                             <td class="dNoneMobil"><a class="telmail" title="Appeler" href="mailto:<?= htmlspecialchars($user->email) ?>"><?= htmlspecialchars($user->email) ?></a></td>
                                             <td><?= ($user->admin === 1) ? "OUI" : "NON" ?></td>
-                                            <td><a class="m-1 seeProfil" title="Voir et modifier profil" href="/../controllers/dashboard/profilCrudCtrl.php?id=<?= $user->id ?>"><i class="fa-regular fa-eye"></i></a>
+                                            <td><a class="m-1 seeProfil" title="Voir et modifier profil" href="/../controllers/dashboard/profilCrudCtrl.php?id=<?= $user->id ?>"><i class="fa-regular fa-pen-to-square"></i></i></a>
                                                 <a class="m-1 deleteApt" title="Supprimer l'utilisateur" href="" data-bs-toggle="modal" data-bs-target="#validateModal" data-name="<?= htmlspecialchars($user->lastname) ?> <?= htmlspecialchars($user->firstname) ?>" data-id=<?= $user->id ?>>
                                                     <i class="fa-regular fa-trash-can m-1"></i></a>
                                             </td>

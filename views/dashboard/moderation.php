@@ -78,7 +78,6 @@
 
        <!---------------- MAIN --------------->
        <main>
-
            <div class="container main mt-5">
                <div class="row d-flex gap-2 justify-content-center">
                    <div class="col-12">
@@ -90,7 +89,7 @@
                    <div class="container-fluid  my-3 cardUserContent">
                        <div class="row">
                            <div class="col-12">
-                               <h2 class="text-white text-center m-2"><span class="xtrem">Publi</span><span class="spot">cations</span></h2>
+                               <h2 class="text-white text-center m-2 mb-5"><span class="xtrem">Publi</span><span class="spot">cations</span></h2>
                            </div>
                            <?php foreach ($publications as $publication) { ?>
 

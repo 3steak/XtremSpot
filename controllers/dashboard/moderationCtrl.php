@@ -15,7 +15,6 @@ require_once(__DIR__ . '/../../models/Comment.php');
 // RECUP COMMENT VALIDATED IS NULL 
 
 try {
-
     $publications = Publication::getCrudPublications();
     $comments = Comment::getNoValidatedComments();
     // var_dump($publications, $comments);
