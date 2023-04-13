@@ -9,7 +9,7 @@
                </div>
                <?= $error['idUsers'] ?? '' ?>
 
-               <div class="col-8  card bg-dark p-4 m-2">
+               <div class="col-lg-8  card bg-dark p-4 m-2">
                    <!------------------   FORM  ---------------->
                    <form method="post" enctype="multipart/form-data" autocomplete="off">
                        <h4 class="text-white">Choisir une photo ou vidéo :</h4>
