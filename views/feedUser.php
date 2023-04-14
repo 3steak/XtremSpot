@@ -241,7 +241,7 @@ flash('deleteComment');
                         </div>
                     </div>
 
-                    <img src="/../public/assets/uploads/newPicture/<?= htmlentities($publication->image_name) ?>" class="card-img" alt="<?= htmlentities($publication->title) ?>">
+                    <img src="/../public/assets/uploads/newPicture/<?= htmlentities($publication->image_name) ?>" class="card-img" alt="photo <?= htmlentities($publication->title) ?>">
                     <div class=" d-flex flex-column justify-content-end ">
                         <div class="row banniereLike  p-2 ">
                             <div class="col-12 dropcenter dropup">
