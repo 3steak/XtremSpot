@@ -11,13 +11,9 @@ require_once(__DIR__ . '/../../models/Comment.php');
 
 
 
-// RECUP PUBLICATION VALIDATED IS NULL 
-// RECUP COMMENT VALIDATED IS NULL 
-
 try {
     $publications = Publication::getCrudPublications();
     $comments = Comment::getNoValidatedComments();
-    // var_dump($publications, $comments);
 } catch (\Throwable $th) {
     $errorMsg = $th->getMessage();
     include_once(__DIR__ . '/../../views/templates/header.php');
@@ -77,8 +73,6 @@ if (!empty($_GET['idComment'])) {
         die;
     }
 }
-
-
 
 
 

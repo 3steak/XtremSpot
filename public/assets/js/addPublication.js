@@ -48,7 +48,6 @@ $(document).ready(function () {
                                 $(errorMessage).text('').hide();
                             }, "2000");
                         }
-
                         // Creating personal  ping 
                         var myIcon = L.icon({
                             iconUrl: '/../public/assets/img/surf.png',

@@ -15,13 +15,13 @@
                       <div class=" row">
                           <!-- Firstname -->
                           <div class="col-12 col-lg-6 p-3">
-                              <input type="text" class="form-control" name="firstname" id="firstname" value="<?= !empty($_POST['firstname']) ? $_POST['firstname'] : '' ?>" placeholder="Firstname *" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="lirstname" required>
+                              <input type="text" class="form-control" name="firstname" id="firstname" value="<?= !empty($_POST['firstname']) ? $_POST['firstname'] : '' ?>" placeholder="Prénom *" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="lirstname" required>
                               <?= $error['firstname'] ?? '' ?>
                           </div>
 
                           <!-- Lastname -->
                           <div class="col-12 col-lg-6 p-3">
-                              <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname *" value="<?= !empty($_POST['lastname']) ? $_POST['lastname'] : '' ?>" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="lastname" required>
+                              <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nom *" value="<?= !empty($_POST['lastname']) ? $_POST['lastname'] : '' ?>" pattern="<?= REGEX_NO_NUMBER ?>" aria-label="lastname" required>
                               <?= $error['lastname'] ?? '' ?>
                           </div>
 

@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($error)) {
         try {
-            // SUPPRESION
+            // DELETE
 
             $result = Comment::delete($id);
             if ($result) {

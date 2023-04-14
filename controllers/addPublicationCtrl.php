@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $result = $publication->addPublication();
             if ($result) {
-                flash('formNewContentOk', 'Votre publication va être lue par nos plus beaux modérateurs', FLASH_SUCCESS);
+                flash('formNewContentOk', 'Votre publication va être lue par nos modérateurs', FLASH_SUCCESS);
                 header('location: /controllers/profilUserCtrl.php');
                 die;
             } else {
